@@ -1,0 +1,263 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://tres/theme_dark.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/ui/Reader.gd" type="Script" id=2]
+[ext_resource path="res://tres/default_font_48.tres" type="DynamicFont" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.2, 0.2, 0.2, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0, 0, 0.196078 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+
+[node name="Reader" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxC" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelC" type="PanelContainer" parent="VBoxC"]
+margin_right = 1024.0
+margin_bottom = 80.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="HBoxC" type="HBoxContainer" parent="VBoxC/PanelC"]
+margin_right = 1024.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 80 )
+
+[node name="Title" type="Label" parent="VBoxC/PanelC/HBoxC"]
+margin_top = 9.0
+margin_right = 1024.0
+margin_bottom = 71.0
+size_flags_horizontal = 3
+text = "标题"
+align = 1
+valign = 1
+clip_text = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxC"]
+margin_top = 84.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/normal_font = ExtResource( 3 )
+custom_constants/line_separation = 12
+bbcode_enabled = true
+bbcode_text = "[center]On the Australian war crimes in Afghanistan
+Written by: Nick G. on 3 December 2020[/center]
+
+Marxist-Leninists hold that there are two types of war – just and unjust. 
+
+Imperialist wars brutalise soldiers of imperialist armies engaged in foreign wars of aggression and occupations.  In contrast, people’s liberation armies fighting just wars are under the leadership and guidance of revolutionary class ideology and organisation serving the people.
+
+Just wars cannot be won by military means alone. They are often waged by weaker and technologically inferior forces which attract the support of the people and can be sustained and led to victory by correct politics. Those correct politics include relations between the armed forces and the people, and also between the armed forces of the just cause and the armed forces of the unjust cause. Captured and wounded soldiers of the unjust army are subjected to education about the two types of war, are persuaded to renounce their support for the unjust, and are treated with leniency.
+
+Unjust wars cannot attract popular support over the longer term.  What support there is evaporates over time. The forces of the unjust cause must rely on military means, and tend to discount winning popular support because of their apparent superiority in strength of arms and other technologies.
+
+Afghanistan – an unjust war
+
+Australia’s longest-running war is its engagement in Afghanistan.  It began in November 2001 in the wake of the September 11 attack on the World Trade Towers in New York.  The Australian government sent troops to Afghanistan to show its support and subservience to the US as a compliant ally, often referred to as a “puppet” or “deputy sheriff of the US”. Australian soldiers played a support role to the forces of US and other imperialisms.  Those forces invaded Afghanistan in a so-called “war on terrorism”. There was and is a terrorism associated with the reactionary fascist wing of the Islamic religion, but the invasion of Afghanistan by imperialist powers was not a just application of force.  It was unjust from the start, largely motivated by US imperialist ambitions in the region and set the scene for a wave of anti-democratic measures, under the cover of “anti-terrorism”.
+
+The recent report into allegations of war crimes by Australian troops in Afghanistan was preceded by a report commissioned by the head of the Australian Army, Gen. Angus Campbell, in 2015 following persistent rumours of illegal killings of Afghans by Australians.  Presented to Campbell in 2016, the report by sociologist Dr. Samantha Crompvoets quoted Australian soldiers, who did not want to be identified, who were appalled by the behaviour of fellow soldiers. 
+
+One said that 2012 was the worst he had seen:
+
+“Guys just had this blood lust. Psychos. Absolute psychos. And we bred them. These things do not happen in isolation. They (soldiers) become more confident over time when they are there and these behaviours become permissible and equated with being good and effective soldiers.”
+
+She repeated allegations made by the soldiers she interviewed: when helicopters landed in villages, any villagers running away were fired upon, “killing many of these men and boys (and sometimes women and children) shooting them in the back, while running away.” Other soldiers would take any surviving men and boys “and ‘interrogate’ them, meaning tie them up and torture them…for days and the whole village would be deprived of food, water and medicines…When the Special Forces left, the men and boys would be found dead: shot in the head or blindfolded and with throats slit,’’ she wrote.
+
+One “disturbing example” given by soldier informants occurred when Australian soldiers driving along a road saw two 14-year old boys who they decided might be Taliban sympathisers. “They were stopped and searched and then their throats slit.  The rest of the troop then had to ‘clean up the mess’…the bodies were bagged and thrown in a nearby river.”
+
+It was this report, delivered in 2015 but kept secret at the time, that led Angus Campbell to commission the report into allegations of Australian war crimes in Afghanistan. Campbell (now head of all Australian Defence Forces) did that in March 2016.  
+
+In the meantime, David McBride, a former Army lawyer with two tours of duty in Afghanistan, was leaking Australian Defence Force files (the “Afghan Files”) to the Australian Broadcasting Corporation (ABC). The ABC subsequently ran a series of stories alleging Australian war crimes. 
+
+The Australian Government retaliated against McBride and its national broadcaster. In September 2018, McBride was charged with theft of Government property (more charges were subsequently added), while in June 2019, the offices of the ABC were raided by Australian Federal Police (AFP) and all material relating to the Afghan Files seized. In June 2020, the AFP recommended that charges be laid against ABC journalist Dan Oakes.  There was a huge public outcry and the Government was forced to back down from charging Oakes. Charges still remain against the whistleblower McBride.
+
+The heavily redacted (censored, blacked-out) Afghanistan Inquiry Report, also known as the Brereton Report, finds credible evidence of 23 incidents involving 25 current or former ADF personnel accused of killing 39 individuals, with a further two subjected to cruel treatment. However, a further 28 incidents (and 11 more that were discontinued) had found that allegations were not substantiated or could not be proceeded with.
+
+Of those that the Report found to be unsubstantiated, there were 20 allegations of unlawful killings, seven of which involved more than one person. Nine involved case of ill-treatment of prisoners, including assaults and the holding of knives to male genitals.  
+
+Nine of the allegations which were designated as credible were dismissed with no further action required because of the legal principle of derivative use immunity according to which if Soldier X gives information to the Inquiry that he unlawfully killed a prisoner, the information given to the Inquiry by Soldier X (and anything obtained as a direct or indirect consequence) is inadmissible in any prosecution of Soldier X. 
+
+Regardless of the alleged war crimes of Australian troops in the unjust invasion and occupation of Afghanistan, there is culture of a sub-imperialist lackey that has long permeated the Australian armed forces.  With the exception of the War Against Fascism (WW2), every conflict involving Australian troops in imperialist wars has been unjust. The Brereton Report does us all a favour by including an historical review of Australian war crimes (Chapter 1.08 of the Report) from the Boer War to the present day.  There are several examples from WW2, unsurprising given that although the cause was just, the political and military leadership came from the pro-imperialist bourgeoisie.  Australia has sent troops to just about every imperialist war waged by the dominant imperialist power presiding over this county – from the British colonial Boer war to US imperialist wars on Korea, Vietnam, Afghanistan, Iraq, Libya and Syria.
+
+Fascists and racists are attracted to imperialist military service and encourage a culture in which unjust actions are celebrated. In 2018, photos emerged of Australian troops, in 2007, flying a Nazi flag from their combat vehicle. In June 2020, footage emerged of Australian soldiers holding a racist “Southern Pride” Confederate flag used to guide in a U.S. military UH-60 Black Hawk helicopter to pick up Afghan prisoners following an Australian-led raid. The ADF immediately denied any knowledge of the incident although the footage was reportedly included in a highlight reel for the Special Air Service Regiment's 3 Squadron following a 2012 deployment to Afghanistan.
+
+Bandaid measures and the necessary prosecution of Australian war criminals aside, Australians must ensure that our country has an independent and peaceful foreign policy, that we make a decisive break with US and other imperialisms, and never again allow Australian armed forces to be sent to support unjust wars.
+
+The whistleblower David McBride should receive the highest of accolades and the shameful and vengeful charges against him be dropped immediately.
+
+Australia’s working people have a long tradition of struggle against imperialist wars, reaching as far back as mass opposition to imperialist WW1 and Conscription; to fascism in WW2 and the Vietnam War.  In the months leading to the invasion of Iraq in 2003 millions of Australians from different walks of life voiced their opposition to Australia sending troops to US planned and led war on Iraq.  In February 2003 one month before the invasion of Iraq over 4000,000 demonstrated in the streets across the country demanding “No War on Iraq”, “No War for Oil”, “No troops to Iraq”.  Many carried signs depicting the then Australian Prime Minister as a puppet of the US. 
+
+No more Australian involvement in imperialist wars!
+For anti-imperialist independence and socialism!"
+text = "On the Australian war crimes in Afghanistan
+Written by: Nick G. on 3 December 2020
+
+Marxist-Leninists hold that there are two types of war – just and unjust. 
+
+Imperialist wars brutalise soldiers of imperialist armies engaged in foreign wars of aggression and occupations.  In contrast, people’s liberation armies fighting just wars are under the leadership and guidance of revolutionary class ideology and organisation serving the people.
+
+Just wars cannot be won by military means alone. They are often waged by weaker and technologically inferior forces which attract the support of the people and can be sustained and led to victory by correct politics. Those correct politics include relations between the armed forces and the people, and also between the armed forces of the just cause and the armed forces of the unjust cause. Captured and wounded soldiers of the unjust army are subjected to education about the two types of war, are persuaded to renounce their support for the unjust, and are treated with leniency.
+
+Unjust wars cannot attract popular support over the longer term.  What support there is evaporates over time. The forces of the unjust cause must rely on military means, and tend to discount winning popular support because of their apparent superiority in strength of arms and other technologies.
+
+Afghanistan – an unjust war
+
+Australia’s longest-running war is its engagement in Afghanistan.  It began in November 2001 in the wake of the September 11 attack on the World Trade Towers in New York.  The Australian government sent troops to Afghanistan to show its support and subservience to the US as a compliant ally, often referred to as a “puppet” or “deputy sheriff of the US”. Australian soldiers played a support role to the forces of US and other imperialisms.  Those forces invaded Afghanistan in a so-called “war on terrorism”. There was and is a terrorism associated with the reactionary fascist wing of the Islamic religion, but the invasion of Afghanistan by imperialist powers was not a just application of force.  It was unjust from the start, largely motivated by US imperialist ambitions in the region and set the scene for a wave of anti-democratic measures, under the cover of “anti-terrorism”.
+
+The recent report into allegations of war crimes by Australian troops in Afghanistan was preceded by a report commissioned by the head of the Australian Army, Gen. Angus Campbell, in 2015 following persistent rumours of illegal killings of Afghans by Australians.  Presented to Campbell in 2016, the report by sociologist Dr. Samantha Crompvoets quoted Australian soldiers, who did not want to be identified, who were appalled by the behaviour of fellow soldiers. 
+
+One said that 2012 was the worst he had seen:
+
+“Guys just had this blood lust. Psychos. Absolute psychos. And we bred them. These things do not happen in isolation. They (soldiers) become more confident over time when they are there and these behaviours become permissible and equated with being good and effective soldiers.”
+
+She repeated allegations made by the soldiers she interviewed: when helicopters landed in villages, any villagers running away were fired upon, “killing many of these men and boys (and sometimes women and children) shooting them in the back, while running away.” Other soldiers would take any surviving men and boys “and ‘interrogate’ them, meaning tie them up and torture them…for days and the whole village would be deprived of food, water and medicines…When the Special Forces left, the men and boys would be found dead: shot in the head or blindfolded and with throats slit,’’ she wrote.
+
+One “disturbing example” given by soldier informants occurred when Australian soldiers driving along a road saw two 14-year old boys who they decided might be Taliban sympathisers. “They were stopped and searched and then their throats slit.  The rest of the troop then had to ‘clean up the mess’…the bodies were bagged and thrown in a nearby river.”
+
+It was this report, delivered in 2015 but kept secret at the time, that led Angus Campbell to commission the report into allegations of Australian war crimes in Afghanistan. Campbell (now head of all Australian Defence Forces) did that in March 2016.  
+
+In the meantime, David McBride, a former Army lawyer with two tours of duty in Afghanistan, was leaking Australian Defence Force files (the “Afghan Files”) to the Australian Broadcasting Corporation (ABC). The ABC subsequently ran a series of stories alleging Australian war crimes. 
+
+The Australian Government retaliated against McBride and its national broadcaster. In September 2018, McBride was charged with theft of Government property (more charges were subsequently added), while in June 2019, the offices of the ABC were raided by Australian Federal Police (AFP) and all material relating to the Afghan Files seized. In June 2020, the AFP recommended that charges be laid against ABC journalist Dan Oakes.  There was a huge public outcry and the Government was forced to back down from charging Oakes. Charges still remain against the whistleblower McBride.
+
+The heavily redacted (censored, blacked-out) Afghanistan Inquiry Report, also known as the Brereton Report, finds credible evidence of 23 incidents involving 25 current or former ADF personnel accused of killing 39 individuals, with a further two subjected to cruel treatment. However, a further 28 incidents (and 11 more that were discontinued) had found that allegations were not substantiated or could not be proceeded with.
+
+Of those that the Report found to be unsubstantiated, there were 20 allegations of unlawful killings, seven of which involved more than one person. Nine involved case of ill-treatment of prisoners, including assaults and the holding of knives to male genitals.  
+
+Nine of the allegations which were designated as credible were dismissed with no further action required because of the legal principle of derivative use immunity according to which if Soldier X gives information to the Inquiry that he unlawfully killed a prisoner, the information given to the Inquiry by Soldier X (and anything obtained as a direct or indirect consequence) is inadmissible in any prosecution of Soldier X. 
+
+Regardless of the alleged war crimes of Australian troops in the unjust invasion and occupation of Afghanistan, there is culture of a sub-imperialist lackey that has long permeated the Australian armed forces.  With the exception of the War Against Fascism (WW2), every conflict involving Australian troops in imperialist wars has been unjust. The Brereton Report does us all a favour by including an historical review of Australian war crimes (Chapter 1.08 of the Report) from the Boer War to the present day.  There are several examples from WW2, unsurprising given that although the cause was just, the political and military leadership came from the pro-imperialist bourgeoisie.  Australia has sent troops to just about every imperialist war waged by the dominant imperialist power presiding over this county – from the British colonial Boer war to US imperialist wars on Korea, Vietnam, Afghanistan, Iraq, Libya and Syria.
+
+Fascists and racists are attracted to imperialist military service and encourage a culture in which unjust actions are celebrated. In 2018, photos emerged of Australian troops, in 2007, flying a Nazi flag from their combat vehicle. In June 2020, footage emerged of Australian soldiers holding a racist “Southern Pride” Confederate flag used to guide in a U.S. military UH-60 Black Hawk helicopter to pick up Afghan prisoners following an Australian-led raid. The ADF immediately denied any knowledge of the incident although the footage was reportedly included in a highlight reel for the Special Air Service Regiment's 3 Squadron following a 2012 deployment to Afghanistan.
+
+Bandaid measures and the necessary prosecution of Australian war criminals aside, Australians must ensure that our country has an independent and peaceful foreign policy, that we make a decisive break with US and other imperialisms, and never again allow Australian armed forces to be sent to support unjust wars.
+
+The whistleblower David McBride should receive the highest of accolades and the shameful and vengeful charges against him be dropped immediately.
+
+Australia’s working people have a long tradition of struggle against imperialist wars, reaching as far back as mass opposition to imperialist WW1 and Conscription; to fascism in WW2 and the Vietnam War.  In the months leading to the invasion of Iraq in 2003 millions of Australians from different walks of life voiced their opposition to Australia sending troops to US planned and led war on Iraq.  In February 2003 one month before the invasion of Iraq over 4000,000 demonstrated in the streets across the country demanding “No War on Iraq”, “No War for Oil”, “No troops to Iraq”.  Many carried signs depicting the then Australian Prime Minister as a puppet of the US. 
+
+No more Australian involvement in imperialist wars!
+For anti-imperialist independence and socialism!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="PanelContainer" parent="Panel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -526.0
+
+[node name="VBoxC" type="VBoxContainer" parent="Panel/Panel"]
+margin_right = 1024.0
+margin_bottom = 526.0
+rect_min_size = Vector2( 0, 512 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Panel/Panel/VBoxC"]
+margin_right = 1024.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 0, 64 )
+text = "引用1"
+align = 1
+valign = 1
+
+[node name="Content" type="RichTextLabel" parent="Panel/Panel/VBoxC"]
+margin_top = 68.0
+margin_right = 1024.0
+margin_bottom = 526.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "内容"
+
+[node name="MenuPanel" type="Panel" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Button" parent="MenuPanel"]
+margin_right = 128.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 128, 128 )
+custom_styles/normal = SubResource( 3 )
+text = "返回"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="PanelContainer" parent="MenuPanel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -283.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxC" type="HBoxContainer" parent="MenuPanel/Panel"]
+margin_right = 1080.0
+margin_bottom = 283.0
+
+[node name="Button" type="Button" parent="MenuPanel/Panel/HBoxC"]
+margin_right = 267.0
+margin_bottom = 283.0
+size_flags_horizontal = 3
+text = "目录/书签"
+
+[node name="Button2" type="Button" parent="MenuPanel/Panel/HBoxC"]
+margin_left = 271.0
+margin_right = 538.0
+margin_bottom = 283.0
+size_flags_horizontal = 3
+text = "字号/样式"
+
+[node name="Button3" type="Button" parent="MenuPanel/Panel/HBoxC"]
+margin_left = 542.0
+margin_right = 809.0
+margin_bottom = 283.0
+size_flags_horizontal = 3
+text = "翻页模式"
+
+[node name="Button4" type="Button" parent="MenuPanel/Panel/HBoxC"]
+margin_left = 813.0
+margin_right = 1080.0
+margin_bottom = 283.0
+size_flags_horizontal = 3
+text = "搜索"
+
+[connection signal="gui_input" from="VBoxC/RichTextLabel" to="." method="_on_RichTextLabel_gui_input"]
+[connection signal="meta_clicked" from="VBoxC/RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]
+[connection signal="gui_input" from="Panel" to="." method="_on_Panel_gui_input"]
+[connection signal="gui_input" from="MenuPanel" to="." method="_on_MenuPanel_gui_input"]
+[connection signal="pressed" from="MenuPanel/Back" to="." method="_on_Back_pressed"]

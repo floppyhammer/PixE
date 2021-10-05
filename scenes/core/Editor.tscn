@@ -1,0 +1,264 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://tres/theme_dark.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/core/Canvas.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/graphics/transparent_bg.png" type="Texture" id=3]
+[ext_resource path="res://scenes/core/Editor.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[node name="Editor" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OpArea" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 692.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 16
+
+[node name="Palette" type="VBoxContainer" parent="VBoxContainer/OpArea"]
+margin_right = 172.0
+margin_bottom = 692.0
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/OpArea/Palette"]
+margin_right = 172.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 0, 48 )
+
+[node name="Add" type="Button" parent="VBoxContainer/OpArea/Palette/HBoxContainer"]
+margin_right = 60.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 0 )
+text = "Add"
+
+[node name="Delete" type="Button" parent="VBoxContainer/OpArea/Palette/HBoxContainer"]
+margin_left = 64.0
+margin_right = 172.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 0 )
+text = "Delete"
+
+[node name="Palette" type="ScrollContainer" parent="VBoxContainer/OpArea/Palette"]
+margin_top = 52.0
+margin_right = 172.0
+margin_bottom = 692.0
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/OpArea/Palette/Palette"]
+margin_right = 140.0
+margin_bottom = 68.0
+columns = 4
+
+[node name="Button" type="Button" parent="VBoxContainer/OpArea/Palette/Palette/GridContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+
+[node name="Button2" type="Button" parent="VBoxContainer/OpArea/Palette/Palette/GridContainer"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+
+[node name="Button3" type="Button" parent="VBoxContainer/OpArea/Palette/Palette/GridContainer"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+
+[node name="Button4" type="Button" parent="VBoxContainer/OpArea/Palette/Palette/GridContainer"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+
+[node name="Button5" type="Button" parent="VBoxContainer/OpArea/Palette/Palette/GridContainer"]
+margin_top = 36.0
+margin_right = 32.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+
+[node name="Button6" type="Button" parent="VBoxContainer/OpArea/Palette/Palette/GridContainer"]
+margin_left = 36.0
+margin_top = 36.0
+margin_right = 68.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+
+[node name="ColorPicker" type="ColorPicker" parent="VBoxContainer/OpArea/Palette"]
+visible = false
+margin_left = 96.0
+margin_top = 352.0
+margin_right = 496.0
+margin_bottom = 878.0
+presets_visible = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/OpArea"]
+margin_left = 188.0
+margin_right = 1280.0
+margin_bottom = 692.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ToolOptions" type="HBoxContainer" parent="VBoxContainer/OpArea/VBoxContainer"]
+margin_right = 1092.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 0, 48 )
+
+[node name="Button" type="Button" parent="VBoxContainer/OpArea/VBoxContainer/ToolOptions"]
+margin_right = 204.0
+margin_bottom = 48.0
+text = "Tool Options"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/OpArea/VBoxContainer"]
+margin_top = 52.0
+margin_right = 1092.0
+margin_bottom = 692.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer"]
+margin_right = 916.0
+margin_bottom = 640.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer"]
+margin_right = 1024.0
+margin_bottom = 1024.0
+rect_min_size = Vector2( 1024, 1024 )
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer"]
+margin_left = 512.0
+margin_top = 512.0
+margin_right = 512.0
+margin_bottom = 512.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="Bg" type="TextureRect" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer/Panel"]
+margin_left = -44.0737
+margin_top = -135.611
+margin_right = -12.0737
+margin_bottom = -103.611
+rect_scale = Vector2( 5, 5 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 3 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer/Panel"]
+margin_left = -44.0737
+margin_top = -135.611
+margin_right = -44.0737
+margin_bottom = -135.611
+rect_min_size = Vector2( 32, 32 )
+rect_scale = Vector2( 5, 5 )
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer/Panel/ViewportContainer"]
+size = Vector2( 32, 32 )
+transparent_bg = true
+handle_input_locally = false
+render_target_clear_mode = 1
+render_target_update_mode = 3
+
+[node name="Canvas" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer/Panel/ViewportContainer/Viewport" instance=ExtResource( 2 )]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer"]
+margin_left = 920.0
+margin_right = 1092.0
+margin_bottom = 640.0
+rect_min_size = Vector2( 48, 0 )
+size_flags_vertical = 3
+
+[node name="Select" type="Button" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 172.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
+text = "Select"
+
+[node name="Pencil" type="Button" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 52.0
+margin_right = 172.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 48, 48 )
+text = "Pencil"
+
+[node name="Eraser" type="Button" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 104.0
+margin_right = 172.0
+margin_bottom = 152.0
+rect_min_size = Vector2( 48, 48 )
+text = "Eraser"
+
+[node name="Eyedropper" type="Button" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 156.0
+margin_right = 172.0
+margin_bottom = 204.0
+rect_min_size = Vector2( 48, 48 )
+text = "Eyedropper"
+
+[node name="Move" type="Button" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 208.0
+margin_right = 172.0
+margin_bottom = 256.0
+rect_min_size = Vector2( 48, 48 )
+text = "Move"
+
+[node name="Bucket" type="Button" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 260.0
+margin_right = 172.0
+margin_bottom = 308.0
+rect_min_size = Vector2( 48, 48 )
+text = "Bucket"
+
+[node name="Shape" type="OptionButton" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 312.0
+margin_right = 172.0
+margin_bottom = 360.0
+rect_min_size = Vector2( 48, 48 )
+text = "Line"
+items = [ "Line", null, false, 0, null, "Rect", null, false, 1, null ]
+selected = 0
+
+[node name="InfoBar" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 696.0
+margin_right = 1280.0
+margin_bottom = 720.0
+
+[node name="PenPosLabel" type="Label" parent="VBoxContainer/InfoBar"]
+margin_bottom = 24.0
+
+[node name="SizeLabel" type="Label" parent="VBoxContainer/InfoBar"]
+margin_left = 4.0
+margin_right = 4.0
+margin_bottom = 24.0

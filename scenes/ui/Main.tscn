@@ -1,0 +1,221 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://tres/theme_dark.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/ui/OpenSpriteDialog.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/core/Editor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/ui/Main.gd" type="Script" id=4]
+
+[node name="Main" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1273.0
+margin_bottom = 713.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 1266.0
+margin_bottom = 48.0
+custom_constants/separation = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="File" type="MenuButton" parent="VBoxContainer/HBoxContainer"]
+margin_right = 76.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
+text = "File"
+
+[node name="Edit" type="MenuButton" parent="VBoxContainer/HBoxContainer"]
+margin_left = 92.0
+margin_right = 168.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
+focus_mode = 2
+text = "Edit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+margin_top = 52.0
+margin_right = 1266.0
+margin_bottom = 706.0
+size_flags_vertical = 3
+tab_align = 0
+
+[node name="Home" type="Control" parent="VBoxContainer/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 42.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Home"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Home/HBoxContainer"]
+margin_right = 627.0
+margin_bottom = 608.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Home/HBoxContainer/VBoxContainer"]
+margin_right = 627.0
+margin_bottom = 24.0
+text = "Recent files"
+
+[node name="ItemList" type="ItemList" parent="VBoxContainer/TabContainer/Home/HBoxContainer/VBoxContainer"]
+margin_top = 28.0
+margin_right = 627.0
+margin_bottom = 608.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/TabContainer/Home/HBoxContainer"]
+margin_left = 631.0
+margin_right = 1258.0
+margin_bottom = 608.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Home/HBoxContainer/VBoxContainer2"]
+margin_right = 627.0
+margin_bottom = 24.0
+text = "Recent news"
+
+[node name="ItemList" type="ItemList" parent="VBoxContainer/TabContainer/Home/HBoxContainer/VBoxContainer2"]
+margin_top = 28.0
+margin_right = 627.0
+margin_bottom = 608.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Editor" parent="VBoxContainer/TabContainer" instance=ExtResource( 3 )]
+visible = false
+margin_left = 4.0
+margin_top = 42.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="NewSpriteDialog" type="WindowDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -139.0
+margin_top = -139.0
+margin_right = 139.0
+margin_bottom = 139.0
+popup_exclusive = true
+window_title = "New Sprite"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="NewSpriteDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 16
+custom_constants/margin_top = 16
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NewSpriteDialog/MarginContainer"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 318.0
+margin_bottom = 262.0
+custom_constants/separation = 16
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Width" type="HBoxContainer" parent="NewSpriteDialog/MarginContainer/VBoxContainer"]
+margin_top = 35.0
+margin_right = 246.0
+margin_bottom = 83.0
+rect_min_size = Vector2( 0, 48 )
+
+[node name="Label" type="Label" parent="NewSpriteDialog/MarginContainer/VBoxContainer/Width"]
+margin_top = 8.0
+margin_right = 64.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 64, 0 )
+text = "Width"
+
+[node name="LineEdit" type="LineEdit" parent="NewSpriteDialog/MarginContainer/VBoxContainer/Width"]
+margin_left = 68.0
+margin_right = 246.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+
+[node name="Height" type="HBoxContainer" parent="NewSpriteDialog/MarginContainer/VBoxContainer"]
+margin_top = 99.0
+margin_right = 246.0
+margin_bottom = 147.0
+rect_min_size = Vector2( 0, 48 )
+
+[node name="Label" type="Label" parent="NewSpriteDialog/MarginContainer/VBoxContainer/Height"]
+margin_top = 8.0
+margin_right = 64.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 64, 0 )
+text = "Height"
+
+[node name="LineEdit" type="LineEdit" parent="NewSpriteDialog/MarginContainer/VBoxContainer/Height"]
+margin_left = 68.0
+margin_right = 246.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NewSpriteDialog/MarginContainer/VBoxContainer"]
+margin_top = 163.0
+margin_right = 246.0
+margin_bottom = 211.0
+rect_min_size = Vector2( 0, 48 )
+
+[node name="OK" type="Button" parent="NewSpriteDialog/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 121.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+text = "OK"
+
+[node name="Cancel" type="Button" parent="NewSpriteDialog/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 125.0
+margin_right = 246.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+text = "Cancel"
+
+[node name="OpenSpriteDialog" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -398.0
+margin_top = -266.5
+margin_right = 398.0
+margin_bottom = 266.5

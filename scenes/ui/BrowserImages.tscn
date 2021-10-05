@@ -1,0 +1,140 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/ui/BrowserImages.gd" type="Script" id=1]
+[ext_resource path="res://tres/theme_dark.tres" type="Theme" id=2]
+[ext_resource path="res://dbs/images/87380193.jpg" type="Texture" id=3]
+[ext_resource path="res://dbs/images/87611527.png" type="Texture" id=4]
+[ext_resource path="res://dbs/images/China_2098.jpg" type="Texture" id=5]
+
+[node name="BrowserImages" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="ScrollC" type="ScrollContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxC" type="VBoxContainer" parent="ScrollC"]
+margin_right = 1008.0
+margin_bottom = 1544.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Item" type="Button" parent="ScrollC/VBoxC"]
+margin_right = 1008.0
+margin_bottom = 512.0
+rect_min_size = Vector2( 0, 512 )
+mouse_filter = 1
+
+[node name="VBoxC" type="VBoxContainer" parent="ScrollC/VBoxC/Item"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="ScrollC/VBoxC/Item/VBoxC"]
+margin_right = 1008.0
+margin_bottom = 444.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ScrollC/VBoxC/Item/VBoxC"]
+margin_top = 448.0
+margin_right = 1008.0
+margin_bottom = 512.0
+rect_min_size = Vector2( 0, 64 )
+text = "Title"
+valign = 1
+
+[node name="Item2" type="Button" parent="ScrollC/VBoxC"]
+margin_top = 516.0
+margin_right = 1008.0
+margin_bottom = 1028.0
+rect_min_size = Vector2( 0, 512 )
+mouse_filter = 1
+
+[node name="VBoxC" type="VBoxContainer" parent="ScrollC/VBoxC/Item2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="ScrollC/VBoxC/Item2/VBoxC"]
+margin_right = 1008.0
+margin_bottom = 444.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ScrollC/VBoxC/Item2/VBoxC"]
+margin_top = 448.0
+margin_right = 1008.0
+margin_bottom = 512.0
+rect_min_size = Vector2( 0, 64 )
+text = "Title"
+valign = 1
+
+[node name="Item3" type="Button" parent="ScrollC/VBoxC"]
+margin_top = 1032.0
+margin_right = 1008.0
+margin_bottom = 1544.0
+rect_min_size = Vector2( 0, 512 )
+mouse_filter = 1
+
+[node name="VBoxC" type="VBoxContainer" parent="ScrollC/VBoxC/Item3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="ScrollC/VBoxC/Item3/VBoxC"]
+margin_right = 1008.0
+margin_bottom = 444.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ScrollC/VBoxC/Item3/VBoxC"]
+margin_top = 448.0
+margin_right = 1008.0
+margin_bottom = 512.0
+rect_min_size = Vector2( 0, 64 )
+text = "Title"
+valign = 1
+
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
+[connection signal="pressed" from="ScrollC/VBoxC/Item" to="." method="_on_Item_pressed"]
+[connection signal="pressed" from="ScrollC/VBoxC/Item2" to="." method="_on_Item_pressed"]
+[connection signal="pressed" from="ScrollC/VBoxC/Item3" to="." method="_on_Item_pressed"]

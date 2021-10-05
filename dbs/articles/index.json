@@ -1,0 +1,24 @@
+{
+    "Factions": {
+        "Hiigara": {
+            "Origin": {
+                "title": "中国社会各阶级的分析",
+                "url": "res://dbs/articles/selection_of_mao_volume_1_article_1.json",
+            },
+            "Goal": {
+                "title": "湖南农民运动考察报告",
+                "url": "res://dbs/articles/selection_of_mao_volume_1_article_2.json",
+            },
+        },
+        "Taiidan": {
+            "Origin": {
+                "title": "中国社会各阶级的分析",
+                "url": "res://dbs/articles/selection_of_mao_volume_1_article_1.json",
+            },
+            "Goal": {
+                "title": "湖南农民运动考察报告",
+                "url": "res://dbs/articles/selection_of_mao_volume_1_article_2.json",
+            },
+        },
+    },
+}
