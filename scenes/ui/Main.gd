@@ -2,6 +2,7 @@ extends Panel
 
 
 onready var file_mb = $VBoxContainer/HBoxContainer/File
+onready var edit_mb = $VBoxContainer/HBoxContainer/Edit
 
 
 func _ready():
@@ -19,6 +20,9 @@ func _reload():
 	file_mb.get_popup().add_separator("")
 	file_mb.get_popup().add_item("Exit")
 	file_mb.get_popup().connect("index_pressed", self, "_when_file_entry_pressed")
+
+	edit_mb.get_popup().add_item("undo")
+	edit_mb.get_popup().add_item("redo")
 
 
 func _when_file_entry_pressed(index):

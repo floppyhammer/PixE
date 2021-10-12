@@ -55,20 +55,54 @@ var last_pixel : Vector2
 
 # Cache is used to undo steps. When a pixel path is drawn,
 # add the resulting texture to cache.
-var texture_cache = []
+var texture_cache = [Image.new()]
 
 # Only draw a pixel patch, which is from mouse press to mouse release.
 var pixel_patch = []
 
+var cache_header = 0
+
+var need_to_redraw_cache = false
+
+signal stroke_finished
+
 
 func undo():
-	pass
+	print("undo")
+	
+	if cache_header > 0:
+		cache_header -= 1
+		
+		# Redraw if header is not at zero.
+		need_to_redraw_cache = true
+	else:
+		cache_header = 0
+	
+	update()
+
+
+func redo():
+	print("redo")
+	
+	if cache_header < texture_cache.size() - 1:
+		cache_header += 1
+		
+		need_to_redraw_cache = true
+	else:
+		cache_header = texture_cache.size() - 1
+	
+	update()
 
 
 func _draw():
-	# Draw the last texture in the cache.
-	if not texture_cache.empty():
-		draw_texture(texture_cache.back(), Vector2.ZERO)
+	if need_to_redraw_cache:
+		need_to_redraw_cache = false
+		
+		# Draw the last texture in the cache.
+		if cache_header < texture_cache.size():
+			var tex = ImageTexture.new()
+			tex.create_from_image(texture_cache[cache_header])
+			draw_texture(tex, Vector2.ZERO)
 	
 	for p in pixel_patch:
 		draw_rect(Rect2(p, Vector2.ONE), Color.white)
@@ -96,6 +130,9 @@ func snap_to_pixel(pos : Vector2):
 
 
 func _on_Canvas_gui_input(event):
+	if Input.is_action_just_pressed("undo"):
+		undo()
+	
 	if event is InputEventMouse:
 		if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
 			if event.pressed:
@@ -113,8 +150,12 @@ func _on_Canvas_gui_input(event):
 				last_pixel = snapped
 			else:
 				pixel_patch.clear()
-				# Cache the current viewport texture.
-				#texture_cache.append()
+				
+				# If did undo before, remove outdated cache.
+				if cache_header < texture_cache.size() - 1:
+					texture_cache.resize(cache_header)
+				
+				emit_signal("stroke_finished")
 		
 		# Drag.
 		if event is InputEventMouseMotion and Input.is_mouse_button_pressed(BUTTON_LEFT):
