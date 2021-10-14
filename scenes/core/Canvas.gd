@@ -60,7 +60,7 @@ var texture_cache = [Image.new()]
 # Only draw a pixel patch, which is from mouse press to mouse release.
 var pixel_patch = []
 
-var cache_header = 0
+var cache_head = 0
 
 var need_to_redraw_cache = false
 
@@ -70,13 +70,13 @@ signal stroke_finished
 func undo():
 	print("undo")
 	
-	if cache_header > 0:
-		cache_header -= 1
+	if cache_head > 0:
+		cache_head -= 1
 		
 		# Redraw if header is not at zero.
 		need_to_redraw_cache = true
 	else:
-		cache_header = 0
+		cache_head = 0
 	
 	update()
 
@@ -84,12 +84,12 @@ func undo():
 func redo():
 	print("redo")
 	
-	if cache_header < texture_cache.size() - 1:
-		cache_header += 1
+	if cache_head < texture_cache.size() - 1:
+		cache_head += 1
 		
 		need_to_redraw_cache = true
 	else:
-		cache_header = texture_cache.size() - 1
+		cache_head = texture_cache.size() - 1
 	
 	update()
 
@@ -99,10 +99,13 @@ func _draw():
 		need_to_redraw_cache = false
 		
 		# Draw the last texture in the cache.
-		if cache_header < texture_cache.size():
+		if cache_head > 0 and cache_head < texture_cache.size():
 			var tex = ImageTexture.new()
-			tex.create_from_image(texture_cache[cache_header])
-			draw_texture(tex, Vector2.ZERO)
+			tex.create_from_image(texture_cache[cache_head])
+			#draw_texture(tex, Vector2.ZERO)
+			$TextureCache.texture = tex
+		elif cache_head == 0:
+			$TextureCache.texture = null
 	
 	for p in pixel_patch:
 		draw_rect(Rect2(p, Vector2.ONE), Color.white)
@@ -152,25 +155,25 @@ func _on_Canvas_gui_input(event):
 				pixel_patch.clear()
 				
 				# If did undo before, remove outdated cache.
-				if cache_header < texture_cache.size() - 1:
-					texture_cache.resize(cache_header)
+				if cache_head < texture_cache.size() - 1:
+					texture_cache.resize(cache_head)
 				
 				emit_signal("stroke_finished")
 		
 		# Drag.
-		if event is InputEventMouseMotion and Input.is_mouse_button_pressed(BUTTON_LEFT):
+		if event is InputEventMouseMotion:
 			var snapped = snap_to_pixel(event.position)
-			
-			if snapped.x > IMAGE_SIZE.x or snapped.y > IMAGE_SIZE.y:
-				pixel_patch.clear()
-				update()
-				return
-			
 			snapped_mouse_pos = snapped
 			
-			if snapped != last_pixel:
-				if not snapped in pixel_patch:
-					pixel_patch.append(snapped)
-				last_pixel = snapped
+			if Input.is_mouse_button_pressed(BUTTON_LEFT):
+				if snapped.x > IMAGE_SIZE.x or snapped.y > IMAGE_SIZE.y:
+					pixel_patch.clear()
+					update()
+					return
+				
+				if snapped != last_pixel:
+					if not snapped in pixel_patch:
+						pixel_patch.append(snapped)
+					last_pixel = snapped
 		
 		update()

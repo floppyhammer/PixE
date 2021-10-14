@@ -24,16 +24,6 @@ __meta__ = {
 position = Vector2( 14, 17 )
 zoom = Vector2( 0.1, 0.1 )
 
-[node name="Label" type="Label" parent="."]
-visible = false
-margin_left = -11.0
-margin_top = 19.0
-margin_right = 29.0
-margin_bottom = 33.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="TextureCache" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0

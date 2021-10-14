@@ -3,6 +3,7 @@ extends Panel
 
 onready var file_mb = $VBoxContainer/HBoxContainer/File
 onready var edit_mb = $VBoxContainer/HBoxContainer/Edit
+onready var editor = $VBoxContainer/TabContainer/Editor
 
 
 func _ready():
@@ -21,8 +22,9 @@ func _reload():
 	file_mb.get_popup().add_item("Exit")
 	file_mb.get_popup().connect("index_pressed", self, "_when_file_entry_pressed")
 
-	edit_mb.get_popup().add_item("undo")
-	edit_mb.get_popup().add_item("redo")
+	edit_mb.get_popup().add_item("Undo")
+	edit_mb.get_popup().add_item("Redo")
+	edit_mb.get_popup().connect("index_pressed", self, "edit_mb_pressed")
 
 
 func _when_file_entry_pressed(index):
@@ -65,3 +67,11 @@ func _on_About_pressed():
 
 func _on_BrowserImages_image_pressed():
 	$ImageViewer.show()
+
+
+func edit_mb_pressed(index):
+	match index:
+		0:
+			editor.undo_canvas()
+		1:
+			editor.redo_canvas()
