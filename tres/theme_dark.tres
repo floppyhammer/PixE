@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=16 format=2]
+[gd_resource type="Theme" load_steps=17 format=2]
 
 [ext_resource path="res://tres/default_font_24.tres" type="DynamicFont" id=1]
 
@@ -54,6 +54,10 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id=5]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
 bg_color = Color( 0, 0, 0, 1 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
@@ -69,6 +73,10 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxFlat" id=10]
 content_margin_left = 8.0
@@ -76,6 +84,15 @@ content_margin_right = 8.0
 content_margin_top = 16.0
 content_margin_bottom = 16.0
 bg_color = Color( 0.145098, 0.145098, 0.14902, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color( 0, 0, 0, 0.392157 )
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id=16]
+bg_color = Color( 0.133333, 0.133333, 0.133333, 1 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -115,8 +132,8 @@ Button/colors/font_color = Color( 0.811765, 0.811765, 0.811765, 1 )
 Button/colors/font_color_disabled = Color( 0, 0, 0, 1 )
 Button/colors/font_color_hover = Color( 0.811765, 0.811765, 0.811765, 1 )
 Button/colors/font_color_pressed = Color( 0, 0, 0, 1 )
-Button/colors/icon_color_hover = Color( 0, 0, 0, 1 )
-Button/colors/icon_color_pressed = Color( 0, 0, 0, 1 )
+Button/colors/icon_color_hover = Color( 1, 1, 1, 1 )
+Button/colors/icon_color_pressed = Color( 1, 1, 1, 1 )
 Button/constants/hseparation = 0
 Button/fonts/font = null
 Button/styles/disabled = SubResource( 1 )
@@ -1147,7 +1164,7 @@ LineEdit/colors/font_color = Color( 0.811765, 0.811765, 0.811765, 1 )
 LineEdit/colors/font_color_selected = Color( 0, 0, 0, 1 )
 LineEdit/colors/font_color_uneditable = Color( 0, 0, 0, 1 )
 LineEdit/colors/read_only = Color( 0, 0, 0, 1 )
-LineEdit/colors/selection_color = Color( 0, 0, 0, 1 )
+LineEdit/colors/selection_color = Color( 0.811765, 0.811765, 0.811765, 1 )
 LineEdit/constants/minimum_spaces = 0
 LineEdit/fonts/font = null
 LineEdit/icons/clear = null
@@ -1220,7 +1237,7 @@ PopupMenu/styles/panel = SubResource( 10 )
 PopupMenu/styles/panel_disabled = null
 PopupMenu/styles/pressed = null
 PopupMenu/styles/separator = null
-PopupPanel/styles/panel = null
+PopupPanel/styles/panel = SubResource( 16 )
 ProgressBar/colors/font_color = Color( 0, 0, 0, 1 )
 ProgressBar/colors/font_color_shadow = Color( 0, 0, 0, 1 )
 ProgressBar/fonts/font = null
@@ -1406,7 +1423,7 @@ VSplitContainer/constants/autohide = 0
 VSplitContainer/constants/separation = 0
 VSplitContainer/icons/grabber = null
 VSplitContainer/styles/bg = null
-WindowDialog/colors/title_color = Color( 0, 0, 0, 1 )
+WindowDialog/colors/title_color = Color( 1, 1, 1, 1 )
 WindowDialog/constants/close_h_ofs = 0
 WindowDialog/constants/close_v_ofs = 0
 WindowDialog/constants/scaleborder_size = 0
