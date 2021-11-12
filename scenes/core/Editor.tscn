@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://tres/theme_dark.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/core/Canvas.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://assets/graphics/icon_line.png" type="Texture" id=10]
 [ext_resource path="res://assets/graphics/icon_move.png" type="Texture" id=11]
 [ext_resource path="res://assets/graphics/icon_bucket.png" type="Texture" id=12]
+[ext_resource path="res://scenes/core/ViewportContainer.gd" type="Script" id=13]
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
@@ -34,6 +35,8 @@ border_width_bottom = 4
 border_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="ButtonGroup" id=5]
 
 [node name="Editor" type="PanelContainer"]
 anchor_right = 1.0
@@ -62,35 +65,37 @@ size_flags_vertical = 3
 custom_constants/separation = 16
 
 [node name="Palette" type="VBoxContainer" parent="VBoxContainer/OpArea"]
-margin_right = 136.0
+margin_right = 128.0
 margin_bottom = 574.0
 size_flags_vertical = 3
 custom_constants/separation = 16
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/OpArea/Palette"]
-margin_right = 136.0
-margin_bottom = 64.0
+margin_right = 128.0
+margin_bottom = 48.0
 rect_min_size = Vector2( 0, 48 )
 custom_constants/separation = 8
+alignment = 1
 
 [node name="Add" type="Button" parent="VBoxContainer/OpArea/Palette/HBoxContainer"]
-margin_right = 64.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-text = "Add"
+margin_left = 12.0
+margin_right = 60.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
+text = "+"
 clip_text = true
 
 [node name="Delete" type="Button" parent="VBoxContainer/OpArea/Palette/HBoxContainer"]
-margin_left = 72.0
-margin_right = 136.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 64, 64 )
-text = "Delete"
+margin_left = 68.0
+margin_right = 116.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
+text = "-"
 clip_text = true
 
 [node name="Palette" type="ScrollContainer" parent="VBoxContainer/OpArea/Palette"]
-margin_top = 80.0
-margin_right = 136.0
+margin_top = 64.0
+margin_right = 128.0
 margin_bottom = 510.0
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
@@ -138,13 +143,13 @@ custom_styles/normal = SubResource( 2 )
 
 [node name="ColorCode" type="LineEdit" parent="VBoxContainer/OpArea/Palette"]
 margin_top = 526.0
-margin_right = 136.0
+margin_right = 128.0
 margin_bottom = 574.0
 rect_min_size = Vector2( 0, 48 )
 text = "#000000"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/OpArea"]
-margin_left = 152.0
+margin_left = 144.0
 margin_right = 1270.0
 margin_bottom = 574.0
 size_flags_horizontal = 3
@@ -152,7 +157,7 @@ size_flags_vertical = 3
 custom_constants/separation = 16
 
 [node name="ToolOptions" type="HBoxContainer" parent="VBoxContainer/OpArea/VBoxContainer"]
-margin_right = 1118.0
+margin_right = 1126.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 0, 48 )
 
@@ -165,20 +170,20 @@ suffix = "px"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/OpArea/VBoxContainer"]
 margin_top = 64.0
-margin_right = 1118.0
+margin_right = 1126.0
 margin_bottom = 574.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 16
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer"]
-margin_right = 1038.0
+margin_right = 1046.0
 margin_bottom = 510.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Panel" type="Panel" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer"]
-margin_right = 1026.0
+margin_right = 1038.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 720, 720 )
 mouse_filter = 2
@@ -194,17 +199,17 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer"]
-margin_left = 513.0
+margin_left = 519.0
 margin_top = 360.0
-margin_right = 513.0
+margin_right = 519.0
 margin_bottom = 360.0
 custom_styles/panel = SubResource( 1 )
 
 [node name="Bg" type="TextureRect" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer/Panel"]
-margin_left = -44.0737
-margin_top = -135.611
-margin_right = -12.0737
-margin_bottom = -103.611
+margin_left = -73.0
+margin_top = -119.0
+margin_right = -41.0
+margin_bottom = -87.0
 rect_scale = Vector2( 5, 5 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -214,31 +219,28 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer/Panel"]
-margin_left = -44.0737
-margin_top = -135.611
-margin_right = -44.0737
-margin_bottom = -135.611
+[node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer/Panel/Bg"]
+margin_right = 32.0
+margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
-rect_scale = Vector2( 5, 5 )
 stretch = true
+script = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Viewport" type="Viewport" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer/Panel/ViewportContainer"]
+[node name="Viewport" type="Viewport" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer/Panel/Bg/ViewportContainer"]
 size = Vector2( 32, 32 )
 transparent_bg = true
 handle_input_locally = false
 render_target_clear_mode = 1
 render_target_update_mode = 3
-gui_disable_input = true
 
-[node name="Canvas" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer/Panel/ViewportContainer/Viewport" instance=ExtResource( 2 )]
+[node name="Canvas" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer/Panel/Bg/ViewportContainer/Viewport" instance=ExtResource( 2 )]
 
 [node name="ScrollContainer2" type="ScrollContainer" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer"]
-margin_left = 1054.0
-margin_right = 1118.0
+margin_left = 1062.0
+margin_right = 1126.0
 margin_bottom = 510.0
 rect_min_size = Vector2( 48, 0 )
 scroll_horizontal_enabled = false
@@ -253,6 +255,7 @@ margin_right = 64.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 64, 64 )
 toggle_mode = true
+group = SubResource( 5 )
 icon = ExtResource( 7 )
 expand_icon = true
 
@@ -262,6 +265,8 @@ margin_right = 64.0
 margin_bottom = 136.0
 rect_min_size = Vector2( 64, 64 )
 toggle_mode = true
+pressed = true
+group = SubResource( 5 )
 icon = ExtResource( 6 )
 expand_icon = true
 
@@ -271,6 +276,7 @@ margin_right = 64.0
 margin_bottom = 208.0
 rect_min_size = Vector2( 64, 64 )
 toggle_mode = true
+group = SubResource( 5 )
 icon = ExtResource( 8 )
 expand_icon = true
 
@@ -280,6 +286,7 @@ margin_right = 64.0
 margin_bottom = 280.0
 rect_min_size = Vector2( 64, 64 )
 toggle_mode = true
+group = SubResource( 5 )
 icon = ExtResource( 9 )
 expand_icon = true
 
@@ -289,6 +296,7 @@ margin_right = 64.0
 margin_bottom = 352.0
 rect_min_size = Vector2( 64, 64 )
 toggle_mode = true
+group = SubResource( 5 )
 icon = ExtResource( 11 )
 expand_icon = true
 
@@ -298,6 +306,7 @@ margin_right = 64.0
 margin_bottom = 424.0
 rect_min_size = Vector2( 64, 64 )
 toggle_mode = true
+group = SubResource( 5 )
 icon = ExtResource( 12 )
 expand_icon = true
 
@@ -307,6 +316,7 @@ margin_right = 64.0
 margin_bottom = 496.0
 rect_min_size = Vector2( 64, 64 )
 toggle_mode = true
+group = SubResource( 5 )
 icon = ExtResource( 10 )
 expand_icon = true
 
@@ -344,5 +354,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="draw" from="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer/Panel/ViewportContainer/Viewport/Canvas" to="." method="_on_Canvas_draw"]
-[connection signal="stroke_finished" from="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer/Panel/ViewportContainer/Viewport/Canvas" to="." method="_on_Canvas_stroke_finished"]
+[connection signal="draw" from="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer/Panel/Bg/ViewportContainer/Viewport/Canvas" to="." method="_on_Canvas_draw"]
+[connection signal="stroke_finished" from="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer/Panel/Bg/ViewportContainer/Viewport/Canvas" to="." method="_on_Canvas_stroke_finished"]
+[connection signal="toggled" from="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer/Pencil" to="." method="_on_Pencil_toggled"]
+[connection signal="toggled" from="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer/Eraser" to="." method="_on_Eraser_toggled"]

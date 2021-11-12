@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/core/Canvas.gd" type="Script" id=1]
 
+[sub_resource type="CanvasItemMaterial" id=1]
+
 [node name="Canvas" type="Control"]
+material = SubResource( 1 )
 margin_right = 32.0
 margin_bottom = 32.0
 script = ExtResource( 1 )
@@ -11,6 +14,7 @@ __meta__ = {
 }
 
 [node name="ReferenceRect" type="ReferenceRect" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -23,13 +27,5 @@ __meta__ = {
 [node name="DebugCamera2D" type="Camera2D" parent="."]
 position = Vector2( 14, 17 )
 zoom = Vector2( 0.1, 0.1 )
-
-[node name="TextureCache" type="TextureRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [connection signal="gui_input" from="." to="." method="_on_Canvas_gui_input"]

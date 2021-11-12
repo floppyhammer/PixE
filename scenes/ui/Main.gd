@@ -1,8 +1,7 @@
 extends Panel
 
-
-onready var file_mb = $VBoxContainer/HBoxContainer/File
-onready var edit_mb = $VBoxContainer/HBoxContainer/Edit
+onready var file_mb = $VBoxContainer/VBoxContainer/File
+onready var edit_mb = $VBoxContainer/VBoxContainer/Edit
 onready var editor = $VBoxContainer/TabContainer/Editor
 
 

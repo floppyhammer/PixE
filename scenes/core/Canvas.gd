@@ -55,19 +55,23 @@ var last_pixel : Vector2
 
 # Cache is used to undo steps. When a pixel path is drawn,
 # add the resulting texture to cache.
-var texture_cache = [Image.new()]
+var img_cache = [Image.new()]
 
-# Only draw a pixel patch, which is from mouse press to mouse release.
-var pixel_patch = []
+# Only draw a pixel batch, which is from mouse press to mouse release.
+var pixel_batch = []
 
 var cache_head = 0
 
 var need_to_redraw_cache = false
 
+# Don't use a temporary variable to call draw_texture() as it will be
+# dropped before the actual rendering takes place.
+var tex = ImageTexture.new()
+
 signal stroke_finished
 
 
-func undo():
+func undo() -> bool:
 	print("undo")
 	
 	if cache_head > 0:
@@ -75,40 +79,56 @@ func undo():
 		
 		# Redraw if header is not at zero.
 		need_to_redraw_cache = true
+		
+		update()
+		
+		return true
 	else:
 		cache_head = 0
-	
-	update()
+		
+		return false
 
 
-func redo():
+func redo() -> bool:
 	print("redo")
 	
-	if cache_head < texture_cache.size() - 1:
+	if cache_head < img_cache.size() - 1:
 		cache_head += 1
 		
 		need_to_redraw_cache = true
+		
+		update()
+		
+		return true
 	else:
-		cache_head = texture_cache.size() - 1
-	
-	update()
+		cache_head = img_cache.size() - 1
+		
+		return false
 
 
 func _draw():
-	if need_to_redraw_cache:
-		need_to_redraw_cache = false
-		
-		# Draw the last texture in the cache.
-		if cache_head > 0 and cache_head < texture_cache.size():
-			var tex = ImageTexture.new()
-			tex.create_from_image(texture_cache[cache_head])
-			#draw_texture(tex, Vector2.ZERO)
-			$TextureCache.texture = tex
-		elif cache_head == 0:
-			$TextureCache.texture = null
+	print("Redraw canvas")
 	
-	for p in pixel_patch:
-		draw_rect(Rect2(p, Vector2.ONE), Color.white)
+	# NB: create_from_image() doesn't like empty images.
+	if need_to_redraw_cache and cache_head > 0:
+		# Draw the last texture in the cache.
+		tex.create_from_image(img_cache[cache_head])
+		
+		draw_texture(tex, Vector2.ZERO)
+		
+		need_to_redraw_cache = false
+	
+	var color = Color.white
+	
+	match brush_mode:
+		BrushModes.PENCIL:
+			material.blend_mode = material.BLEND_MODE_MIX
+		BrushModes.ERASER:
+			material.blend_mode = material.BLEND_MODE_MUL
+			color = Color.transparent
+	
+	for p in pixel_batch:
+		draw_primitive([p + Vector2.RIGHT], [color], [])
 
 
 func save_picture(path):
@@ -133,9 +153,6 @@ func snap_to_pixel(pos : Vector2):
 
 
 func _on_Canvas_gui_input(event):
-	if Input.is_action_just_pressed("undo"):
-		undo()
-	
 	if event is InputEventMouse:
 		if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
 			if event.pressed:
@@ -148,17 +165,22 @@ func _on_Canvas_gui_input(event):
 				var snapped = snap_to_pixel(event.position)
 				snapped_mouse_pos = snapped
 				
-				if not snapped in pixel_patch:
-					pixel_patch.append(snapped)
+				if not snapped in pixel_batch:
+					pixel_batch.append(snapped)
 				last_pixel = snapped
-			else:
-				pixel_patch.clear()
 				
-				# If did undo before, remove outdated cache.
-				if cache_head < texture_cache.size() - 1:
-					texture_cache.resize(cache_head)
+				update()
+			else:
+				pixel_batch.clear()
+				
+				# If we did undo before, remove outdated images.
+				# Don't remove the first empty image.
+				if cache_head < img_cache.size() - 1:
+					img_cache.resize(cache_head + 1)
 				
 				emit_signal("stroke_finished")
+				
+				update()
 		
 		# Drag.
 		if event is InputEventMouseMotion:
@@ -167,13 +189,13 @@ func _on_Canvas_gui_input(event):
 			
 			if Input.is_mouse_button_pressed(BUTTON_LEFT):
 				if snapped.x > IMAGE_SIZE.x or snapped.y > IMAGE_SIZE.y:
-					pixel_patch.clear()
+					pixel_batch.clear()
 					update()
 					return
 				
 				if snapped != last_pixel:
-					if not snapped in pixel_patch:
-						pixel_patch.append(snapped)
+					if not snapped in pixel_batch:
+						pixel_batch.append(snapped)
 					last_pixel = snapped
-		
-		update()
+				
+				update()
