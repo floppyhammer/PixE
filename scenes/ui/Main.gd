@@ -4,10 +4,31 @@ onready var file_mb = $VBoxContainer/VBoxContainer/File
 onready var edit_mb = $VBoxContainer/VBoxContainer/Edit
 onready var editor = $VBoxContainer/TabContainer/Editor
 
+var editor_scene = preload("res://scenes/core/Editor.tscn")
+
+var loaded_image : Image = Image.new()
 
 func _ready():
 	_reload()
+	
+	get_tree().connect("files_dropped", self, "_get_dropped_files_path")
 
+
+func _get_dropped_files_path(files : PoolStringArray, screen : int) -> void:
+	if not files.empty():
+		var file_path : String = files[0]
+		var err = loaded_image.load(file_path)
+		if err != OK:
+			return
+		
+		var img_size = loaded_image.get_size()
+		if img_size.x == 0 or img_size.y == 0: return
+		
+		var new_editor = editor_scene.instance()
+		new_editor.call_deferred("setup", img_size, loaded_image)
+		new_editor.name = file_path.get_basename().trim_prefix(file_path.get_base_dir())
+		$VBoxContainer/TabContainer.add_child(new_editor)
+		
 
 func _reload():
 	file_mb.get_popup().add_item("New")

@@ -1,16 +1,16 @@
 extends Control
 
-# A constant for whether or not we're needing to undo a shape.
-const UNDO_MODE_SHAPE = -2
-# A constant for whether or not we can undo.
-const UNDO_NONE = -1
-# How large is the image (it's actually the size of DrawingAreaBG, because that's our background canvas).
-const IMAGE_SIZE = Vector2(32, 32)
+var IMAGE_SIZE = Vector2(32, 32)
 
 # Enums for the various modes and brush shapes that can be applied.
 enum BrushModes {
+	SELECT,
 	PENCIL,
 	ERASER,
+	EYEDROPPER,
+	MOVE,
+	BUCKET,
+	LINE_SHAPE,
 	CIRCLE_SHAPE,
 	RECTANGLE_SHAPE,
 }
@@ -21,7 +21,7 @@ enum BrushShapes {
 }
 
 # The top-left position of the canvas.
-var TL_node
+onready var TL_node = $TLPos
 
 # A list to hold all of the dictionaries that make up each brush.
 var brush_data_list = []
@@ -62,7 +62,7 @@ var pixel_batch = []
 
 var cache_head = 0
 
-var need_to_redraw_cache = false
+var need_to_redraw_cache = true
 
 # Don't use a temporary variable to call draw_texture() as it will be
 # dropped before the actual rendering takes place.
@@ -118,7 +118,7 @@ func _draw():
 		
 		need_to_redraw_cache = false
 	
-	var color = Color.white
+	var color = brush_color
 	
 	match brush_mode:
 		BrushModes.PENCIL:

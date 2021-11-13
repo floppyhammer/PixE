@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/core/Palette.gd" type="Script" id=2]
+
+[node name="Palette" type="ScrollContainer"]
+margin_right = 128.0
+margin_bottom = 536.0
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="."]
+columns = 4
