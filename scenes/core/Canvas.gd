@@ -152,7 +152,8 @@ func snap_to_pixel(pos : Vector2):
 	return pos
 
 
-func _on_Canvas_gui_input(event):
+# Pass input events manually due to some input bug of Viewport.
+func receive_gui_input(event):
 	if event is InputEventMouse:
 		if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
 			if event.pressed:

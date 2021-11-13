@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/graphics/icon_move.png" type="Texture" id=11]
 [ext_resource path="res://assets/graphics/icon_bucket.png" type="Texture" id=12]
 [ext_resource path="res://scenes/core/ViewportContainer.gd" type="Script" id=13]
+[ext_resource path="res://scenes/ui/CustomColorPicker.tscn" type="PackedScene" id=14]
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
@@ -22,8 +23,6 @@
 bg_color = Color( 0, 0, 0, 1 )
 border_width_bottom = 8
 border_color = Color( 1, 1, 1, 1 )
-
-[sub_resource type="StyleBoxEmpty" id=1]
 
 [sub_resource type="ButtonGroup" id=5]
 
@@ -124,40 +123,25 @@ size_flags_vertical = 3
 custom_constants/separation = 8
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer"]
-margin_right = 1112.0
+margin_right = 1168.0
 margin_bottom = 608.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Panel" type="Panel" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer"]
-margin_right = 1104.0
+margin_right = 1160.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 720, 720 )
-mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Panel" type="Panel" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer"]
-margin_left = 552.0
-margin_top = 360.0
-margin_right = 552.0
-margin_bottom = 360.0
-custom_styles/panel = SubResource( 1 )
-
-[node name="Bg" type="TextureRect" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer/Panel"]
-margin_left = -73.0
-margin_top = -119.0
-margin_right = -41.0
-margin_bottom = -87.0
+[node name="Bg" type="TextureRect" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel"]
+margin_left = 494.0
+margin_top = 278.0
+margin_right = 526.0
+margin_bottom = 310.0
 rect_scale = Vector2( 5, 5 )
+mouse_filter = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 3 )
@@ -166,7 +150,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer/Panel/Bg"]
+[node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/Bg"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 32, 32 )
@@ -176,16 +160,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Viewport" type="Viewport" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer/Panel/Bg/ViewportContainer"]
+[node name="Viewport" type="Viewport" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/Bg/ViewportContainer"]
 size = Vector2( 32, 32 )
 transparent_bg = true
 handle_input_locally = false
 render_target_clear_mode = 1
 render_target_update_mode = 3
+gui_disable_input = true
 
-[node name="Canvas" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer/Panel/Bg/ViewportContainer/Viewport" instance=ExtResource( 2 )]
+[node name="Canvas" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/Bg/ViewportContainer/Viewport" instance=ExtResource( 2 )]
 
 [node name="ScrollContainer2" type="ScrollContainer" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer"]
+visible = false
 margin_left = 1120.0
 margin_right = 1168.0
 margin_bottom = 608.0
@@ -310,27 +296,23 @@ margin_bottom = 720.0
 mouse_filter = 2
 
 [node name="PopupPanel" type="PopupPanel" parent="CenterContainer"]
-margin_left = 471.0
+margin_left = 485.0
 margin_top = 84.0
-margin_right = 809.0
+margin_right = 795.0
 margin_bottom = 636.0
 
-[node name="ColorPicker" type="ColorPicker" parent="CenterContainer/PopupPanel"]
+[node name="ColorPicker" parent="CenterContainer/PopupPanel" instance=ExtResource( 14 )]
 margin_left = 8.0
 margin_top = 16.0
-margin_right = 330.0
+margin_right = 302.0
 margin_bottom = 536.0
-presets_enabled = false
-presets_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [connection signal="color_selected" from="VBoxContainer/OpArea/Palette/Palette" to="." method="_on_Palette_color_selected"]
 [connection signal="text_changed" from="VBoxContainer/OpArea/Palette/ColorCode" to="." method="_on_ColorCode_text_changed"]
 [connection signal="pressed" from="VBoxContainer/OpArea/Palette/HBoxContainer/Add" to="." method="_on_Add_pressed"]
-[connection signal="draw" from="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer/Panel/Bg/ViewportContainer/Viewport/Canvas" to="." method="_on_Canvas_draw"]
-[connection signal="stroke_finished" from="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer/Panel/Bg/ViewportContainer/Viewport/Canvas" to="." method="_on_Canvas_stroke_finished"]
+[connection signal="gui_input" from="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/Bg/ViewportContainer" to="." method="_on_ViewportContainer_gui_input"]
+[connection signal="draw" from="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/Bg/ViewportContainer/Viewport/Canvas" to="." method="_on_Canvas_draw"]
+[connection signal="stroke_finished" from="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/Bg/ViewportContainer/Viewport/Canvas" to="." method="_on_Canvas_stroke_finished"]
 [connection signal="toggled" from="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer/Pencil" to="." method="_on_Pencil_toggled"]
 [connection signal="toggled" from="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer/Eraser" to="." method="_on_Eraser_toggled"]
 [connection signal="color_changed" from="CenterContainer/PopupPanel/ColorPicker" to="." method="_on_ColorPicker_color_changed"]

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=19 format=2]
+[gd_resource type="Theme" load_steps=26 format=2]
 
 [ext_resource path="res://tres/default_font_24.tres" type="DynamicFont" id=1]
 
@@ -23,6 +23,31 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxEmpty" id=25]
+
+[sub_resource type="StyleBoxEmpty" id=23]
+
+[sub_resource type="StyleBoxEmpty" id=26]
+
+[sub_resource type="StyleBoxEmpty" id=24]
+
+[sub_resource type="StyleBoxFlat" id=20]
+border_width_top = 4
+border_width_bottom = 4
+border_color = Color( 1, 1, 1, 0 )
+
+[sub_resource type="StyleBoxFlat" id=22]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_top = 4
+border_width_bottom = 4
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+
+[sub_resource type="StyleBoxFlat" id=21]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_top = 8
+border_width_bottom = 8
+border_color = Color( 0, 0, 0, 1 )
 
 [sub_resource type="StyleBoxFlat" id=12]
 content_margin_left = 16.0
@@ -146,7 +171,7 @@ corner_radius_bottom_left = 4
 [resource]
 default_font = ExtResource( 1 )
 BoxContainer/constants/separation = 0
-Button/colors/font_color = Color( 0.811765, 0.811765, 0.811765, 1 )
+Button/colors/font_color = Color( 1, 1, 1, 1 )
 Button/colors/font_color_disabled = Color( 0, 0, 0, 1 )
 Button/colors/font_color_hover = Color( 0.811765, 0.811765, 0.811765, 1 )
 Button/colors/font_color_pressed = Color( 0, 0, 0, 1 )
@@ -177,11 +202,11 @@ CheckBox/icons/radio_unchecked_disabled = null
 CheckBox/icons/unchecked = null
 CheckBox/icons/unchecked_disabled = null
 CheckBox/styles/disabled = null
-CheckBox/styles/focus = null
-CheckBox/styles/hover = null
-CheckBox/styles/hover_pressed = null
-CheckBox/styles/normal = null
-CheckBox/styles/pressed = null
+CheckBox/styles/focus = SubResource( 25 )
+CheckBox/styles/hover = SubResource( 23 )
+CheckBox/styles/hover_pressed = SubResource( 23 )
+CheckBox/styles/normal = SubResource( 23 )
+CheckBox/styles/pressed = SubResource( 26 )
 CheckButton/colors/font_color = Color( 0, 0, 0, 1 )
 CheckButton/colors/font_color_disabled = Color( 0, 0, 0, 1 )
 CheckButton/colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -196,11 +221,11 @@ CheckButton/icons/off_disabled = null
 CheckButton/icons/on = null
 CheckButton/icons/on_disabled = null
 CheckButton/styles/disabled = null
-CheckButton/styles/focus = null
-CheckButton/styles/hover = null
-CheckButton/styles/hover_pressed = null
-CheckButton/styles/normal = null
-CheckButton/styles/pressed = null
+CheckButton/styles/focus = SubResource( 24 )
+CheckButton/styles/hover = SubResource( 24 )
+CheckButton/styles/hover_pressed = SubResource( 24 )
+CheckButton/styles/normal = SubResource( 24 )
+CheckButton/styles/pressed = SubResource( 24 )
 ColorPicker/constants/h_width = 0
 ColorPicker/constants/label_width = 0
 ColorPicker/constants/margin = 0
@@ -1144,9 +1169,9 @@ HSlider/icons/grabber = null
 HSlider/icons/grabber_disabled = null
 HSlider/icons/grabber_highlight = null
 HSlider/icons/tick = null
-HSlider/styles/grabber_area = null
-HSlider/styles/grabber_area_highlight = null
-HSlider/styles/slider = null
+HSlider/styles/grabber_area = SubResource( 20 )
+HSlider/styles/grabber_area_highlight = SubResource( 22 )
+HSlider/styles/slider = SubResource( 21 )
 HSplitContainer/constants/autohide = 0
 HSplitContainer/constants/separation = 0
 HSplitContainer/icons/grabber = null

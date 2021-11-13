@@ -1,10 +1,15 @@
 extends Control
 
 onready var pen_pos_label = $VBoxContainer/InfoBar/PenPosLabel
-onready var canvas_vp_container = $VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/CenterContainer/Panel/Bg/ViewportContainer
+onready var canvas_vp_container = $VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/Bg/ViewportContainer
 onready var canvas_viewport = canvas_vp_container.get_node("Viewport")
 onready var canvas = canvas_viewport.get_node("Canvas")
 onready var debug_label = $DebugLabel
+onready var color_picker = $CenterContainer/PopupPanel/ColorPicker
+
+
+func _ready():
+	color_picker.get_child(4).get_child(4).get_child(1).hide()
 
 
 func setup(p_image_size : Vector2, p_initial_image : Image = null):
@@ -86,3 +91,8 @@ func _on_ColorPicker_color_changed(color):
 
 func _on_Palette_color_selected(p_color):
 	canvas.brush_color = p_color
+
+
+# Pass input events manually due to some input bug of Viewport.
+func _on_ViewportContainer_gui_input(event):
+	canvas.receive_gui_input(event)

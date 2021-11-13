@@ -28,5 +28,3 @@ __meta__ = {
 [node name="DebugCamera2D" type="Camera2D" parent="."]
 position = Vector2( 14, 17 )
 zoom = Vector2( 0.1, 0.1 )
-
-[connection signal="gui_input" from="." to="." method="_on_Canvas_gui_input"]
