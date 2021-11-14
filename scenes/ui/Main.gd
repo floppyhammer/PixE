@@ -1,8 +1,11 @@
 extends Panel
 
-onready var file_mb = $VBoxContainer/VBoxContainer/File
-onready var edit_mb = $VBoxContainer/VBoxContainer/Edit
-onready var editor = $VBoxContainer/TabContainer/Editor
+onready var file_mb = $VBoxC/MenuBar/File
+onready var edit_mb = $VBoxC/MenuBar/Edit
+onready var tabs = $VBoxC/MenuBar/Tabs
+onready var tab_c = $VBoxC/TabC
+
+var current_editor = null
 
 var editor_scene = preload("res://scenes/core/Editor.tscn")
 
@@ -13,22 +16,6 @@ func _ready():
 	
 	get_tree().connect("files_dropped", self, "_get_dropped_files_path")
 
-
-func _get_dropped_files_path(files : PoolStringArray, screen : int) -> void:
-	if not files.empty():
-		var file_path : String = files[0]
-		var err = loaded_image.load(file_path)
-		if err != OK:
-			return
-		
-		var img_size = loaded_image.get_size()
-		if img_size.x == 0 or img_size.y == 0: return
-		
-		var new_editor = editor_scene.instance()
-		new_editor.call_deferred("setup", img_size, loaded_image)
-		new_editor.name = file_path.get_basename().trim_prefix(file_path.get_base_dir())
-		$VBoxContainer/TabContainer.add_child(new_editor)
-		
 
 func _reload():
 	file_mb.get_popup().add_item("New")
@@ -45,6 +32,30 @@ func _reload():
 	edit_mb.get_popup().add_item("Undo")
 	edit_mb.get_popup().add_item("Redo")
 	edit_mb.get_popup().connect("index_pressed", self, "edit_mb_pressed")
+	
+	
+	tabs.add_tab("Home")
+	tabs.add_tab("New")
+
+
+func _get_dropped_files_path(files : PoolStringArray, screen : int) -> void:
+	if not files.empty():
+		var file_path : String = files[0]
+		var err = loaded_image.load(file_path)
+		if err != OK:
+			return
+		
+		var img_size = loaded_image.get_size()
+		if img_size.x == 0 or img_size.y == 0: return
+		
+		var new_editor = editor_scene.instance()
+		new_editor.call_deferred("setup", img_size, loaded_image)
+		var file_name = file_path.get_basename().trim_prefix(file_path.get_base_dir() + "/")
+		
+		tab_c.add_child(new_editor)
+		tabs.add_tab(file_name)
+		
+		current_editor = new_editor
 
 
 func _when_file_entry_pressed(index):
@@ -57,41 +68,20 @@ func _when_file_entry_pressed(index):
 			get_tree().quit()
 
 
-func _on_Browser_article_pressed(url):
-	$Reader.prepare(url)
-
-
-func _on_Words_pressed():
-	$VBoxC/Middle.current_tab = 0
-	
-	$VBoxC/Top.show()
-
-
-func _on_Pictures_pressed():
-	$VBoxC/Middle.current_tab = 1
-	
-	$VBoxC/Top.show()
-
-
-func _on_Audio_pressed():
-	$VBoxC/Middle.current_tab = 2
-	
-	$VBoxC/Top.show()
-
-
-func _on_About_pressed():
-	$VBoxC/Middle.current_tab = 3
-	
-	$VBoxC/Top.hide()
-
-
-func _on_BrowserImages_image_pressed():
-	$ImageViewer.show()
-
-
 func edit_mb_pressed(index):
+	if not current_editor: return
+	
 	match index:
 		0:
-			editor.undo_canvas()
+			current_editor.undo_canvas()
 		1:
-			editor.redo_canvas()
+			current_editor.redo_canvas()
+
+
+func _on_Tabs_tab_changed(tab):
+	tab_c.current_tab = tab
+	
+	if tab == 0:
+		current_editor = null
+	else:
+		current_editor = tab_c.get_child(tab)
