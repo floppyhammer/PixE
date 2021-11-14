@@ -1,7 +1,9 @@
 extends Panel
 
-onready var file_mb = $VBoxC/MenuBar/File
-onready var edit_mb = $VBoxC/MenuBar/Edit
+onready var file_mb = $VBoxC/MenuBar/HBoxC/File
+onready var edit_mb = $VBoxC/MenuBar/HBoxC/Edit
+onready var image_mb = $VBoxC/MenuBar/HBoxC/Image
+onready var view_mb = $VBoxC/MenuBar/HBoxC/View
 onready var tabs = $VBoxC/MenuBar/Tabs
 onready var tab_c = $VBoxC/TabC
 
@@ -18,24 +20,44 @@ func _ready():
 
 
 func _reload():
-	file_mb.get_popup().add_item("New")
-	file_mb.get_popup().add_item("Open")
-	file_mb.get_popup().add_item("Close")
-	file_mb.get_popup().add_item("Close All")
-	file_mb.get_popup().add_separator("")
-	file_mb.get_popup().add_item("Import")
-	file_mb.get_popup().add_item("Export")
-	file_mb.get_popup().add_separator("")
-	file_mb.get_popup().add_item("Exit")
-	file_mb.get_popup().connect("index_pressed", self, "_when_file_entry_pressed")
-
-	edit_mb.get_popup().add_item("Undo")
-	edit_mb.get_popup().add_item("Redo")
-	edit_mb.get_popup().connect("index_pressed", self, "edit_mb_pressed")
+	var popup_menu = file_mb.get_popup()
 	
+	popup_menu.add_item("New...")
+	popup_menu.add_item("Open...")
+	popup_menu.add_separator("")
+	popup_menu.add_item("Import...")
+	popup_menu.add_item("Export...")
+	popup_menu.add_separator("")
+	popup_menu.add_item("Close")
+	popup_menu.add_item("Close All")
+	popup_menu.add_item("Quit")
+	popup_menu.connect("index_pressed", self, "_when_file_entry_pressed")
+
+	popup_menu = edit_mb.get_popup()
+
+	popup_menu.add_item("Undo")
+	popup_menu.add_item("Redo")
+	popup_menu.add_separator("")
+	popup_menu.add_item("Cut")
+	popup_menu.add_item("Copy")
+	popup_menu.add_item("Paste")
+	popup_menu.add_separator("")
+	popup_menu.add_item("Clear")
+	popup_menu.add_separator("")
+	popup_menu.add_item("Preferences")
+	popup_menu.connect("index_pressed", self, "edit_mb_pressed")
+	
+	popup_menu = image_mb.get_popup()
+	popup_menu.add_item("Canvas Size...")
+	popup_menu.add_item("Image Size...")
+	
+	popup_menu = view_mb.get_popup()
+	popup_menu.add_check_item("Grid")
+	popup_menu.add_item("Center Image")
 	
 	tabs.add_tab("Home")
 	tabs.add_tab("New")
+	tabs.set_tab_close_display_policy(tabs.CLOSE_BUTTON_SHOW_ALWAYS)
 
 
 func _get_dropped_files_path(files : PoolStringArray, screen : int) -> void:
@@ -64,6 +86,8 @@ func _when_file_entry_pressed(index):
 			$NewSpriteDialog.popup()
 		1:
 			$OpenSpriteDialog.popup()
+		2:
+			_on_Tabs_tab_close(tabs.current_tab)
 		8:
 			get_tree().quit()
 
@@ -85,3 +109,17 @@ func _on_Tabs_tab_changed(tab):
 		current_editor = null
 	else:
 		current_editor = tab_c.get_child(tab)
+
+
+func _on_Tabs_tab_close(tab):
+	# Remove from tabs.
+	tabs.remove_tab(tab)
+	
+	# Remove from tab container and tree.
+	var closed_tab = tab_c.get_child(tab)
+	tab_c.remove_child(closed_tab)
+	closed_tab.free()
+
+
+func _on_Cancel_pressed():
+	$NewSpriteDialog.hide()

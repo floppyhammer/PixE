@@ -6,10 +6,14 @@ onready var canvas_viewport = canvas_vp_container.get_node("Viewport")
 onready var canvas = canvas_viewport.get_node("Canvas")
 onready var debug_label = $DebugLabel
 onready var color_picker = $CenterContainer/PopupPanel/ColorPicker
+onready var zoom_menu_button = $VBoxContainer/InfoBar/ZoomMenuButton
+onready var zoom_edit = $VBoxContainer/InfoBar/ZoomEdit
 
 
 func _ready():
 	color_picker.get_child(4).get_child(4).get_child(1).hide()
+	
+	zoom_menu_button.get_popup().connect("index_pressed", self, "_when_zoom_level_pressed")
 
 
 func setup(p_image_size : Vector2, p_initial_image : Image = null):
@@ -96,3 +100,11 @@ func _on_Palette_color_selected(p_color):
 # Pass input events manually due to some input bug of Viewport.
 func _on_ViewportContainer_gui_input(event):
 	canvas.receive_gui_input(event)
+
+
+func _when_zoom_level_pressed(p_index):
+	var item_text : String = zoom_menu_button.get_popup().get_item_text(p_index)
+	var zoom = item_text.to_int()
+	zoom_edit.text = item_text
+	
+	canvas_vp_container.get_parent().rect_scale = Vector2.ONE * zoom * 0.01

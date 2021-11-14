@@ -26,46 +26,74 @@ __meta__ = {
 
 [node name="MenuBar" type="HBoxContainer" parent="VBoxC"]
 margin_right = 1280.0
-margin_bottom = 64.0
+margin_bottom = 56.0
 custom_constants/separation = 16
 
-[node name="File" type="MenuButton" parent="VBoxC/MenuBar"]
+[node name="HBoxC" type="HBoxContainer" parent="VBoxC/MenuBar"]
+margin_right = 632.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+
+[node name="File" type="MenuButton" parent="VBoxC/MenuBar/HBoxC"]
 margin_right = 96.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 96, 64 )
+margin_bottom = 56.0
+rect_min_size = Vector2( 96, 48 )
 text = "File"
 
-[node name="Edit" type="MenuButton" parent="VBoxC/MenuBar"]
-margin_left = 112.0
-margin_right = 208.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 96, 64 )
+[node name="Edit" type="MenuButton" parent="VBoxC/MenuBar/HBoxC"]
+margin_left = 104.0
+margin_right = 200.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 96, 48 )
 focus_mode = 2
 text = "Edit"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="View" type="MenuButton" parent="VBoxC/MenuBar"]
-margin_left = 224.0
-margin_right = 320.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 96, 64 )
+[node name="Image" type="MenuButton" parent="VBoxC/MenuBar/HBoxC"]
+margin_left = 208.0
+margin_right = 304.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 96, 48 )
+focus_mode = 2
+text = "Image"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="View" type="MenuButton" parent="VBoxC/MenuBar/HBoxC"]
+margin_left = 312.0
+margin_right = 408.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 96, 48 )
 focus_mode = 2
 text = "View"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Help" type="MenuButton" parent="VBoxC/MenuBar/HBoxC"]
+margin_left = 416.0
+margin_right = 512.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 96, 48 )
+focus_mode = 2
+text = "Help"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Tabs" type="Tabs" parent="VBoxC/MenuBar"]
-margin_left = 336.0
+margin_left = 648.0
 margin_right = 1280.0
-margin_bottom = 64.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 0, 48 )
 size_flags_horizontal = 3
 tab_align = 0
 
 [node name="TabC" type="TabContainer" parent="VBoxC"]
-margin_top = 64.0
+margin_top = 56.0
 margin_right = 1280.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
@@ -85,7 +113,7 @@ custom_styles/panel = SubResource( 1 )
 
 [node name="GridC" type="GridContainer" parent="VBoxC/TabC/Home"]
 margin_right = 1264.0
-margin_bottom = 640.0
+margin_bottom = 648.0
 custom_constants/vseparation = 8
 custom_constants/hseparation = 8
 columns = 2
@@ -93,11 +121,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LabelFiles" type="Label" parent="VBoxC/TabC/Home/GridC"]
+[node name="LabelRecentFolders" type="Label" parent="VBoxC/TabC/Home/GridC"]
 margin_right = 628.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 0, 48 )
-text = "Files"
+text = "Recent folders"
 valign = 1
 
 [node name="LabelNews" type="Label" parent="VBoxC/TabC/Home/GridC"]
@@ -108,10 +136,10 @@ rect_min_size = Vector2( 0, 48 )
 text = "News"
 valign = 1
 
-[node name="ListFiles" type="ItemList" parent="VBoxC/TabC/Home/GridC"]
+[node name="ListFolders" type="ItemList" parent="VBoxC/TabC/Home/GridC"]
 margin_top = 56.0
 margin_right = 628.0
-margin_bottom = 640.0
+margin_bottom = 648.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -119,13 +147,14 @@ size_flags_vertical = 3
 margin_left = 636.0
 margin_top = 56.0
 margin_right = 1264.0
-margin_bottom = 640.0
+margin_bottom = 648.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="New" parent="VBoxC/TabC" instance=ExtResource( 3 )]
 visible = false
 margin_left = 8.0
+margin_top = 8.0
 margin_right = -8.0
 margin_bottom = -8.0
 
@@ -134,10 +163,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -139.0
-margin_top = -139.0
-margin_right = 139.0
-margin_bottom = 139.0
+margin_left = -132.0
+margin_top = -132.0
+margin_right = 132.0
+margin_bottom = 132.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -149,79 +178,84 @@ margin_left = 8.0
 margin_top = 16.0
 margin_right = -8.0
 margin_bottom = -16.0
-custom_constants/margin_right = 16
-custom_constants/margin_top = 16
-custom_constants/margin_left = 16
-custom_constants/margin_bottom = 16
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxC" type="VBoxContainer" parent="NewSpriteDialog/MarginC"]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 248.0
-margin_bottom = 230.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 240.0
+margin_bottom = 224.0
 custom_constants/separation = 16
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Width" type="HBoxContainer" parent="NewSpriteDialog/MarginC/VBoxC"]
+[node name="GridC" type="GridContainer" parent="NewSpriteDialog/MarginC/VBoxC"]
 margin_right = 232.0
-margin_bottom = 48.0
+margin_bottom = 88.0
 rect_min_size = Vector2( 0, 48 )
+custom_constants/vseparation = 8
+custom_constants/hseparation = 8
+columns = 2
 
-[node name="Label" type="Label" parent="NewSpriteDialog/MarginC/VBoxC/Width"]
-margin_top = 12.0
-margin_right = 80.0
-margin_bottom = 36.0
-rect_min_size = Vector2( 64, 0 )
-text = "Width"
-
-[node name="LineEdit" type="LineEdit" parent="NewSpriteDialog/MarginC/VBoxC/Width"]
-margin_left = 104.0
-margin_right = 232.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 128, 0 )
-size_flags_horizontal = 10
-
-[node name="Height" type="HBoxContainer" parent="NewSpriteDialog/MarginC/VBoxC"]
-margin_top = 64.0
-margin_right = 232.0
-margin_bottom = 112.0
-rect_min_size = Vector2( 0, 48 )
-
-[node name="Label" type="Label" parent="NewSpriteDialog/MarginC/VBoxC/Height"]
-margin_top = 12.0
+[node name="LabelHeight" type="Label" parent="NewSpriteDialog/MarginC/VBoxC/GridC"]
+margin_top = 8.0
 margin_right = 96.0
-margin_bottom = 36.0
+margin_bottom = 32.0
 rect_min_size = Vector2( 64, 0 )
 text = "Height"
 
-[node name="LineEdit" type="LineEdit" parent="NewSpriteDialog/MarginC/VBoxC/Height"]
+[node name="LineEditWidth" type="LineEdit" parent="NewSpriteDialog/MarginC/VBoxC/GridC"]
 margin_left = 104.0
 margin_right = 232.0
-margin_bottom = 48.0
+margin_bottom = 40.0
 rect_min_size = Vector2( 128, 0 )
 size_flags_horizontal = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="NewSpriteDialog/MarginC/VBoxC"]
-margin_top = 166.0
+[node name="LabelWidth" type="Label" parent="NewSpriteDialog/MarginC/VBoxC/GridC"]
+margin_top = 56.0
+margin_right = 96.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 64, 0 )
+text = "Width"
+
+[node name="LineEditHeight" type="LineEdit" parent="NewSpriteDialog/MarginC/VBoxC/GridC"]
+margin_left = 104.0
+margin_top = 48.0
 margin_right = 232.0
-margin_bottom = 214.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 128, 0 )
+size_flags_horizontal = 10
+
+[node name="CheckBox" type="CheckBox" parent="NewSpriteDialog/MarginC/VBoxC"]
+margin_top = 104.0
+margin_right = 232.0
+margin_bottom = 152.0
+rect_min_size = Vector2( 0, 48 )
+text = "Square"
+
+[node name="HBoxC" type="HBoxContainer" parent="NewSpriteDialog/MarginC/VBoxC"]
+margin_top = 168.0
+margin_right = 232.0
+margin_bottom = 216.0
 rect_min_size = Vector2( 0, 48 )
 size_flags_vertical = 10
 custom_constants/separation = 16
 
-[node name="OK" type="Button" parent="NewSpriteDialog/MarginC/VBoxC/HBoxContainer"]
+[node name="OK" type="Button" parent="NewSpriteDialog/MarginC/VBoxC/HBoxC"]
 margin_right = 108.0
 margin_bottom = 48.0
 size_flags_horizontal = 3
 text = "OK"
 
-[node name="Cancel" type="Button" parent="NewSpriteDialog/MarginC/VBoxC/HBoxContainer"]
+[node name="Cancel" type="Button" parent="NewSpriteDialog/MarginC/VBoxC/HBoxC"]
 margin_left = 124.0
 margin_right = 232.0
 margin_bottom = 48.0
@@ -239,3 +273,5 @@ margin_right = 398.0
 margin_bottom = 266.5
 
 [connection signal="tab_changed" from="VBoxC/MenuBar/Tabs" to="." method="_on_Tabs_tab_changed"]
+[connection signal="tab_close" from="VBoxC/MenuBar/Tabs" to="." method="_on_Tabs_tab_close"]
+[connection signal="pressed" from="NewSpriteDialog/MarginC/VBoxC/HBoxC/Cancel" to="." method="_on_Cancel_pressed"]
