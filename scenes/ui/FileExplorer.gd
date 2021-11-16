@@ -1,4 +1,4 @@
-extends PopupPanel
+extends PanelContainer
 
 
 # Declare member variables here. Examples:

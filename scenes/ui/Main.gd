@@ -44,7 +44,7 @@ func _reload():
 	popup_menu.add_separator("")
 	popup_menu.add_item("Clear")
 	popup_menu.add_separator("")
-	popup_menu.add_item("Preferences")
+	popup_menu.add_item("Preferences...")
 	popup_menu.connect("index_pressed", self, "edit_mb_pressed")
 	
 	popup_menu = image_mb.get_popup()
@@ -83,9 +83,9 @@ func _get_dropped_files_path(files : PoolStringArray, screen : int) -> void:
 func _when_file_entry_pressed(index):
 	match index:
 		0:
-			$NewSpriteDialog.popup()
+			$NewSprite.show()
 		1:
-			$OpenSpriteDialog.popup()
+			$OpenSprite.show()
 		2:
 			_on_Tabs_tab_close(tabs.current_tab)
 		8:
@@ -122,4 +122,12 @@ func _on_Tabs_tab_close(tab):
 
 
 func _on_Cancel_pressed():
-	$NewSpriteDialog.hide()
+	$NewSprite.hide()
+
+
+func _on_NewSprite_pressed():
+	$NewSprite.hide()
+
+
+func _on_OpenSprite_pressed():
+	$OpenSprite.hide()

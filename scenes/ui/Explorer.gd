@@ -1,7 +1,11 @@
 extends Tree
 
 var dir = Directory.new()
-var top_urls = ['/storage/emulated/0', 'C:/users']
+var top_urls = {
+	"Android": '/storage/emulated/0',
+	"X11": "/usr",
+	"Windows": "C:/users",
+}
 var start_url
 
 signal file_selected
@@ -21,10 +25,7 @@ func _ready():
 	print('Granted Permissions: %s' % str(perm))
 	
 	# 判断是否是触屏
-	if OS.has_touchscreen_ui_hint():
-		start_url = top_urls[0]
-	else:
-		start_url = top_urls[1]
+	start_url = top_urls[OS.get_name()]
 	
 	if dir.open(start_url) == OK:
 		_relist_dir()
@@ -157,7 +158,8 @@ func _reload_list(dirs, files):
 		tree_item.set_tooltip(0, ' ')
 		#add_item(thing, ResourceLoader.load('res://assets/graphic/icon_file.png'))
 	
-	# print(get_scroll())
+	# Scroll to the top.
+	scroll_to_item(root)
 	
 	return
 

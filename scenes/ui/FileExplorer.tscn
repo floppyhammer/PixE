@@ -1,0 +1,86 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/ui/Explorer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/ui/FileExplorer.gd" type="Script" id=2]
+
+[node name="FileExplorer" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 355.0
+margin_top = 145.0
+margin_right = -482.0
+margin_bottom = -172.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginC" type="MarginContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 436.0
+margin_bottom = 396.0
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+
+[node name="VBoxC" type="VBoxContainer" parent="MarginC"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 421.0
+margin_bottom = 381.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxC" type="HBoxContainer" parent="MarginC/VBoxC"]
+margin_right = 413.0
+margin_bottom = 64.0
+
+[node name="Back" type="Button" parent="MarginC/VBoxC/HBoxC"]
+margin_right = 79.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+size_flags_horizontal = 3
+text = "Back"
+
+[node name="Forward" type="Button" parent="MarginC/VBoxC/HBoxC"]
+margin_left = 83.0
+margin_right = 162.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+size_flags_horizontal = 3
+text = "Forward"
+
+[node name="Up" type="Button" parent="MarginC/VBoxC/HBoxC"]
+margin_left = 166.0
+margin_right = 245.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+size_flags_horizontal = 3
+text = "Up"
+
+[node name="NewFolder" type="Button" parent="MarginC/VBoxC/HBoxC"]
+margin_left = 249.0
+margin_right = 330.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+size_flags_horizontal = 3
+text = "New folder"
+
+[node name="ListView" type="Button" parent="MarginC/VBoxC/HBoxC"]
+margin_left = 334.0
+margin_right = 413.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+size_flags_horizontal = 3
+text = "List View"
+
+[node name="Explorer" parent="MarginC/VBoxC" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 68.0
+margin_right = 413.0
+margin_bottom = 373.0
+size_flags_vertical = 3

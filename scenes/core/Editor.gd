@@ -78,19 +78,15 @@ func _on_Pencil_toggled(button_pressed):
 	canvas.brush_mode = canvas.BrushModes.PENCIL
 
 
-func _on_ColorCode_text_changed(new_text):
-	var color_box = $VBoxContainer/OpArea/Palette/ColorCode
-	var new_color = Color(new_text)
-	color_box.get_stylebox("normal").border_color = new_color
-
-
 func _on_Add_pressed():
-	$CenterContainer/PopupPanel.popup()
+	pass
 
 
 func _on_ColorPicker_color_changed(color):
-	var color_box = $VBoxContainer/OpArea/Palette/ColorCode
-	color_box.get_stylebox("normal").border_color = color
+	var color_btn = $VBoxContainer/OpArea/Palette/Color
+	color_btn.get_stylebox("normal").bg_color = color
+	color_btn.get_stylebox("pressed").bg_color = color
+	canvas.brush_color = color
 
 
 func _on_Palette_color_selected(p_color):
@@ -106,5 +102,16 @@ func _when_zoom_level_pressed(p_index):
 	var item_text : String = zoom_menu_button.get_popup().get_item_text(p_index)
 	var zoom = item_text.to_int()
 	zoom_edit.text = item_text
+	
+	canvas_vp_container.get_parent().rect_scale = Vector2.ONE * zoom * 0.01
+
+
+func _on_Color_pressed():
+	$CenterContainer/PopupPanel.popup()
+
+
+func _on_ZoomEdit_text_entered(new_text):
+	var zoom = new_text.to_int()
+	zoom_edit.text = str(zoom) + "%"
 	
 	canvas_vp_container.get_parent().rect_scale = Vector2.ONE * zoom * 0.01
