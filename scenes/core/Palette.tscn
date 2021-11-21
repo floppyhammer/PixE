@@ -12,5 +12,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GridContainer" type="GridContainer" parent="."]
-columns = 4
+[node name="GridC" type="GridContainer" parent="."]
+custom_constants/vseparation = 4
+custom_constants/hseparation = 4
+columns = 3

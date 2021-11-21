@@ -1,0 +1,103 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/ui/TouchPad.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.145098, 0.145098, 0.14902, 1 )
+border_width_top = 32
+border_color = Color( 0.176471, 0.176471, 0.176471, 0.498039 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color( 0, 0, 0, 0.196078 )
+shadow_size = 2
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 56, 24 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 56, 24 )
+
+[node name="TouchPad" type="PanelContainer"]
+margin_left = 895.0
+margin_top = 155.0
+margin_right = 1151.0
+margin_bottom = 411.0
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginC" type="MarginContainer" parent="."]
+margin_top = 32.0
+margin_right = 256.0
+margin_bottom = 256.0
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxC" type="VBoxContainer" parent="MarginC"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 248.0
+margin_bottom = 216.0
+
+[node name="PanelC" type="PanelContainer" parent="MarginC/VBoxC"]
+margin_right = 240.0
+margin_bottom = 156.0
+rect_min_size = Vector2( 128, 128 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxC" type="HBoxContainer" parent="MarginC/VBoxC"]
+margin_top = 160.0
+margin_right = 240.0
+margin_bottom = 208.0
+
+[node name="DummyPushButtonL" type="Button" parent="MarginC/VBoxC/HBoxC"]
+margin_right = 118.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "L"
+clip_text = true
+
+[node name="PushButton" type="TouchScreenButton" parent="MarginC/VBoxC/HBoxC/DummyPushButtonL"]
+position = Vector2( 3, 0 )
+shape = SubResource( 3 )
+
+[node name="DummyPushButtonR" type="Button" parent="MarginC/VBoxC/HBoxC"]
+margin_left = 122.0
+margin_right = 240.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "R"
+clip_text = true
+
+[node name="PushButton" type="TouchScreenButton" parent="MarginC/VBoxC/HBoxC/DummyPushButtonR"]
+position = Vector2( 3, 0 )
+shape = SubResource( 4 )
+
+[node name="DebugLabel" type="Label" parent="."]
+visible = false
+margin_top = 128.0
+margin_right = 276.0
+margin_bottom = 142.0
+
+[connection signal="gui_input" from="." to="." method="_on_TouchPad_gui_input"]
+[connection signal="gui_input" from="MarginC/VBoxC/PanelC" to="." method="_on_PanelC_gui_input"]
+[connection signal="pressed" from="MarginC/VBoxC/HBoxC/DummyPushButtonL/PushButton" to="." method="_on_TouchScreenButton_pressed"]
+[connection signal="released" from="MarginC/VBoxC/HBoxC/DummyPushButtonL/PushButton" to="." method="_on_TouchScreenButton_released"]
+[connection signal="pressed" from="MarginC/VBoxC/HBoxC/DummyPushButtonR/PushButton" to="." method="_on_TouchScreenButton_pressed"]
+[connection signal="released" from="MarginC/VBoxC/HBoxC/DummyPushButtonR/PushButton" to="." method="_on_TouchScreenButton_released"]

@@ -13,18 +13,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ReferenceRect" type="ReferenceRect" parent="."]
+[node name="TopleftPos" type="Position2D" parent="."]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-editor_only = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TLPos" type="Position2D" parent="."]
 
 [node name="DebugCamera2D" type="Camera2D" parent="."]
+visible = false
 position = Vector2( 14, 17 )
 zoom = Vector2( 0.1, 0.1 )

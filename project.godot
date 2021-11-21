@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Button",
+"class": "CustomPopup",
+"language": "GDScript",
+"path": "res://scenes/ui/CustomPopup.gd"
+} ]
+_global_script_class_icons={
+"CustomPopup": ""
+}
+
 [application]
 
 config/name="PixE"
@@ -24,6 +34,8 @@ default_bus_layout="res://tres/default_audiobuslayout.tres"
 
 Global="*res://scenes/autoload/Global.gd"
 JsonParser="*res://scenes/autoload/JsonParser.gd"
+Logger="*res://scenes/autoload/Logger.gd"
+Math="*res://scenes/autoload/Math.gd"
 
 [display]
 

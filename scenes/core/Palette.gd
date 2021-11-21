@@ -1,12 +1,12 @@
 extends ScrollContainer
 
-var colors = [Color.white, Color.red, Color.green, Color.blue]
+var colors = []
 
 var color_scene = preload("res://scenes/ui/PaletteColor.tscn")
 
 var color_button_group = ButtonGroup.new()
 
-onready var grid_c = $GridContainer
+onready var grid_c = $GridC
 
 signal color_selected
 
@@ -18,12 +18,19 @@ func _ready():
 		add_color(c)
 
 
-func add_color(p_color):
-	var color_node = color_scene.instance()
-	color_node.set_content_color(p_color)
-	color_node.set_unique_id(grid_c.get_child_count())
-	color_node.group = color_button_group
-	grid_c.add_child(color_node)
+func add_color(new_color):
+	if not new_color in colors:
+		colors.append(new_color)
+		
+		var color_node = color_scene.instance()
+		color_node.set_content_color(new_color)
+		color_node.set_unique_id(grid_c.get_child_count())
+		color_node.group = color_button_group
+		grid_c.add_child(color_node)
+
+
+func delete_color():
+	pass
 
 
 func _when_color_selected(index):

@@ -1,16 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://tres/theme_dark.tres" type="Theme" id=1]
-[ext_resource path="res://scenes/ui/FileExplorer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/ui/WindowOpenImage.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/core/Editor.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/ui/Main.gd" type="Script" id=4]
+[ext_resource path="res://scenes/ui/WindowImageSize.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/ui/WindowExport.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/ui/WindowNewImage.tscn" type="PackedScene" id=7]
 
 [sub_resource type="StyleBoxEmpty" id=1]
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0, 0, 0, 0.392157 )
-
-[sub_resource type="StyleBoxEmpty" id=3]
 
 [node name="Main" type="Panel"]
 anchor_right = 1.0
@@ -31,27 +29,29 @@ __meta__ = {
 
 [node name="MenuBar" type="HBoxContainer" parent="VBoxC"]
 margin_right = 1280.0
-margin_bottom = 56.0
+margin_bottom = 48.0
 custom_constants/separation = 16
 
 [node name="HBoxC" type="HBoxContainer" parent="VBoxC/MenuBar"]
 margin_right = 632.0
-margin_bottom = 56.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
 
 [node name="File" type="MenuButton" parent="VBoxC/MenuBar/HBoxC"]
 margin_right = 96.0
-margin_bottom = 56.0
+margin_bottom = 48.0
 rect_min_size = Vector2( 96, 48 )
 text = "File"
+switch_on_hover = true
 
 [node name="Edit" type="MenuButton" parent="VBoxC/MenuBar/HBoxC"]
 margin_left = 104.0
 margin_right = 200.0
-margin_bottom = 56.0
+margin_bottom = 48.0
 rect_min_size = Vector2( 96, 48 )
 focus_mode = 2
 text = "Edit"
+switch_on_hover = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -59,10 +59,11 @@ __meta__ = {
 [node name="Image" type="MenuButton" parent="VBoxC/MenuBar/HBoxC"]
 margin_left = 208.0
 margin_right = 304.0
-margin_bottom = 56.0
+margin_bottom = 48.0
 rect_min_size = Vector2( 96, 48 )
 focus_mode = 2
 text = "Image"
+switch_on_hover = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -70,10 +71,11 @@ __meta__ = {
 [node name="View" type="MenuButton" parent="VBoxC/MenuBar/HBoxC"]
 margin_left = 312.0
 margin_right = 408.0
-margin_bottom = 56.0
+margin_bottom = 48.0
 rect_min_size = Vector2( 96, 48 )
 focus_mode = 2
 text = "View"
+switch_on_hover = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -81,10 +83,11 @@ __meta__ = {
 [node name="Help" type="MenuButton" parent="VBoxC/MenuBar/HBoxC"]
 margin_left = 416.0
 margin_right = 512.0
-margin_bottom = 56.0
+margin_bottom = 48.0
 rect_min_size = Vector2( 96, 48 )
 focus_mode = 2
 text = "Help"
+switch_on_hover = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -92,13 +95,12 @@ __meta__ = {
 [node name="Tabs" type="Tabs" parent="VBoxC/MenuBar"]
 margin_left = 648.0
 margin_right = 1280.0
-margin_bottom = 56.0
-rect_min_size = Vector2( 0, 48 )
+margin_bottom = 48.0
 size_flags_horizontal = 3
 tab_align = 0
 
 [node name="TabC" type="TabContainer" parent="VBoxC"]
-margin_top = 56.0
+margin_top = 48.0
 margin_right = 1280.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
@@ -118,7 +120,7 @@ custom_styles/panel = SubResource( 1 )
 
 [node name="GridC" type="GridContainer" parent="VBoxC/TabC/Home"]
 margin_right = 1264.0
-margin_bottom = 648.0
+margin_bottom = 656.0
 custom_constants/vseparation = 8
 custom_constants/hseparation = 8
 columns = 2
@@ -126,33 +128,33 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LabelRecentFolders" type="Label" parent="VBoxC/TabC/Home/GridC"]
+[node name="RecentFoldersLabel" type="Label" parent="VBoxC/TabC/Home/GridC"]
 margin_right = 628.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 0, 48 )
 text = "Recent folders"
 valign = 1
 
-[node name="LabelNews" type="Label" parent="VBoxC/TabC/Home/GridC"]
+[node name="ReleaseNotesLabel" type="Label" parent="VBoxC/TabC/Home/GridC"]
 margin_left = 636.0
 margin_right = 1264.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 0, 48 )
-text = "News"
+text = "Release Notes"
 valign = 1
 
-[node name="ListFolders" type="ItemList" parent="VBoxC/TabC/Home/GridC"]
+[node name="RecentFoldersList" type="ItemList" parent="VBoxC/TabC/Home/GridC"]
 margin_top = 56.0
 margin_right = 628.0
-margin_bottom = 648.0
+margin_bottom = 656.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ListNews" type="ItemList" parent="VBoxC/TabC/Home/GridC"]
+[node name="ReleaseNotesList" type="ItemList" parent="VBoxC/TabC/Home/GridC"]
 margin_left = 636.0
 margin_top = 56.0
 margin_right = 1264.0
-margin_bottom = 648.0
+margin_bottom = 656.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -163,153 +165,16 @@ margin_top = 8.0
 margin_right = -8.0
 margin_bottom = -8.0
 
-[node name="NewSprite" type="Button" parent="."]
+[node name="WindowNewImage" parent="." instance=ExtResource( 7 )]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/normal = SubResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="CenterC" type="CenterContainer" parent="NewSprite"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="WindowOpenImage" parent="." instance=ExtResource( 2 )]
 
-[node name="PanelC" type="PanelContainer" parent="NewSprite/CenterC"]
-margin_left = 640.0
-margin_top = 360.0
-margin_right = 640.0
-margin_bottom = 360.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="WindowExport" parent="." instance=ExtResource( 6 )]
 
-[node name="MarginC" type="MarginContainer" parent="NewSprite/CenterC/PanelC"]
-margin_right = 264.0
-margin_bottom = 256.0
-custom_constants/margin_right = 16
-custom_constants/margin_top = 16
-custom_constants/margin_left = 16
-custom_constants/margin_bottom = 16
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxC" type="VBoxContainer" parent="NewSprite/CenterC/PanelC/MarginC"]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 248.0
-margin_bottom = 240.0
-custom_constants/separation = 16
-alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="GridC" type="GridContainer" parent="NewSprite/CenterC/PanelC/MarginC/VBoxC"]
-margin_right = 232.0
-margin_bottom = 96.0
-rect_min_size = Vector2( 0, 48 )
-custom_constants/vseparation = 16
-custom_constants/hseparation = 8
-columns = 2
-
-[node name="LabelHeight" type="Label" parent="NewSprite/CenterC/PanelC/MarginC/VBoxC/GridC"]
-margin_top = 8.0
-margin_right = 96.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 64, 0 )
-text = "Height"
-
-[node name="LineEditWidth" type="LineEdit" parent="NewSprite/CenterC/PanelC/MarginC/VBoxC/GridC"]
-margin_left = 104.0
-margin_right = 232.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 128, 0 )
-size_flags_horizontal = 10
-
-[node name="LabelWidth" type="Label" parent="NewSprite/CenterC/PanelC/MarginC/VBoxC/GridC"]
-margin_top = 64.0
-margin_right = 96.0
-margin_bottom = 88.0
-rect_min_size = Vector2( 64, 0 )
-text = "Width"
-
-[node name="LineEditHeight" type="LineEdit" parent="NewSprite/CenterC/PanelC/MarginC/VBoxC/GridC"]
-margin_left = 104.0
-margin_top = 56.0
-margin_right = 232.0
-margin_bottom = 96.0
-rect_min_size = Vector2( 128, 0 )
-size_flags_horizontal = 10
-
-[node name="CheckBox" type="CheckBox" parent="NewSprite/CenterC/PanelC/MarginC/VBoxC"]
-margin_top = 112.0
-margin_right = 232.0
-margin_bottom = 160.0
-rect_min_size = Vector2( 0, 48 )
-text = "Square"
-
-[node name="HBoxC" type="HBoxContainer" parent="NewSprite/CenterC/PanelC/MarginC/VBoxC"]
-margin_top = 176.0
-margin_right = 232.0
-margin_bottom = 224.0
-rect_min_size = Vector2( 0, 48 )
-size_flags_vertical = 10
-custom_constants/separation = 16
-
-[node name="OK" type="Button" parent="NewSprite/CenterC/PanelC/MarginC/VBoxC/HBoxC"]
-margin_right = 108.0
-margin_bottom = 48.0
-size_flags_horizontal = 3
-text = "OK"
-
-[node name="Cancel" type="Button" parent="NewSprite/CenterC/PanelC/MarginC/VBoxC/HBoxC"]
-margin_left = 124.0
-margin_right = 232.0
-margin_bottom = 48.0
-size_flags_horizontal = 3
-text = "Cancel"
-
-[node name="OpenSprite" type="Button" parent="."]
+[node name="WindowImageSize" parent="." instance=ExtResource( 5 )]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/normal = SubResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CenterC" type="CenterContainer" parent="OpenSprite"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="FileExplorer" parent="OpenSprite/CenterC" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 384.0
-margin_top = 104.0
-margin_right = 896.0
-margin_bottom = 616.0
-rect_min_size = Vector2( 512, 512 )
 
 [connection signal="tab_changed" from="VBoxC/MenuBar/Tabs" to="." method="_on_Tabs_tab_changed"]
 [connection signal="tab_close" from="VBoxC/MenuBar/Tabs" to="." method="_on_Tabs_tab_close"]
-[connection signal="pressed" from="NewSprite" to="." method="_on_NewSprite_pressed"]
-[connection signal="pressed" from="NewSprite/CenterC/PanelC/MarginC/VBoxC/HBoxC/Cancel" to="." method="_on_Cancel_pressed"]
-[connection signal="pressed" from="OpenSprite" to="." method="_on_OpenSprite_pressed"]
+[connection signal="size_changed" from="WindowImageSize" to="." method="_on_WindowImageSize_size_changed"]

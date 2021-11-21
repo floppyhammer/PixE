@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://tres/theme_dark.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/core/Canvas.tscn" type="PackedScene" id=2]
@@ -15,6 +15,8 @@
 [ext_resource path="res://scenes/core/ViewportContainer.gd" type="Script" id=13]
 [ext_resource path="res://scenes/ui/CustomColorPicker.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/graphics/icon_zoom_level.png" type="Texture" id=15]
+[ext_resource path="res://scenes/ui/TouchPad.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/ui/CustomPopup.tscn" type="PackedScene" id=18]
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
@@ -24,10 +26,6 @@ border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxEmpty" id=7]
 
@@ -46,43 +44,42 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxC" type="VBoxContainer" parent="."]
 margin_right = 1280.0
 margin_bottom = 720.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OpArea" type="HBoxContainer" parent="VBoxContainer"]
+[node name="OpArea" type="HBoxContainer" parent="VBoxC"]
 margin_right = 1280.0
 margin_bottom = 664.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 8
 
-[node name="Palette" type="VBoxContainer" parent="VBoxContainer/OpArea"]
+[node name="Palette" type="VBoxContainer" parent="VBoxC/OpArea"]
 margin_right = 104.0
 margin_bottom = 664.0
 size_flags_vertical = 3
 custom_constants/separation = 16
 
-[node name="Palette" parent="VBoxContainer/OpArea/Palette" instance=ExtResource( 5 )]
+[node name="Palette" parent="VBoxC/OpArea/Palette" instance=ExtResource( 5 )]
 margin_right = 104.0
 
-[node name="Color" type="Button" parent="VBoxContainer/OpArea/Palette"]
-margin_left = 28.0
+[node name="Color" type="Button" parent="VBoxC/OpArea/Palette"]
 margin_top = 552.0
-margin_right = 76.0
+margin_right = 104.0
 margin_bottom = 600.0
 rect_min_size = Vector2( 48, 48 )
-size_flags_horizontal = 4
+size_flags_horizontal = 3
 size_flags_vertical = 4
 custom_styles/hover = SubResource( 8 )
 custom_styles/pressed = SubResource( 8 )
 custom_styles/focus = SubResource( 7 )
 custom_styles/normal = SubResource( 6 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/OpArea/Palette"]
+[node name="HBoxC" type="HBoxContainer" parent="VBoxC/OpArea/Palette"]
 margin_top = 616.0
 margin_right = 104.0
 margin_bottom = 664.0
@@ -90,14 +87,14 @@ rect_min_size = Vector2( 0, 48 )
 custom_constants/separation = 8
 alignment = 1
 
-[node name="Add" type="Button" parent="VBoxContainer/OpArea/Palette/HBoxContainer"]
+[node name="Add" type="Button" parent="VBoxC/OpArea/Palette/HBoxC"]
 margin_right = 48.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
 text = "+"
 clip_text = true
 
-[node name="Delete" type="Button" parent="VBoxContainer/OpArea/Palette/HBoxContainer"]
+[node name="Delete" type="Button" parent="VBoxC/OpArea/Palette/HBoxC"]
 margin_left = 56.0
 margin_right = 104.0
 margin_bottom = 48.0
@@ -105,7 +102,7 @@ rect_min_size = Vector2( 48, 48 )
 text = "-"
 clip_text = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/OpArea"]
+[node name="VBoxC" type="VBoxContainer" parent="VBoxC/OpArea"]
 margin_left = 112.0
 margin_right = 1280.0
 margin_bottom = 664.0
@@ -113,21 +110,22 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 8
 
-[node name="ToolOptions" type="HBoxContainer" parent="VBoxContainer/OpArea/VBoxContainer"]
+[node name="ToolOptions" type="HBoxContainer" parent="VBoxC/OpArea/VBoxC"]
 margin_right = 1168.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 0, 48 )
 
-[node name="Size" type="SpinBox" parent="VBoxContainer/OpArea/VBoxContainer/ToolOptions"]
-margin_right = 128.0
+[node name="Size" type="SpinBox" parent="VBoxC/OpArea/VBoxC/ToolOptions"]
+margin_right = 100.0
 margin_bottom = 48.0
-rect_min_size = Vector2( 128, 48 )
+rect_min_size = Vector2( 100, 48 )
+min_value = 1.0
+max_value = 128.0
 value = 1.0
 rounded = true
 align = 1
-suffix = "px"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/OpArea/VBoxContainer"]
+[node name="HBoxC" type="HBoxContainer" parent="VBoxC/OpArea/VBoxC"]
 margin_top = 56.0
 margin_right = 1168.0
 margin_bottom = 664.0
@@ -135,21 +133,22 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 8
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer"]
-margin_right = 1168.0
+[node name="ScrollC" type="ScrollContainer" parent="VBoxC/OpArea/VBoxC/HBoxC"]
+margin_right = 1112.0
 margin_bottom = 608.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Panel" type="Panel" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer"]
-margin_right = 1160.0
+[node name="Panel" type="Panel" parent="VBoxC/OpArea/VBoxC/HBoxC/ScrollC"]
+margin_right = 1104.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 720, 720 )
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Bg" type="TextureRect" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel"]
+[node name="Bg" type="TextureRect" parent="VBoxC/OpArea/VBoxC/HBoxC/ScrollC/Panel"]
 margin_left = 494.0
 margin_top = 278.0
 margin_right = 526.0
@@ -163,17 +162,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/Bg"]
+[node name="ViewportC" type="ViewportContainer" parent="VBoxC/OpArea/VBoxC/HBoxC/ScrollC/Panel/Bg"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 32, 32 )
+mouse_filter = 1
 stretch = true
 script = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Viewport" type="Viewport" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/Bg/ViewportContainer"]
+[node name="Viewport" type="Viewport" parent="VBoxC/OpArea/VBoxC/HBoxC/ScrollC/Panel/Bg/ViewportC"]
 size = Vector2( 32, 32 )
 transparent_bg = true
 handle_input_locally = false
@@ -181,22 +181,21 @@ render_target_clear_mode = 1
 render_target_update_mode = 3
 gui_disable_input = true
 
-[node name="Canvas" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/Bg/ViewportContainer/Viewport" instance=ExtResource( 2 )]
+[node name="Canvas" parent="VBoxC/OpArea/VBoxC/HBoxC/ScrollC/Panel/Bg/ViewportC/Viewport" instance=ExtResource( 2 )]
 
-[node name="ScrollContainer2" type="ScrollContainer" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer"]
-visible = false
+[node name="ScrollC2" type="ScrollContainer" parent="VBoxC/OpArea/VBoxC/HBoxC"]
 margin_left = 1120.0
 margin_right = 1168.0
 margin_bottom = 608.0
 rect_min_size = Vector2( 48, 0 )
 scroll_horizontal_enabled = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer2"]
+[node name="VBoxC" type="VBoxContainer" parent="VBoxC/OpArea/VBoxC/HBoxC/ScrollC2"]
 margin_right = 48.0
 margin_bottom = 608.0
 size_flags_vertical = 3
 
-[node name="Select" type="Button" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer"]
+[node name="Select" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/ScrollC2/VBoxC"]
 margin_right = 48.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
@@ -205,7 +204,7 @@ group = SubResource( 5 )
 icon = ExtResource( 7 )
 expand_icon = true
 
-[node name="Pencil" type="Button" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer"]
+[node name="Pencil" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/ScrollC2/VBoxC"]
 margin_top = 56.0
 margin_right = 48.0
 margin_bottom = 104.0
@@ -216,7 +215,7 @@ group = SubResource( 5 )
 icon = ExtResource( 6 )
 expand_icon = true
 
-[node name="Eraser" type="Button" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer"]
+[node name="Eraser" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/ScrollC2/VBoxC"]
 margin_top = 112.0
 margin_right = 48.0
 margin_bottom = 160.0
@@ -226,7 +225,7 @@ group = SubResource( 5 )
 icon = ExtResource( 8 )
 expand_icon = true
 
-[node name="Eyedropper" type="Button" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer"]
+[node name="Eyedropper" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/ScrollC2/VBoxC"]
 margin_top = 168.0
 margin_right = 48.0
 margin_bottom = 216.0
@@ -236,7 +235,7 @@ group = SubResource( 5 )
 icon = ExtResource( 9 )
 expand_icon = true
 
-[node name="Move" type="Button" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer"]
+[node name="Move" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/ScrollC2/VBoxC"]
 margin_top = 224.0
 margin_right = 48.0
 margin_bottom = 272.0
@@ -246,7 +245,7 @@ group = SubResource( 5 )
 icon = ExtResource( 11 )
 expand_icon = true
 
-[node name="Bucket" type="Button" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer"]
+[node name="Bucket" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/ScrollC2/VBoxC"]
 margin_top = 280.0
 margin_right = 48.0
 margin_bottom = 328.0
@@ -256,7 +255,7 @@ group = SubResource( 5 )
 icon = ExtResource( 12 )
 expand_icon = true
 
-[node name="Line" type="Button" parent="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer"]
+[node name="Line" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/ScrollC2/VBoxC"]
 margin_top = 336.0
 margin_right = 48.0
 margin_bottom = 384.0
@@ -266,23 +265,23 @@ group = SubResource( 5 )
 icon = ExtResource( 10 )
 expand_icon = true
 
-[node name="InfoBar" type="HBoxContainer" parent="VBoxContainer"]
+[node name="InfoBar" type="HBoxContainer" parent="VBoxC"]
 margin_top = 672.0
 margin_right = 1280.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 0, 48 )
 
-[node name="PenPosLabel" type="Label" parent="VBoxContainer/InfoBar"]
+[node name="PenPosLabel" type="Label" parent="VBoxC/InfoBar"]
 margin_top = 12.0
 margin_bottom = 36.0
 
-[node name="SizeLabel" type="Label" parent="VBoxContainer/InfoBar"]
+[node name="SizeLabel" type="Label" parent="VBoxC/InfoBar"]
 margin_left = 8.0
 margin_top = 12.0
 margin_right = 8.0
 margin_bottom = 36.0
 
-[node name="ZoomEdit" type="LineEdit" parent="VBoxContainer/InfoBar"]
+[node name="ZoomEdit" type="LineEdit" parent="VBoxC/InfoBar"]
 margin_left = 1144.0
 margin_right = 1224.0
 margin_bottom = 48.0
@@ -290,49 +289,79 @@ rect_min_size = Vector2( 80, 0 )
 size_flags_horizontal = 10
 text = "100%"
 
-[node name="ZoomMenuButton" type="MenuButton" parent="VBoxContainer/InfoBar"]
+[node name="ZoomMenuButton" type="MenuButton" parent="VBoxC/InfoBar"]
 margin_left = 1232.0
 margin_right = 1280.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 0 )
 icon = ExtResource( 15 )
 expand_icon = true
-items = [ "500%", null, 0, false, false, 0, 0, null, "", false, "200%", null, 0, false, false, 1, 0, null, "", false, "100%", null, 0, false, false, 2, 0, null, "", false, "50%", null, 0, false, false, 3, 0, null, "", false, "20%", null, 0, false, false, 4, 0, null, "", false ]
+items = [ "1000%", null, 0, false, false, 0, 0, null, "", false, "500%", null, 0, false, false, 1, 0, null, "", false, "200%", null, 0, false, false, 2, 0, null, "", false, "100%", null, 0, false, false, 3, 0, null, "", false, "50%", null, 0, false, false, 4, 0, null, "", false, "20%", null, 0, false, false, 5, 0, null, "", false ]
 
-[node name="DebugLabel" type="Label" parent="."]
-visible = false
-margin_top = 348.0
-margin_right = 1280.0
-margin_bottom = 372.0
-autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="FreeZone" type="Control" parent="."]
 margin_right = 1280.0
 margin_bottom = 720.0
 mouse_filter = 2
 
-[node name="PopupPanel" type="PopupPanel" parent="CenterContainer"]
-margin_left = 485.0
-margin_top = 84.0
-margin_right = 795.0
-margin_bottom = 636.0
+[node name="TouchPad" parent="FreeZone" instance=ExtResource( 16 )]
+visible = false
 
-[node name="ColorPicker" parent="CenterContainer/PopupPanel" instance=ExtResource( 14 )]
+[node name="ColorPickerPopup" parent="." instance=ExtResource( 18 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1280.0
+margin_bottom = 720.0
+
+[node name="CenterC" type="CenterContainer" parent="ColorPickerPopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelC" type="PanelContainer" parent="ColorPickerPopup/CenterC"]
+margin_left = 640.0
+margin_top = 360.0
+margin_right = 640.0
+margin_bottom = 360.0
+
+[node name="MarginC" type="MarginContainer" parent="ColorPickerPopup/CenterC/PanelC"]
+margin_right = 310.0
+margin_bottom = 528.0
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+
+[node name="ColorPicker" parent="ColorPickerPopup/CenterC/PanelC/MarginC" instance=ExtResource( 14 )]
 margin_left = 8.0
-margin_top = 16.0
+margin_top = 8.0
 margin_right = 302.0
-margin_bottom = 536.0
+margin_bottom = 520.0
 
-[connection signal="color_selected" from="VBoxContainer/OpArea/Palette/Palette" to="." method="_on_Palette_color_selected"]
-[connection signal="pressed" from="VBoxContainer/OpArea/Palette/Color" to="." method="_on_Color_pressed"]
-[connection signal="pressed" from="VBoxContainer/OpArea/Palette/HBoxContainer/Add" to="." method="_on_Add_pressed"]
-[connection signal="gui_input" from="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/Bg/ViewportContainer" to="." method="_on_ViewportContainer_gui_input"]
-[connection signal="draw" from="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/Bg/ViewportContainer/Viewport/Canvas" to="." method="_on_Canvas_draw"]
-[connection signal="stroke_finished" from="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer/Panel/Bg/ViewportContainer/Viewport/Canvas" to="." method="_on_Canvas_stroke_finished"]
-[connection signal="toggled" from="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer/Pencil" to="." method="_on_Pencil_toggled"]
-[connection signal="toggled" from="VBoxContainer/OpArea/VBoxContainer/HBoxContainer/ScrollContainer2/VBoxContainer/Eraser" to="." method="_on_Eraser_toggled"]
-[connection signal="text_entered" from="VBoxContainer/InfoBar/ZoomEdit" to="." method="_on_ZoomEdit_text_entered"]
-[connection signal="color_changed" from="CenterContainer/PopupPanel/ColorPicker" to="." method="_on_ColorPicker_color_changed"]
+[node name="CenterC" type="CenterContainer" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+mouse_filter = 2
+
+[node name="PopupPanel" type="PopupPanel" parent="CenterC"]
+margin_left = 632.0
+margin_top = 344.0
+margin_right = 648.0
+margin_bottom = 376.0
+
+[connection signal="color_selected" from="VBoxC/OpArea/Palette/Palette" to="." method="_on_Palette_color_selected"]
+[connection signal="pressed" from="VBoxC/OpArea/Palette/Color" to="." method="_on_Color_pressed"]
+[connection signal="pressed" from="VBoxC/OpArea/Palette/HBoxC/Add" to="." method="_on_Add_pressed"]
+[connection signal="gui_input" from="VBoxC/OpArea/VBoxC/HBoxC/ScrollC/Panel" to="." method="_on_Panel_gui_input"]
+[connection signal="gui_input" from="VBoxC/OpArea/VBoxC/HBoxC/ScrollC/Panel/Bg/ViewportC" to="." method="_on_ViewportContainer_gui_input"]
+[connection signal="bursh_moved_by_mouse" from="VBoxC/OpArea/VBoxC/HBoxC/ScrollC/Panel/Bg/ViewportC/Viewport/Canvas" to="." method="_on_Canvas_bursh_moved_by_mouse"]
+[connection signal="draw" from="VBoxC/OpArea/VBoxC/HBoxC/ScrollC/Panel/Bg/ViewportC/Viewport/Canvas" to="." method="_on_Canvas_draw"]
+[connection signal="stroke_finished" from="VBoxC/OpArea/VBoxC/HBoxC/ScrollC/Panel/Bg/ViewportC/Viewport/Canvas" to="." method="_on_Canvas_stroke_finished"]
+[connection signal="toggled" from="VBoxC/OpArea/VBoxC/HBoxC/ScrollC2/VBoxC/Pencil" to="." method="_on_Pencil_toggled"]
+[connection signal="toggled" from="VBoxC/OpArea/VBoxC/HBoxC/ScrollC2/VBoxC/Eraser" to="." method="_on_Eraser_toggled"]
+[connection signal="text_entered" from="VBoxC/InfoBar/ZoomEdit" to="." method="_on_ZoomEdit_text_entered"]
+[connection signal="touch_pad_operated" from="FreeZone/TouchPad" to="." method="_on_TouchPad_touch_pad_operated"]
+[connection signal="color_changed" from="ColorPickerPopup/CenterC/PanelC/MarginC/ColorPicker" to="." method="_on_ColorPicker_color_changed"]
