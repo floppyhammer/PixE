@@ -11,6 +11,10 @@ func snap_to_pixel(pos : Vector2) -> Vector2:
 	return pos
 
 
+static func angle_to_angle(from, to):
+	return fposmod(to - from + PI, PI * 2) - PI
+
+
 func is_value_in_range(value, lower_limit, higher_limit):
 	if value > lower_limit and value < higher_limit:
 		return true

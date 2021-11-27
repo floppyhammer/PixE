@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "CustomPopup",
 "language": "GDScript",
 "path": "res://scenes/ui/CustomPopup.gd"
+}, {
+"base": "Reference",
+"class": "JSONBeautifier",
+"language": "GDScript",
+"path": "res://addons/json_beautifier/json_beautifier.gd"
 } ]
 _global_script_class_icons={
-"CustomPopup": ""
+"CustomPopup": "",
+"JSONBeautifier": ""
 }
 
 [application]

@@ -4,7 +4,6 @@ onready var pen_pos_label = $VBoxC/InfoBar/PenPosLabel
 onready var canvas_vp_container = $VBoxC/OpArea/VBoxC/HBoxC/ScrollC/Panel/Bg/ViewportC
 onready var canvas_viewport = canvas_vp_container.get_node("Viewport")
 onready var canvas = canvas_viewport.get_node("Canvas")
-onready var color_picker = $CenterC/PopupPanel/ColorPicker
 onready var zoom_menu_button = $VBoxC/InfoBar/ZoomMenuButton
 onready var zoom_edit = $VBoxC/InfoBar/ZoomEdit
 onready var palette = $VBoxC/OpArea/Palette/Palette
@@ -175,3 +174,11 @@ func _on_Panel_gui_input(event):
 			canvas_vp_container.get_parent().rect_scale = Vector2.ONE * new_zoom
 			
 			scroll_c.get_child(0).rect_min_size = Vector2.ONE * 720 * new_zoom
+
+
+func _on_UndoButton_pressed():
+	undo_canvas()
+
+
+func _on_RedoButton_pressed():
+	redo_canvas()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://tres/theme_dark.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/core/Canvas.tscn" type="PackedScene" id=2]
@@ -16,21 +16,31 @@
 [ext_resource path="res://scenes/ui/CustomColorPicker.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/graphics/icon_zoom_level.png" type="Texture" id=15]
 [ext_resource path="res://scenes/ui/TouchPad.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/graphics/icon_undo.png" type="Texture" id=17]
 [ext_resource path="res://scenes/ui/CustomPopup.tscn" type="PackedScene" id=18]
+[ext_resource path="res://assets/graphics/icon_redo.png" type="Texture" id=19]
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0, 0, 0, 1 )
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
+border_width_bottom = 2
+border_color = Color( 0.4, 0.8, 1, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxEmpty" id=7]
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0, 0, 0, 1 )
+border_width_bottom = 2
+border_color = Color( 0.811765, 0.811765, 0.811765, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [sub_resource type="ButtonGroup" id=5]
 
@@ -53,36 +63,37 @@ __meta__ = {
 
 [node name="OpArea" type="HBoxContainer" parent="VBoxC"]
 margin_right = 1280.0
-margin_bottom = 664.0
+margin_bottom = 662.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 8
 
 [node name="Palette" type="VBoxContainer" parent="VBoxC/OpArea"]
 margin_right = 104.0
-margin_bottom = 664.0
+margin_bottom = 662.0
 size_flags_vertical = 3
 custom_constants/separation = 16
 
 [node name="Palette" parent="VBoxC/OpArea/Palette" instance=ExtResource( 5 )]
 margin_right = 104.0
+margin_bottom = 534.0
 
 [node name="Color" type="Button" parent="VBoxC/OpArea/Palette"]
-margin_top = 552.0
+margin_top = 550.0
 margin_right = 104.0
-margin_bottom = 600.0
+margin_bottom = 598.0
 rect_min_size = Vector2( 48, 48 )
 size_flags_horizontal = 3
 size_flags_vertical = 4
 custom_styles/hover = SubResource( 8 )
 custom_styles/pressed = SubResource( 8 )
 custom_styles/focus = SubResource( 7 )
-custom_styles/normal = SubResource( 6 )
+custom_styles/normal = SubResource( 9 )
 
 [node name="HBoxC" type="HBoxContainer" parent="VBoxC/OpArea/Palette"]
-margin_top = 616.0
+margin_top = 614.0
 margin_right = 104.0
-margin_bottom = 664.0
+margin_bottom = 662.0
 rect_min_size = Vector2( 0, 48 )
 custom_constants/separation = 8
 alignment = 1
@@ -105,7 +116,7 @@ clip_text = true
 [node name="VBoxC" type="VBoxContainer" parent="VBoxC/OpArea"]
 margin_left = 112.0
 margin_right = 1280.0
-margin_bottom = 664.0
+margin_bottom = 662.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 8
@@ -128,14 +139,14 @@ align = 1
 [node name="HBoxC" type="HBoxContainer" parent="VBoxC/OpArea/VBoxC"]
 margin_top = 56.0
 margin_right = 1168.0
-margin_bottom = 664.0
+margin_bottom = 662.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 8
 
 [node name="ScrollC" type="ScrollContainer" parent="VBoxC/OpArea/VBoxC/HBoxC"]
 margin_right = 1112.0
-margin_bottom = 608.0
+margin_bottom = 606.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -186,13 +197,13 @@ gui_disable_input = true
 [node name="ScrollC2" type="ScrollContainer" parent="VBoxC/OpArea/VBoxC/HBoxC"]
 margin_left = 1120.0
 margin_right = 1168.0
-margin_bottom = 608.0
+margin_bottom = 606.0
 rect_min_size = Vector2( 48, 0 )
 scroll_horizontal_enabled = false
 
 [node name="VBoxC" type="VBoxContainer" parent="VBoxC/OpArea/VBoxC/HBoxC/ScrollC2"]
 margin_right = 48.0
-margin_bottom = 608.0
+margin_bottom = 606.0
 size_flags_vertical = 3
 
 [node name="Select" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/ScrollC2/VBoxC"]
@@ -266,33 +277,45 @@ icon = ExtResource( 10 )
 expand_icon = true
 
 [node name="InfoBar" type="HBoxContainer" parent="VBoxC"]
-margin_top = 672.0
+margin_top = 670.0
 margin_right = 1280.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 0, 48 )
 
 [node name="PenPosLabel" type="Label" parent="VBoxC/InfoBar"]
-margin_top = 12.0
-margin_bottom = 36.0
+margin_top = 13.0
+margin_bottom = 37.0
 
 [node name="SizeLabel" type="Label" parent="VBoxC/InfoBar"]
 margin_left = 8.0
-margin_top = 12.0
+margin_top = 13.0
 margin_right = 8.0
-margin_bottom = 36.0
+margin_bottom = 37.0
+
+[node name="UndoButton" type="Button" parent="VBoxC/InfoBar"]
+margin_left = 1032.0
+margin_right = 1080.0
+margin_bottom = 50.0
+size_flags_horizontal = 10
+icon = ExtResource( 17 )
+
+[node name="RedoButton" type="Button" parent="VBoxC/InfoBar"]
+margin_left = 1088.0
+margin_right = 1136.0
+margin_bottom = 50.0
+icon = ExtResource( 19 )
 
 [node name="ZoomEdit" type="LineEdit" parent="VBoxC/InfoBar"]
 margin_left = 1144.0
 margin_right = 1224.0
-margin_bottom = 48.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 80, 0 )
-size_flags_horizontal = 10
 text = "100%"
 
 [node name="ZoomMenuButton" type="MenuButton" parent="VBoxC/InfoBar"]
 margin_left = 1232.0
 margin_right = 1280.0
-margin_bottom = 48.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 48, 0 )
 icon = ExtResource( 15 )
 expand_icon = true
@@ -362,6 +385,8 @@ margin_bottom = 376.0
 [connection signal="stroke_finished" from="VBoxC/OpArea/VBoxC/HBoxC/ScrollC/Panel/Bg/ViewportC/Viewport/Canvas" to="." method="_on_Canvas_stroke_finished"]
 [connection signal="toggled" from="VBoxC/OpArea/VBoxC/HBoxC/ScrollC2/VBoxC/Pencil" to="." method="_on_Pencil_toggled"]
 [connection signal="toggled" from="VBoxC/OpArea/VBoxC/HBoxC/ScrollC2/VBoxC/Eraser" to="." method="_on_Eraser_toggled"]
+[connection signal="pressed" from="VBoxC/InfoBar/UndoButton" to="." method="_on_UndoButton_pressed"]
+[connection signal="pressed" from="VBoxC/InfoBar/RedoButton" to="." method="_on_RedoButton_pressed"]
 [connection signal="text_entered" from="VBoxC/InfoBar/ZoomEdit" to="." method="_on_ZoomEdit_text_entered"]
 [connection signal="touch_pad_operated" from="FreeZone/TouchPad" to="." method="_on_TouchPad_touch_pad_operated"]
 [connection signal="color_changed" from="ColorPickerPopup/CenterC/PanelC/MarginC/ColorPicker" to="." method="_on_ColorPicker_color_changed"]

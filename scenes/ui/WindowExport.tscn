@@ -38,8 +38,10 @@ __meta__ = {
 }
 
 [node name="MarginC" type="MarginContainer" parent="CenterC/PanelC"]
-margin_right = 344.0
-margin_bottom = 192.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 251.0
+margin_bottom = 215.0
 custom_constants/margin_right = 16
 custom_constants/margin_top = 16
 custom_constants/margin_left = 16
@@ -51,8 +53,8 @@ __meta__ = {
 [node name="VBoxC" type="VBoxContainer" parent="CenterC/PanelC/MarginC"]
 margin_left = 16.0
 margin_top = 16.0
-margin_right = 328.0
-margin_bottom = 176.0
+margin_right = 228.0
+margin_bottom = 192.0
 custom_constants/separation = 16
 alignment = 1
 __meta__ = {
@@ -60,61 +62,63 @@ __meta__ = {
 }
 
 [node name="GridC" type="GridContainer" parent="CenterC/PanelC/MarginC/VBoxC"]
-margin_right = 312.0
-margin_bottom = 96.0
+margin_right = 212.0
+margin_bottom = 112.0
 rect_min_size = Vector2( 0, 48 )
 custom_constants/vseparation = 16
 custom_constants/hseparation = 8
 columns = 2
 
 [node name="FileLabel" type="Label" parent="CenterC/PanelC/MarginC/VBoxC/GridC"]
-margin_top = 8.0
-margin_right = 176.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 64, 0 )
-text = "Output File"
+margin_right = 76.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 64, 48 )
+text = "Output File:"
+valign = 1
 
 [node name="FilePath" type="LineEdit" parent="CenterC/PanelC/MarginC/VBoxC/GridC"]
-margin_left = 184.0
-margin_right = 312.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 128, 0 )
+margin_left = 84.0
+margin_right = 212.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 128, 48 )
 size_flags_horizontal = 10
 
 [node name="ScaleLabel" type="Label" parent="CenterC/PanelC/MarginC/VBoxC/GridC"]
 margin_top = 64.0
-margin_right = 176.0
-margin_bottom = 88.0
-rect_min_size = Vector2( 64, 0 )
-text = "Scale"
+margin_right = 76.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 64, 48 )
+text = "Scale:"
+valign = 1
 
 [node name="ScaleOption" type="OptionButton" parent="CenterC/PanelC/MarginC/VBoxC/GridC"]
-margin_left = 184.0
-margin_top = 56.0
-margin_right = 312.0
-margin_bottom = 96.0
+margin_left = 84.0
+margin_top = 64.0
+margin_right = 212.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 0, 48 )
 text = "100%"
 items = [ "100%", null, false, 0, null ]
 selected = 0
 
 [node name="HBoxC" type="HBoxContainer" parent="CenterC/PanelC/MarginC/VBoxC"]
-margin_top = 112.0
-margin_right = 312.0
-margin_bottom = 160.0
+margin_top = 128.0
+margin_right = 212.0
+margin_bottom = 176.0
 rect_min_size = Vector2( 0, 48 )
 size_flags_vertical = 10
 custom_constants/separation = 16
 
 [node name="Export" type="Button" parent="CenterC/PanelC/MarginC/VBoxC/HBoxC"]
-margin_left = 88.0
-margin_right = 192.0
+margin_left = 90.0
+margin_right = 142.0
 margin_bottom = 48.0
 size_flags_horizontal = 10
 text = "Export"
 
 [node name="Cancel" type="Button" parent="CenterC/PanelC/MarginC/VBoxC/HBoxC"]
-margin_left = 208.0
-margin_right = 312.0
+margin_left = 158.0
+margin_right = 212.0
 margin_bottom = 48.0
 text = "Cancel"
 

@@ -2,6 +2,13 @@ extends ScrollContainer
 
 var colors = []
 
+var default_colors = [
+	Color.red, Color.orange,
+	Color.yellow, Color.green,
+	Color.indigo, Color.blue,
+	Color.violet
+]
+
 var color_scene = preload("res://scenes/ui/PaletteColor.tscn")
 
 var color_button_group = ButtonGroup.new()
@@ -14,7 +21,7 @@ signal color_selected
 func _ready():
 	color_button_group.connect("pressed", self, "_when_color_selected")
 	
-	for c in colors:
+	for c in default_colors:
 		add_color(c)
 
 

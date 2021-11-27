@@ -29,26 +29,26 @@ __meta__ = {
 
 [node name="MenuBar" type="HBoxContainer" parent="VBoxC"]
 margin_right = 1280.0
-margin_bottom = 48.0
+margin_bottom = 64.0
 custom_constants/separation = 16
 
 [node name="HBoxC" type="HBoxContainer" parent="VBoxC/MenuBar"]
 margin_right = 632.0
-margin_bottom = 48.0
+margin_bottom = 64.0
 size_flags_horizontal = 3
 
 [node name="File" type="MenuButton" parent="VBoxC/MenuBar/HBoxC"]
 margin_right = 96.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 96, 48 )
+margin_bottom = 64.0
+rect_min_size = Vector2( 96, 64 )
 text = "File"
 switch_on_hover = true
 
 [node name="Edit" type="MenuButton" parent="VBoxC/MenuBar/HBoxC"]
 margin_left = 104.0
 margin_right = 200.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 96, 48 )
+margin_bottom = 64.0
+rect_min_size = Vector2( 96, 64 )
 focus_mode = 2
 text = "Edit"
 switch_on_hover = true
@@ -59,8 +59,8 @@ __meta__ = {
 [node name="Image" type="MenuButton" parent="VBoxC/MenuBar/HBoxC"]
 margin_left = 208.0
 margin_right = 304.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 96, 48 )
+margin_bottom = 64.0
+rect_min_size = Vector2( 96, 64 )
 focus_mode = 2
 text = "Image"
 switch_on_hover = true
@@ -71,8 +71,8 @@ __meta__ = {
 [node name="View" type="MenuButton" parent="VBoxC/MenuBar/HBoxC"]
 margin_left = 312.0
 margin_right = 408.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 96, 48 )
+margin_bottom = 64.0
+rect_min_size = Vector2( 96, 64 )
 focus_mode = 2
 text = "View"
 switch_on_hover = true
@@ -83,8 +83,8 @@ __meta__ = {
 [node name="Help" type="MenuButton" parent="VBoxC/MenuBar/HBoxC"]
 margin_left = 416.0
 margin_right = 512.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 96, 48 )
+margin_bottom = 64.0
+rect_min_size = Vector2( 96, 64 )
 focus_mode = 2
 text = "Help"
 switch_on_hover = true
@@ -95,12 +95,12 @@ __meta__ = {
 [node name="Tabs" type="Tabs" parent="VBoxC/MenuBar"]
 margin_left = 648.0
 margin_right = 1280.0
-margin_bottom = 48.0
+margin_bottom = 64.0
 size_flags_horizontal = 3
 tab_align = 0
 
 [node name="TabC" type="TabContainer" parent="VBoxC"]
-margin_top = 48.0
+margin_top = 64.0
 margin_right = 1280.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
@@ -120,7 +120,7 @@ custom_styles/panel = SubResource( 1 )
 
 [node name="GridC" type="GridContainer" parent="VBoxC/TabC/Home"]
 margin_right = 1264.0
-margin_bottom = 656.0
+margin_bottom = 640.0
 custom_constants/vseparation = 8
 custom_constants/hseparation = 8
 columns = 2
@@ -146,7 +146,7 @@ valign = 1
 [node name="RecentFoldersList" type="ItemList" parent="VBoxC/TabC/Home/GridC"]
 margin_top = 56.0
 margin_right = 628.0
-margin_bottom = 656.0
+margin_bottom = 640.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -154,7 +154,7 @@ size_flags_vertical = 3
 margin_left = 636.0
 margin_top = 56.0
 margin_right = 1264.0
-margin_bottom = 656.0
+margin_bottom = 640.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
