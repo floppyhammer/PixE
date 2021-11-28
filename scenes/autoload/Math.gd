@@ -16,6 +16,12 @@ func snap_to_pixel(pos : Vector2) -> Vector2:
 	return pos
 
 
+func get_rect_center(rect : Rect2) -> Vector2:
+	var center = (rect.position + rect.end) * 0.5
+	
+	return center
+
+
 static func angle_to_angle(from, to):
 	return fposmod(to - from + PI, PI * 2) - PI
 

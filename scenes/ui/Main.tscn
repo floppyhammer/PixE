@@ -118,42 +118,58 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 1 )
 
-[node name="GridC" type="GridContainer" parent="VBoxC/TabC/Home"]
+[node name="HBoxC" type="HBoxContainer" parent="VBoxC/TabC/Home"]
 margin_right = 1264.0
 margin_bottom = 640.0
-custom_constants/vseparation = 8
-custom_constants/hseparation = 8
-columns = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="RecentFoldersLabel" type="Label" parent="VBoxC/TabC/Home/GridC"]
-margin_right = 628.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 0, 48 )
-text = "Recent folders"
-valign = 1
-
-[node name="ReleaseNotesLabel" type="Label" parent="VBoxC/TabC/Home/GridC"]
-margin_left = 636.0
-margin_right = 1264.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 0, 48 )
-text = "Release Notes"
-valign = 1
-
-[node name="RecentFoldersList" type="ItemList" parent="VBoxC/TabC/Home/GridC"]
-margin_top = 56.0
+[node name="VBoxC1" type="VBoxContainer" parent="VBoxC/TabC/Home/HBoxC"]
 margin_right = 628.0
 margin_bottom = 640.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ReleaseNotesList" type="ItemList" parent="VBoxC/TabC/Home/GridC"]
-margin_left = 636.0
+[node name="New" type="Button" parent="VBoxC/TabC/Home/HBoxC/VBoxC1"]
+margin_right = 96.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 0, 48 )
+size_flags_horizontal = 0
+text = "New..."
+
+[node name="Open" type="Button" parent="VBoxC/TabC/Home/HBoxC/VBoxC1"]
 margin_top = 56.0
+margin_right = 112.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 0, 48 )
+size_flags_horizontal = 0
+text = "Open..."
+
+[node name="DropTip" type="Label" parent="VBoxC/TabC/Home/HBoxC/VBoxC1"]
+margin_top = 112.0
+margin_right = 628.0
+margin_bottom = 640.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Or, drop images from your OS"
+align = 1
+valign = 1
+
+[node name="VBoxC2" type="VBoxContainer" parent="VBoxC/TabC/Home/HBoxC"]
+margin_left = 636.0
 margin_right = 1264.0
+margin_bottom = 640.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NewsLabel" type="Label" parent="VBoxC/TabC/Home/HBoxC/VBoxC2"]
+margin_right = 628.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 0, 48 )
+text = "News"
+valign = 1
+
+[node name="NewsList" type="ItemList" parent="VBoxC/TabC/Home/HBoxC/VBoxC2"]
+margin_top = 56.0
+margin_right = 628.0
 margin_bottom = 640.0
 size_flags_horizontal = 3
 size_flags_vertical = 3

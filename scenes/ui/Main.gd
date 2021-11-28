@@ -26,15 +26,16 @@ func _ready():
 func _reload():
 	var popup_menu = file_mb.get_popup()
 	
-	popup_menu.add_item("New >")
-	popup_menu.add_item("Open >")
+	popup_menu.add_item("New..")
+	popup_menu.add_item("Open..")
 	popup_menu.add_separator("")
-	popup_menu.add_item("Import >")
-	popup_menu.add_item("Export >")
+	popup_menu.add_item("Import..")
+	popup_menu.add_item("Export..")
 	popup_menu.add_separator("")
 	popup_menu.add_item("Close")
 	popup_menu.add_item("Close All")
 	popup_menu.add_separator("")
+	popup_menu.add_item("Settings..")
 	popup_menu.add_item("Quit")
 	popup_menu.connect("index_pressed", self, "_file_mb_pressed")
 
@@ -49,13 +50,11 @@ func _reload():
 	popup_menu.add_item("Delete")
 	popup_menu.add_separator("")
 	popup_menu.add_item("Clear")
-	popup_menu.add_separator("")
-	popup_menu.add_item("Preferences >")
 	popup_menu.connect("index_pressed", self, "_edit_mb_pressed")
 	
 	popup_menu = image_mb.get_popup()
-	popup_menu.add_item("Canvas Size >")
-	popup_menu.add_item("Image Size >")
+	popup_menu.add_item("Canvas Size..")
+	popup_menu.add_item("Image Size..")
 	popup_menu.connect("index_pressed", self, "_image_mb_pressed")
 	
 	popup_menu = view_mb.get_popup()
@@ -68,7 +67,7 @@ func _reload():
 	help_mb
 	tabs.add_tab("Home")
 	tabs.add_tab("New")
-	tabs.set_tab_close_display_policy(tabs.CLOSE_BUTTON_SHOW_ALWAYS)
+	tabs.set_tab_close_display_policy(tabs.CLOSE_BUTTON_SHOW_ACTIVE_ONLY)
 
 
 func _get_dropped_files_path(files : PoolStringArray, screen : int) -> void:

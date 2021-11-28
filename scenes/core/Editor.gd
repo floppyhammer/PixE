@@ -1,19 +1,22 @@
 extends Control
 
-onready var pen_pos_label = $VBoxC/InfoBar/PenPosLabel
-onready var canvas_vp_container = $VBoxC/OpArea/VBoxC/HBoxC/ScrollC/Panel/Bg/ViewportC
+onready var pen_pos_label = $VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/InfoBar/PenPosLabel
+onready var scroll_c = $VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC
+onready var scroll_panel = scroll_c.get_node("Panel")
+onready var canvas_bg = scroll_panel.get_node("Bg")
+onready var canvas_vp_container = canvas_bg.get_node("ViewportC")
 onready var canvas_viewport = canvas_vp_container.get_node("Viewport")
+
 onready var canvas = canvas_viewport.get_node("Canvas")
-onready var zoom_menu_button = $VBoxC/InfoBar/ZoomMenuButton
-onready var zoom_edit = $VBoxC/InfoBar/ZoomEdit
+onready var zoom_edit = $VBoxC/OpArea/VBoxC/HBoxC/Control2/MarginContainer/HBoxContainer/ZoomEdit
 onready var palette = $VBoxC/OpArea/Palette/Palette
-onready var scroll_c = $VBoxC/OpArea/VBoxC/HBoxC/ScrollC
 
 var cursor_pos : Vector2 = Vector2.ZERO
+var canvas_zoom : float = 1
 
 
 func _ready():
-	zoom_menu_button.get_popup().connect("index_pressed", self, "_when_zoom_level_pressed")
+	change_zoom(5)
 
 
 func setup(p_image_size : Vector2, p_initial_image : Image = null):
@@ -29,11 +32,13 @@ func setup(p_image_size : Vector2, p_initial_image : Image = null):
 	canvas_vp_container.get_parent().rect_size = p_image_size
 	canvas_viewport.size = p_image_size
 	canvas.rect_size = p_image_size
+	
+	change_zoom(5)
 
 
 func _process(delta):
 	var snapped_cursor_pos = Math.snap_to_pixel(cursor_pos)
-	pen_pos_label.text = str(snapped_cursor_pos)
+	pen_pos_label.text = "%d,%d" % [snapped_cursor_pos.x, snapped_cursor_pos.y]
 	
 	if Input.is_action_just_pressed("undo"):
 		undo_canvas()
@@ -102,14 +107,6 @@ func _on_ViewportContainer_gui_input(event):
 	canvas.receive_gui_input(event)
 
 
-func _when_zoom_level_pressed(p_index):
-	var item_text : String = zoom_menu_button.get_popup().get_item_text(p_index)
-	var zoom = item_text.to_int()
-	zoom_edit.text = item_text
-	
-	canvas_vp_container.get_parent().rect_scale = Vector2.ONE * zoom * 0.01
-
-
 func _on_Color_pressed():
 	$ColorPickerPopup.custom_show()
 
@@ -154,6 +151,7 @@ func _on_TouchPad_touch_pad_operated(relative_pos, pushed, just_pushed, just_rel
 	canvas.receive_touch_input(cursor_pos, pushed, just_pushed, just_released)
 
 
+# Canvas viewport control.
 func _on_Panel_gui_input(event):
 	if event is InputEventMouseMotion:
 		if Input.is_mouse_button_pressed(BUTTON_MIDDLE):
@@ -162,18 +160,10 @@ func _on_Panel_gui_input(event):
 	
 	if event is InputEventMouseButton:
 		if event.pressed:
-			var new_zoom = canvas_vp_container.get_parent().rect_scale.x
 			if event.button_index == BUTTON_WHEEL_UP:
-				new_zoom += event.factor
+				change_zoom(canvas_zoom + canvas_zoom * 0.1)
 			if event.button_index == BUTTON_WHEEL_DOWN:
-				new_zoom -= event.factor
-			
-			new_zoom = clamp(new_zoom, 0.2, 50)
-			
-			zoom_edit.text = str(round(new_zoom * 100.0)) + "%"
-			canvas_vp_container.get_parent().rect_scale = Vector2.ONE * new_zoom
-			
-			scroll_c.get_child(0).rect_min_size = Vector2.ONE * 720 * new_zoom
+				change_zoom(canvas_zoom - canvas_zoom * 0.1)
 
 
 func _on_UndoButton_pressed():
@@ -182,3 +172,50 @@ func _on_UndoButton_pressed():
 
 func _on_RedoButton_pressed():
 	redo_canvas()
+
+
+func _on_ZoomOut_pressed():
+	change_zoom(canvas_zoom - canvas_zoom * 0.1)
+
+
+func _on_ZoomIn_pressed():
+	change_zoom(canvas_zoom + canvas_zoom * 0.1)
+
+
+func change_zoom(new_zoom : float):
+	canvas_zoom = clamp(new_zoom, 0.2, 20)
+	
+	zoom_edit.text = str(round(canvas_zoom * 100)) + "%"
+	
+	canvas_bg.rect_scale = Vector2.ONE * canvas_zoom
+	
+	# This is fixed.
+	var scroll_size = scroll_c.rect_size
+	
+	canvas_bg.rect_scale = Vector2.ONE * canvas_zoom
+	
+	var canvas_bg_scaled_size = canvas_bg.rect_size * canvas_bg.rect_scale
+	
+	var canvas2scroll_ratio = canvas_bg_scaled_size / scroll_size
+	
+	#var cursor_pos_ratio_before = event.position / scroll_panel.rect_min_size
+	
+	var scroll_panel_size
+	var max_canvas_bg_scaled_size = max(canvas_bg_scaled_size.x, canvas_bg_scaled_size.y)
+	if max_canvas_bg_scaled_size > scroll_size.y * 0.5:
+		scroll_panel_size = max_canvas_bg_scaled_size * 2
+	else: # Don't scale scroll panel.
+		scroll_panel_size = scroll_c.rect_size.x
+	
+	scroll_panel_size = max(scroll_panel_size, scroll_c.rect_size.x)
+	
+	scroll_panel.rect_min_size = Vector2.ONE * scroll_panel_size
+	
+	# Center canvas.
+	canvas_bg.rect_position = Vector2.ONE * scroll_panel_size * 0.5 - canvas_bg_scaled_size * 0.5
+	
+	#var cursor_pos_after = cursor_pos_ratio_before * scroll_panel_size
+	
+	# Set view center.
+	scroll_c.scroll_horizontal = scroll_panel_size * 0.5 - scroll_size.x * 0.5
+	scroll_c.scroll_vertical = scroll_panel_size * 0.5 - scroll_size.y * 0.5
