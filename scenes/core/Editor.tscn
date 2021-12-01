@@ -175,7 +175,7 @@ __meta__ = {
 
 [node name="ScrollC" type="ScrollContainer" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC"]
 margin_right = 1112.0
-margin_bottom = 606.0
+margin_bottom = 608.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -185,7 +185,7 @@ __meta__ = {
 
 [node name="Panel" type="Panel" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC"]
 margin_right = 1112.0
-margin_bottom = 606.0
+margin_bottom = 608.0
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -238,14 +238,14 @@ __meta__ = {
 }
 
 [node name="InfoBar" type="HBoxContainer" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC"]
-margin_top = 614.0
+margin_top = 616.0
 margin_right = 1112.0
 margin_bottom = 664.0
 rect_min_size = Vector2( 0, 48 )
 
 [node name="PenPosLabel" type="Label" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/InfoBar"]
 margin_right = 80.0
-margin_bottom = 50.0
+margin_bottom = 48.0
 rect_min_size = Vector2( 80, 0 )
 size_flags_vertical = 5
 custom_styles/normal = SubResource( 10 )
@@ -253,55 +253,69 @@ text = "0,0"
 align = 1
 valign = 1
 
-[node name="SizeLabel" type="Label" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/InfoBar"]
+[node name="ImgSizeLabel" type="Label" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/InfoBar"]
 margin_left = 88.0
-margin_right = 88.0
-margin_bottom = 50.0
+margin_right = 168.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 80, 0 )
 size_flags_vertical = 3
+custom_styles/normal = SubResource( 10 )
+text = "1,1"
+align = 1
 valign = 1
+
+[node name="EyedropperColor" type="ColorRect" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/InfoBar"]
+margin_left = 176.0
+margin_right = 224.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 0 )
 
 [node name="UndoButton" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/InfoBar"]
 margin_left = 784.0
 margin_right = 832.0
-margin_bottom = 50.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 0 )
 size_flags_horizontal = 10
 icon = ExtResource( 17 )
+expand_icon = true
 
 [node name="RedoButton" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/InfoBar"]
 margin_left = 840.0
 margin_right = 888.0
-margin_bottom = 50.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 0 )
 icon = ExtResource( 19 )
+expand_icon = true
 
 [node name="Cut" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/InfoBar"]
 margin_left = 896.0
 margin_right = 944.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 48, 48 )
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 0 )
 icon = ExtResource( 28 )
 expand_icon = true
 
 [node name="Copy" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/InfoBar"]
 margin_left = 952.0
 margin_right = 1000.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 48, 48 )
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 0 )
 icon = ExtResource( 15 )
 expand_icon = true
 
 [node name="Paste" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/InfoBar"]
 margin_left = 1008.0
 margin_right = 1056.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 48, 48 )
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 0 )
 icon = ExtResource( 27 )
 expand_icon = true
 
 [node name="Delete" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/InfoBar"]
 margin_left = 1064.0
 margin_right = 1112.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 48, 48 )
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 0 )
 icon = ExtResource( 26 )
 expand_icon = true
 
@@ -378,19 +392,19 @@ toggle_mode = true
 icon = ExtResource( 22 )
 expand_icon = true
 
-[node name="ScrollC2" type="ScrollContainer" parent="VBoxC/OpArea/VBoxC/HBoxC"]
+[node name="BrushTools" type="ScrollContainer" parent="VBoxC/OpArea/VBoxC/HBoxC"]
 margin_left = 1120.0
 margin_right = 1168.0
 margin_bottom = 664.0
 rect_min_size = Vector2( 48, 0 )
 scroll_horizontal_enabled = false
 
-[node name="VBoxC" type="VBoxContainer" parent="VBoxC/OpArea/VBoxC/HBoxC/ScrollC2"]
+[node name="VBoxC" type="VBoxContainer" parent="VBoxC/OpArea/VBoxC/HBoxC/BrushTools"]
 margin_right = 48.0
 margin_bottom = 664.0
 size_flags_vertical = 3
 
-[node name="Select" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/ScrollC2/VBoxC"]
+[node name="Select" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/BrushTools/VBoxC"]
 margin_right = 48.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
@@ -399,7 +413,7 @@ group = SubResource( 5 )
 icon = ExtResource( 7 )
 expand_icon = true
 
-[node name="Pencil" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/ScrollC2/VBoxC"]
+[node name="Pencil" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/BrushTools/VBoxC"]
 margin_top = 56.0
 margin_right = 48.0
 margin_bottom = 104.0
@@ -410,7 +424,7 @@ group = SubResource( 5 )
 icon = ExtResource( 6 )
 expand_icon = true
 
-[node name="Eraser" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/ScrollC2/VBoxC"]
+[node name="Eraser" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/BrushTools/VBoxC"]
 margin_top = 112.0
 margin_right = 48.0
 margin_bottom = 160.0
@@ -420,7 +434,7 @@ group = SubResource( 5 )
 icon = ExtResource( 8 )
 expand_icon = true
 
-[node name="Eyedropper" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/ScrollC2/VBoxC"]
+[node name="Eyedropper" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/BrushTools/VBoxC"]
 margin_top = 168.0
 margin_right = 48.0
 margin_bottom = 216.0
@@ -430,7 +444,7 @@ group = SubResource( 5 )
 icon = ExtResource( 9 )
 expand_icon = true
 
-[node name="Move" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/ScrollC2/VBoxC"]
+[node name="Move" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/BrushTools/VBoxC"]
 margin_top = 224.0
 margin_right = 48.0
 margin_bottom = 272.0
@@ -440,7 +454,7 @@ group = SubResource( 5 )
 icon = ExtResource( 11 )
 expand_icon = true
 
-[node name="Bucket" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/ScrollC2/VBoxC"]
+[node name="Bucket" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/BrushTools/VBoxC"]
 margin_top = 280.0
 margin_right = 48.0
 margin_bottom = 328.0
@@ -450,7 +464,7 @@ group = SubResource( 5 )
 icon = ExtResource( 12 )
 expand_icon = true
 
-[node name="Line" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/ScrollC2/VBoxC"]
+[node name="Line" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/BrushTools/VBoxC"]
 margin_top = 336.0
 margin_right = 48.0
 margin_bottom = 384.0
@@ -527,7 +541,12 @@ margin_bottom = 376.0
 [connection signal="pressed" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/MarginContainer/HBoxContainer/ZoomOut" to="." method="_on_ZoomOut_pressed"]
 [connection signal="text_entered" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/MarginContainer/HBoxContainer/ZoomEdit" to="." method="_on_ZoomEdit_text_entered"]
 [connection signal="pressed" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/MarginContainer/HBoxContainer/ZoomIn" to="." method="_on_ZoomIn_pressed"]
-[connection signal="toggled" from="VBoxC/OpArea/VBoxC/HBoxC/ScrollC2/VBoxC/Pencil" to="." method="_on_Pencil_toggled"]
-[connection signal="toggled" from="VBoxC/OpArea/VBoxC/HBoxC/ScrollC2/VBoxC/Eraser" to="." method="_on_Eraser_toggled"]
+[connection signal="pressed" from="VBoxC/OpArea/VBoxC/HBoxC/BrushTools/VBoxC/Select" to="." method="_on_Select_pressed"]
+[connection signal="toggled" from="VBoxC/OpArea/VBoxC/HBoxC/BrushTools/VBoxC/Pencil" to="." method="_on_Pencil_toggled"]
+[connection signal="toggled" from="VBoxC/OpArea/VBoxC/HBoxC/BrushTools/VBoxC/Eraser" to="." method="_on_Eraser_toggled"]
+[connection signal="pressed" from="VBoxC/OpArea/VBoxC/HBoxC/BrushTools/VBoxC/Eyedropper" to="." method="_on_Eyedropper_pressed"]
+[connection signal="pressed" from="VBoxC/OpArea/VBoxC/HBoxC/BrushTools/VBoxC/Move" to="." method="_on_Move_pressed"]
+[connection signal="pressed" from="VBoxC/OpArea/VBoxC/HBoxC/BrushTools/VBoxC/Bucket" to="." method="_on_Bucket_pressed"]
+[connection signal="pressed" from="VBoxC/OpArea/VBoxC/HBoxC/BrushTools/VBoxC/Line" to="." method="_on_Line_pressed"]
 [connection signal="touch_pad_operated" from="FreeZone/TouchPad" to="." method="_on_TouchPad_touch_pad_operated"]
 [connection signal="color_changed" from="ColorPickerPopup/CenterC/PanelC/MarginC/ColorPicker" to="." method="_on_ColorPicker_color_changed"]

@@ -9,7 +9,6 @@ bg_color = Color( 0, 0, 0, 0.392157 )
 [sub_resource type="StyleBoxEmpty" id=3]
 
 [node name="WindowOpenImage" type="Button"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/hover = SubResource( 2 )
@@ -39,3 +38,4 @@ margin_bottom = 616.0
 rect_min_size = Vector2( 512, 512 )
 
 [connection signal="pressed" from="." to="." method="_on_WindowOpenSprite_pressed"]
+[connection signal="cancel_pressed" from="CenterC/FileExplorer" to="." method="_on_FileExplorer_cancel_pressed"]

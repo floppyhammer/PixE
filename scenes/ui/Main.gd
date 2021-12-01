@@ -26,16 +26,16 @@ func _ready():
 func _reload():
 	var popup_menu = file_mb.get_popup()
 	
-	popup_menu.add_item("New..")
-	popup_menu.add_item("Open..")
+	popup_menu.add_item("New...")
+	popup_menu.add_item("Open...")
 	popup_menu.add_separator("")
-	popup_menu.add_item("Import..")
-	popup_menu.add_item("Export..")
+	popup_menu.add_item("Import...")
+	popup_menu.add_item("Export...")
 	popup_menu.add_separator("")
 	popup_menu.add_item("Close")
 	popup_menu.add_item("Close All")
 	popup_menu.add_separator("")
-	popup_menu.add_item("Settings..")
+	popup_menu.add_item("Settings...")
 	popup_menu.add_item("Quit")
 	popup_menu.connect("index_pressed", self, "_file_mb_pressed")
 
@@ -53,8 +53,8 @@ func _reload():
 	popup_menu.connect("index_pressed", self, "_edit_mb_pressed")
 	
 	popup_menu = image_mb.get_popup()
-	popup_menu.add_item("Canvas Size..")
-	popup_menu.add_item("Image Size..")
+	popup_menu.add_item("Canvas Size...")
+	popup_menu.add_item("Image Size...")
 	popup_menu.connect("index_pressed", self, "_image_mb_pressed")
 	
 	popup_menu = view_mb.get_popup()
@@ -156,3 +156,11 @@ func _on_Tabs_tab_close(tab):
 func _on_WindowImageSize_size_changed(new_size : Vector2, interpolation):
 	if current_editor:
 		current_editor.change_image_size(new_size, interpolation)
+
+
+func _on_New_pressed():
+	$WindowNewImage.show()
+
+
+func _on_Open_pressed():
+	$WindowOpenImage.show()

@@ -12,11 +12,3 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="TopleftPos" type="Position2D" parent="."]
-visible = false
-
-[node name="DebugCamera2D" type="Camera2D" parent="."]
-visible = false
-position = Vector2( 14, 17 )
-zoom = Vector2( 0.1, 0.1 )

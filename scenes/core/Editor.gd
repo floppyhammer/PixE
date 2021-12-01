@@ -75,14 +75,6 @@ func redo_canvas():
 		canvas_viewport.render_target_clear_mode = canvas_viewport.CLEAR_MODE_ONLY_NEXT_FRAME
 
 
-func _on_Eraser_toggled(button_pressed):
-	canvas.brush_mode = canvas.BrushModes.ERASER
-
-
-func _on_Pencil_toggled(button_pressed):
-	canvas.brush_mode = canvas.BrushModes.PENCIL
-
-
 func _on_Add_pressed():
 	var color_btn = $VBoxC/OpArea/Palette/Color
 	palette.add_color(color_btn.get_stylebox("normal").bg_color)
@@ -219,3 +211,34 @@ func change_zoom(new_zoom : float):
 	# Set view center.
 	scroll_c.scroll_horizontal = scroll_panel_size * 0.5 - scroll_size.x * 0.5
 	scroll_c.scroll_vertical = scroll_panel_size * 0.5 - scroll_size.y * 0.5
+
+
+# Brush tools.
+# ---------------------------------------------
+func _on_Select_pressed():
+	canvas.change_brush_mode(canvas.BrushModes.SELECT)
+
+
+func _on_Eraser_toggled(button_pressed):
+	canvas.change_brush_mode(canvas.BrushModes.ERASER)
+
+
+func _on_Pencil_toggled(button_pressed):
+	canvas.change_brush_mode(canvas.BrushModes.PENCIL)
+
+
+func _on_Eyedropper_pressed():
+	canvas.change_brush_mode(canvas.BrushModes.EYEDROPPER)
+
+
+func _on_Move_pressed():
+	canvas.change_brush_mode(canvas.BrushModes.MOVE)
+
+
+func _on_Bucket_pressed():
+	canvas.change_brush_mode(canvas.BrushModes.BUCKET)
+
+
+func _on_Line_pressed():
+	canvas.change_brush_mode(canvas.BrushModes.LINE)
+# ---------------------------------------------

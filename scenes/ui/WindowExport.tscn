@@ -8,7 +8,6 @@ bg_color = Color( 0, 0, 0, 0.392157 )
 [sub_resource type="StyleBoxEmpty" id=3]
 
 [node name="WindowExport" type="Button"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/hover = SubResource( 2 )
@@ -29,10 +28,10 @@ __meta__ = {
 }
 
 [node name="PanelC" type="PanelContainer" parent="CenterC"]
-margin_left = 633.0
-margin_top = 353.0
-margin_right = 647.0
-margin_bottom = 367.0
+margin_left = 485.0
+margin_top = 255.0
+margin_right = 795.0
+margin_bottom = 465.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -40,8 +39,8 @@ __meta__ = {
 [node name="MarginC" type="MarginContainer" parent="CenterC/PanelC"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 251.0
-margin_bottom = 215.0
+margin_right = 303.0
+margin_bottom = 203.0
 custom_constants/margin_right = 16
 custom_constants/margin_top = 16
 custom_constants/margin_left = 16
@@ -53,72 +52,84 @@ __meta__ = {
 [node name="VBoxC" type="VBoxContainer" parent="CenterC/PanelC/MarginC"]
 margin_left = 16.0
 margin_top = 16.0
-margin_right = 228.0
-margin_bottom = 192.0
+margin_right = 280.0
+margin_bottom = 180.0
 custom_constants/separation = 16
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GridC" type="GridContainer" parent="CenterC/PanelC/MarginC/VBoxC"]
-margin_right = 212.0
-margin_bottom = 112.0
+[node name="VBoxC" type="VBoxContainer" parent="CenterC/PanelC/MarginC/VBoxC"]
+margin_right = 264.0
+margin_bottom = 100.0
 rect_min_size = Vector2( 0, 48 )
-custom_constants/vseparation = 16
-custom_constants/hseparation = 8
-columns = 2
 
-[node name="FileLabel" type="Label" parent="CenterC/PanelC/MarginC/VBoxC/GridC"]
-margin_right = 76.0
+[node name="HBoxC1" type="HBoxContainer" parent="CenterC/PanelC/MarginC/VBoxC/VBoxC"]
+margin_right = 264.0
 margin_bottom = 48.0
-rect_min_size = Vector2( 64, 48 )
-text = "Output File:"
+
+[node name="FileLabel" type="Label" parent="CenterC/PanelC/MarginC/VBoxC/VBoxC/HBoxC1"]
+margin_right = 80.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 80, 48 )
+text = "File name:"
 valign = 1
 
-[node name="FilePath" type="LineEdit" parent="CenterC/PanelC/MarginC/VBoxC/GridC"]
+[node name="FilePath" type="LineEdit" parent="CenterC/PanelC/MarginC/VBoxC/VBoxC/HBoxC1"]
 margin_left = 84.0
 margin_right = 212.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 128, 48 )
 size_flags_horizontal = 10
 
-[node name="ScaleLabel" type="Label" parent="CenterC/PanelC/MarginC/VBoxC/GridC"]
-margin_top = 64.0
-margin_right = 76.0
-margin_bottom = 112.0
-rect_min_size = Vector2( 64, 48 )
+[node name="FileExplorerButton" type="Button" parent="CenterC/PanelC/MarginC/VBoxC/VBoxC/HBoxC1"]
+margin_left = 216.0
+margin_right = 264.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
+text = "..."
+
+[node name="HBoxC2" type="HBoxContainer" parent="CenterC/PanelC/MarginC/VBoxC/VBoxC"]
+margin_top = 52.0
+margin_right = 264.0
+margin_bottom = 100.0
+
+[node name="ScaleLabel" type="Label" parent="CenterC/PanelC/MarginC/VBoxC/VBoxC/HBoxC2"]
+margin_right = 80.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 80, 48 )
 text = "Scale:"
 valign = 1
 
-[node name="ScaleOption" type="OptionButton" parent="CenterC/PanelC/MarginC/VBoxC/GridC"]
+[node name="ScaleOption" type="OptionButton" parent="CenterC/PanelC/MarginC/VBoxC/VBoxC/HBoxC2"]
 margin_left = 84.0
-margin_top = 64.0
-margin_right = 212.0
-margin_bottom = 112.0
+margin_right = 264.0
+margin_bottom = 48.0
 rect_min_size = Vector2( 0, 48 )
+size_flags_horizontal = 3
 text = "100%"
 items = [ "100%", null, false, 0, null ]
 selected = 0
 
 [node name="HBoxC" type="HBoxContainer" parent="CenterC/PanelC/MarginC/VBoxC"]
-margin_top = 128.0
-margin_right = 212.0
-margin_bottom = 176.0
+margin_top = 116.0
+margin_right = 264.0
+margin_bottom = 164.0
 rect_min_size = Vector2( 0, 48 )
 size_flags_vertical = 10
 custom_constants/separation = 16
 
 [node name="Export" type="Button" parent="CenterC/PanelC/MarginC/VBoxC/HBoxC"]
-margin_left = 90.0
-margin_right = 142.0
+margin_left = 142.0
+margin_right = 194.0
 margin_bottom = 48.0
 size_flags_horizontal = 10
 text = "Export"
 
 [node name="Cancel" type="Button" parent="CenterC/PanelC/MarginC/VBoxC/HBoxC"]
-margin_left = 158.0
-margin_right = 212.0
+margin_left = 210.0
+margin_right = 264.0
 margin_bottom = 48.0
 text = "Cancel"
 

@@ -129,19 +129,21 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="New" type="Button" parent="VBoxC/TabC/Home/HBoxC/VBoxC1"]
-margin_right = 96.0
+margin_right = 128.0
 margin_bottom = 48.0
-rect_min_size = Vector2( 0, 48 )
+rect_min_size = Vector2( 128, 48 )
 size_flags_horizontal = 0
 text = "New..."
+align = 0
 
 [node name="Open" type="Button" parent="VBoxC/TabC/Home/HBoxC/VBoxC1"]
 margin_top = 56.0
-margin_right = 112.0
+margin_right = 128.0
 margin_bottom = 104.0
-rect_min_size = Vector2( 0, 48 )
+rect_min_size = Vector2( 128, 48 )
 size_flags_horizontal = 0
 text = "Open..."
+align = 0
 
 [node name="DropTip" type="Label" parent="VBoxC/TabC/Home/HBoxC/VBoxC1"]
 margin_top = 112.0
@@ -149,7 +151,7 @@ margin_right = 628.0
 margin_bottom = 640.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Or, drop images from your OS"
+text = "Drop images from your OS"
 align = 1
 valign = 1
 
@@ -185,12 +187,16 @@ margin_bottom = -8.0
 visible = false
 
 [node name="WindowOpenImage" parent="." instance=ExtResource( 2 )]
+visible = false
 
 [node name="WindowExport" parent="." instance=ExtResource( 6 )]
+visible = false
 
 [node name="WindowImageSize" parent="." instance=ExtResource( 5 )]
 visible = false
 
 [connection signal="tab_changed" from="VBoxC/MenuBar/Tabs" to="." method="_on_Tabs_tab_changed"]
 [connection signal="tab_close" from="VBoxC/MenuBar/Tabs" to="." method="_on_Tabs_tab_close"]
+[connection signal="pressed" from="VBoxC/TabC/Home/HBoxC/VBoxC1/New" to="." method="_on_New_pressed"]
+[connection signal="pressed" from="VBoxC/TabC/Home/HBoxC/VBoxC1/Open" to="." method="_on_Open_pressed"]
 [connection signal="size_changed" from="WindowImageSize" to="." method="_on_WindowImageSize_size_changed"]

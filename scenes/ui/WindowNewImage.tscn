@@ -100,10 +100,11 @@ size_flags_horizontal = 10
 
 [node name="SquareCheckBox" type="CheckBox" parent="CenterC/PanelC/MarginC/VBoxC"]
 margin_top = 128.0
-margin_right = 200.0
+margin_right = 48.0
 margin_bottom = 176.0
 rect_min_size = Vector2( 0, 48 )
-text = "Square"
+size_flags_horizontal = 0
+text = "1:1"
 
 [node name="HBoxC" type="HBoxContainer" parent="CenterC/PanelC/MarginC/VBoxC"]
 margin_top = 192.0

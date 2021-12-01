@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=44 format=2]
+[gd_resource type="Theme" load_steps=47 format=2]
 
 [ext_resource path="res://tres/default_font_24.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/graphics/theme_tabs_close.png" type="Texture" id=2]
@@ -8,13 +8,16 @@
 [ext_resource path="res://assets/graphics/theme_spin_box.png" type="Texture" id=6]
 [ext_resource path="res://assets/graphics/theme_h_slider_grabber.png" type="Texture" id=7]
 [ext_resource path="res://assets/graphics/theme_h_slider_grabber_highlight.png" type="Texture" id=8]
+[ext_resource path="res://assets/graphics/icon_dir.png" type="Texture" id=9]
+[ext_resource path="res://assets/graphics/icon_file.png" type="Texture" id=10]
+[ext_resource path="res://assets/graphics/theme_file_dialog_parent_folder.png" type="Texture" id=11]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
 [sub_resource type="StyleBoxFlat" id=36]
-bg_color = Color( 0.145098, 0.137255, 0.188235, 1 )
+bg_color = Color( 0.219608, 0.207843, 0.286275, 1 )
 border_width_bottom = 2
 border_color = Color( 0.811765, 0.811765, 0.811765, 1 )
 corner_radius_top_left = 2
@@ -102,7 +105,7 @@ content_margin_left = 16.0
 content_margin_right = 16.0
 content_margin_top = 16.0
 content_margin_bottom = 16.0
-bg_color = Color( 0.14902, 0.137255, 0.188235, 1 )
+bg_color = Color( 0.145098, 0.129412, 0.184314, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
@@ -255,8 +258,7 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id=30]
-border_width_top = 32
-expand_margin_top = 16.0
+bg_color = Color( 0.2, 0.188235, 0.258824, 1 )
 
 [resource]
 default_font = ExtResource( 1 )
@@ -1186,12 +1188,12 @@ EditorStyles/styles/ScriptEditor = null
 EditorStyles/styles/ScriptEditorPanel = null
 EditorStyles/styles/ThemeEditorPreviewBG = null
 EditorStyles/styles/ThemeEditorPreviewFG = null
-FileDialog/colors/file_icon_modulate = Color( 0, 0, 0, 1 )
-FileDialog/colors/files_disabled = Color( 0, 0, 0, 1 )
-FileDialog/colors/folder_icon_modulate = Color( 0, 0, 0, 1 )
-FileDialog/icons/file = null
-FileDialog/icons/folder = null
-FileDialog/icons/parent_folder = null
+FileDialog/colors/file_icon_modulate = Color( 1, 1, 1, 1 )
+FileDialog/colors/files_disabled = Color( 0.462745, 0.462745, 0.462745, 1 )
+FileDialog/colors/folder_icon_modulate = Color( 1, 1, 1, 1 )
+FileDialog/icons/file = ExtResource( 10 )
+FileDialog/icons/folder = ExtResource( 9 )
+FileDialog/icons/parent_folder = ExtResource( 11 )
 FileDialog/icons/reload = null
 FileDialog/icons/toggle_hidden = null
 Fonts/fonts/large = null
@@ -1295,7 +1297,7 @@ LineEdit/colors/clear_button_color_pressed = Color( 0, 0, 0, 1 )
 LineEdit/colors/cursor_color = Color( 0.811765, 0.811765, 0.811765, 1 )
 LineEdit/colors/font_color = Color( 0.811765, 0.811765, 0.811765, 1 )
 LineEdit/colors/font_color_selected = Color( 0, 0, 0, 1 )
-LineEdit/colors/font_color_uneditable = Color( 0, 0, 0, 1 )
+LineEdit/colors/font_color_uneditable = Color( 0.490196, 0.490196, 0.490196, 1 )
 LineEdit/colors/read_only = Color( 0, 0, 0, 1 )
 LineEdit/colors/selection_color = Color( 0.811765, 0.811765, 0.811765, 1 )
 LineEdit/constants/minimum_spaces = 0
