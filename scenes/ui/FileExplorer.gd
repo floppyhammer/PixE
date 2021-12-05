@@ -1,19 +1,70 @@
 extends PanelContainer
 
+# Adapt File Explorer to different usages.
+enum Modes {
+	SELECT_FILE = 0,
+	SELECT_DIR,
+	SELECT_DIR_FILE,
+}
+var mode = Modes.SELECT_FILE
+
+# Used to undo and redo dir.
+var dir_history = []
+var dir_head : int
+
+onready var address_edit = $MarginC/VBoxC/HBoxC4/AddressEdit
+onready var file_tree = $MarginC/VBoxC/FileTree
 
 signal cancel_pressed
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
-	#popup()
+	Logger.add_module("FileExplorer")
+	
+	# Disk option is Windows only.
+	var disk_option = $MarginC/VBoxC/HBoxC4/DiskOption
+	if OS.get_name() == "Windows":
+		for i in range(file_tree.dir.get_drive_count()):
+			var drive_name = file_tree.dir.get_drive(i)
+			disk_option.add_item(drive_name)
+		disk_option.select(file_tree.dir.get_current_drive())
+	else:
+		disk_option.hide()
+	
+	_on_FileTree_current_dir_changed(file_tree.get_current_dir())
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func setup():
+	file_tree.setup()
+
+
+func change_mode(new_mode):
+	mode = new_mode
+	
+	match mode:
+		Modes.OPEN:
+			# When opening a file, no need to show the file name edit.
+			$MarginC/VBoxC/FileNameBox.hide()
+		Modes.EXPORT:
+			pass
 
 
 func _on_Cancel_pressed():
 	emit_signal("cancel_pressed")
+
+
+func _on_FileTree_current_dir_changed(new_dir : String):
+	if OS.get_name() == "Windows":
+		var drive_name = file_tree.dir.get_drive(file_tree.dir.get_current_drive())
+		new_dir = new_dir.trim_prefix(drive_name)
+	
+	address_edit.text = new_dir
+
+
+func _on_Upward_pressed():
+	file_tree.go_upward()
+
+
+func _on_NewFolder_pressed():
+	var err = file_tree.dir.make_dir("New folder")
+	file_tree.relist_dir()

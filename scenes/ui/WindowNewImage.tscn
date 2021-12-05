@@ -81,6 +81,7 @@ margin_right = 200.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 128, 48 )
 size_flags_horizontal = 10
+text = "32"
 
 [node name="HeightLabel" type="Label" parent="CenterC/PanelC/MarginC/VBoxC/GridC"]
 margin_top = 64.0
@@ -97,6 +98,7 @@ margin_right = 200.0
 margin_bottom = 112.0
 rect_min_size = Vector2( 128, 48 )
 size_flags_horizontal = 10
+text = "32"
 
 [node name="SquareCheckBox" type="CheckBox" parent="CenterC/PanelC/MarginC/VBoxC"]
 margin_top = 128.0

@@ -29,15 +29,15 @@ func _on_WidthLineEdit_text_changed(new_text):
 
 
 func _on_OK_pressed():
-	var new_width = width_edit.text.to_int()
-	var new_height = height_edit.text.to_int()
+	var width = width_edit.text.to_int()
+	var height = height_edit.text.to_int()
 	
-	if Math.is_value_in_range(new_width, 0, Image.MAX_WIDTH) and Math.is_value_in_range(new_height, 0, Image.MAX_HEIGHT):
-		emit_signal("ok_pressed", Vector2(new_width, new_height))
+	if Math.is_value_in_range(width, 0, Image.MAX_WIDTH) and Math.is_value_in_range(height, 0, Image.MAX_HEIGHT):
+		emit_signal("ok_pressed", Vector2(width, height))
 		hide()
 	else:
-		if not Math.is_value_in_range(new_width, 0, Image.MAX_WIDTH):
-			width_edit.text = "Invalid width"
-		if not Math.is_value_in_range(new_height, 0, Image.MAX_HEIGHT):
-			height_edit.text = "Invalid height"
+		if not Math.is_value_in_range(width, 0, Image.MAX_WIDTH):
+			width_edit.text = "Invalid"
+		if not Math.is_value_in_range(height, 0, Image.MAX_HEIGHT):
+			height_edit.text = "Invalid"
 		return

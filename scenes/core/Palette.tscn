@@ -1,18 +1,114 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=9 format=2]
 
+[ext_resource path="res://assets/graphics/transparent_bg.png" type="Texture" id=1]
 [ext_resource path="res://scenes/core/Palette.gd" type="Script" id=2]
+[ext_resource path="res://assets/graphics/icon_minus.png" type="Texture" id=4]
+[ext_resource path="res://assets/graphics/icon_plus.png" type="Texture" id=5]
 
-[node name="Palette" type="ScrollContainer"]
-margin_right = 128.0
-margin_bottom = 536.0
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.133333, 0.164706, 0.188235, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_bottom = 2
+border_color = Color( 0.109804, 1, 0.6, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_bottom = 2
+border_color = Color( 0.811765, 0.811765, 0.811765, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="Palette" type="VBoxContainer"]
+margin_right = 104.0
+margin_bottom = 720.0
 size_flags_vertical = 3
-scroll_horizontal_enabled = false
+custom_constants/separation = 16
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GridC" type="GridContainer" parent="."]
+[node name="PanelC" type="PanelContainer" parent="."]
+margin_right = 104.0
+margin_bottom = 592.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 10 )
+
+[node name="ScrollC" type="ScrollContainer" parent="PanelC"]
+margin_right = 104.0
+margin_bottom = 592.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridC" type="GridContainer" parent="PanelC/ScrollC"]
 custom_constants/vseparation = 4
 custom_constants/hseparation = 4
 columns = 3
+
+[node name="CurrentColor" type="Button" parent="."]
+margin_top = 608.0
+margin_right = 104.0
+margin_bottom = 656.0
+rect_min_size = Vector2( 48, 48 )
+size_flags_horizontal = 3
+size_flags_vertical = 4
+custom_styles/hover = SubResource( 8 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="CheckedRect" type="TextureRect" parent="CurrentColor"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxC" type="HBoxContainer" parent="."]
+margin_top = 672.0
+margin_right = 104.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 0, 48 )
+custom_constants/separation = 8
+alignment = 1
+
+[node name="Add" type="Button" parent="HBoxC"]
+margin_right = 48.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
+icon = ExtResource( 5 )
+expand_icon = true
+
+[node name="Delete" type="Button" parent="HBoxC"]
+margin_left = 56.0
+margin_right = 104.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
+icon = ExtResource( 4 )
+expand_icon = true
+
+[connection signal="pressed" from="CurrentColor" to="." method="_on_CurrentColor_pressed"]
+[connection signal="pressed" from="HBoxC/Add" to="." method="_on_Add_pressed"]
+[connection signal="pressed" from="HBoxC/Delete" to="." method="_on_Delete_pressed"]

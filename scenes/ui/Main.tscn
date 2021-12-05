@@ -1,14 +1,19 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://tres/theme_dark.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/ui/WindowOpenImage.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/core/Editor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/ui/WindowAbout.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/ui/Main.gd" type="Script" id=4]
 [ext_resource path="res://scenes/ui/WindowImageSize.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/ui/WindowExport.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/ui/WindowNewImage.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/ui/CustomColorPicker.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/ui/CustomPopup.tscn" type="PackedScene" id=11]
 
 [sub_resource type="StyleBoxEmpty" id=1]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
 
 [node name="Main" type="Panel"]
 anchor_right = 1.0
@@ -99,89 +104,84 @@ margin_bottom = 64.0
 size_flags_horizontal = 3
 tab_align = 0
 
-[node name="TabC" type="TabContainer" parent="VBoxC"]
+[node name="Home" type="PanelContainer" parent="VBoxC" groups=["home"]]
 margin_top = 64.0
 margin_right = 1280.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-tabs_visible = false
-
-[node name="Home" type="PanelContainer" parent="VBoxC/TabC"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 8.0
-margin_top = 8.0
-margin_right = -8.0
-margin_bottom = -8.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
 custom_styles/panel = SubResource( 1 )
 
-[node name="HBoxC" type="HBoxContainer" parent="VBoxC/TabC/Home"]
-margin_right = 1264.0
-margin_bottom = 640.0
+[node name="HBoxC" type="HBoxContainer" parent="VBoxC/Home"]
+margin_left = 8.0
+margin_right = 1272.0
+margin_bottom = 648.0
 
-[node name="VBoxC1" type="VBoxContainer" parent="VBoxC/TabC/Home/HBoxC"]
+[node name="VBoxC1" type="VBoxContainer" parent="VBoxC/Home/HBoxC"]
 margin_right = 628.0
-margin_bottom = 640.0
+margin_bottom = 648.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/separation = 16
+alignment = 1
 
-[node name="New" type="Button" parent="VBoxC/TabC/Home/HBoxC/VBoxC1"]
-margin_right = 128.0
-margin_bottom = 48.0
+[node name="New" type="Button" parent="VBoxC/Home/HBoxC/VBoxC1"]
+margin_left = 250.0
+margin_top = 236.0
+margin_right = 378.0
+margin_bottom = 284.0
 rect_min_size = Vector2( 128, 48 )
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 text = "New..."
-align = 0
 
-[node name="Open" type="Button" parent="VBoxC/TabC/Home/HBoxC/VBoxC1"]
-margin_top = 56.0
-margin_right = 128.0
-margin_bottom = 104.0
+[node name="Open" type="Button" parent="VBoxC/Home/HBoxC/VBoxC1"]
+margin_left = 250.0
+margin_top = 300.0
+margin_right = 378.0
+margin_bottom = 348.0
 rect_min_size = Vector2( 128, 48 )
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 text = "Open..."
-align = 0
 
-[node name="DropTip" type="Label" parent="VBoxC/TabC/Home/HBoxC/VBoxC1"]
-margin_top = 112.0
+[node name="DropTip" type="Label" parent="VBoxC/Home/HBoxC/VBoxC1"]
+margin_top = 364.0
 margin_right = 628.0
-margin_bottom = 640.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "Drop images from your OS"
+margin_bottom = 412.0
+text = "You can quickly open an image
+by dropping it from your OS."
 align = 1
 valign = 1
 
-[node name="VBoxC2" type="VBoxContainer" parent="VBoxC/TabC/Home/HBoxC"]
+[node name="VBoxC2" type="VBoxContainer" parent="VBoxC/Home/HBoxC"]
 margin_left = 636.0
 margin_right = 1264.0
-margin_bottom = 640.0
+margin_bottom = 648.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="NewsLabel" type="Label" parent="VBoxC/TabC/Home/HBoxC/VBoxC2"]
+[node name="NewsLabel" type="Label" parent="VBoxC/Home/HBoxC/VBoxC2"]
 margin_right = 628.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 0, 48 )
 text = "News"
 valign = 1
 
-[node name="NewsList" type="ItemList" parent="VBoxC/TabC/Home/HBoxC/VBoxC2"]
+[node name="NewsList" type="ItemList" parent="VBoxC/Home/HBoxC/VBoxC2"]
 margin_top = 56.0
 margin_right = 628.0
-margin_bottom = 640.0
+margin_bottom = 648.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+items = [ "PixE v1.0.0 released!", null, false ]
 
-[node name="New" parent="VBoxC/TabC" instance=ExtResource( 3 )]
+[node name="TabC" type="TabContainer" parent="VBoxC"]
 visible = false
-margin_left = 8.0
-margin_top = 8.0
-margin_right = -8.0
-margin_bottom = -8.0
+margin_top = 392.0
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tabs_visible = false
 
 [node name="WindowNewImage" parent="." instance=ExtResource( 7 )]
 visible = false
@@ -195,8 +195,44 @@ visible = false
 [node name="WindowImageSize" parent="." instance=ExtResource( 5 )]
 visible = false
 
+[node name="WindowColorPicker" parent="." instance=ExtResource( 11 )]
+visible = false
+
+[node name="CenterC" type="CenterContainer" parent="WindowColorPicker"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelC" type="PanelContainer" parent="WindowColorPicker/CenterC"]
+margin_left = 640.0
+margin_top = 360.0
+margin_right = 640.0
+margin_bottom = 360.0
+
+[node name="MarginC" type="MarginContainer" parent="WindowColorPicker/CenterC/PanelC"]
+margin_right = 310.0
+margin_bottom = 528.0
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+
+[node name="ColorPicker" parent="WindowColorPicker/CenterC/PanelC/MarginC" instance=ExtResource( 10 )]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 302.0
+margin_bottom = 520.0
+
+[node name="WindowAbout" parent="." instance=ExtResource( 3 )]
+visible = false
+
 [connection signal="tab_changed" from="VBoxC/MenuBar/Tabs" to="." method="_on_Tabs_tab_changed"]
 [connection signal="tab_close" from="VBoxC/MenuBar/Tabs" to="." method="_on_Tabs_tab_close"]
-[connection signal="pressed" from="VBoxC/TabC/Home/HBoxC/VBoxC1/New" to="." method="_on_New_pressed"]
-[connection signal="pressed" from="VBoxC/TabC/Home/HBoxC/VBoxC1/Open" to="." method="_on_Open_pressed"]
+[connection signal="pressed" from="VBoxC/Home/HBoxC/VBoxC1/New" to="." method="_on_New_pressed"]
+[connection signal="pressed" from="VBoxC/Home/HBoxC/VBoxC1/Open" to="." method="_on_Open_pressed"]
+[connection signal="ok_pressed" from="WindowNewImage" to="." method="_on_WindowNewImage_ok_pressed"]
 [connection signal="size_changed" from="WindowImageSize" to="." method="_on_WindowImageSize_size_changed"]
+[connection signal="color_changed" from="WindowColorPicker/CenterC/PanelC/MarginC/ColorPicker" to="." method="_on_ColorPicker_color_changed"]

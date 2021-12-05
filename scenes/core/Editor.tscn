@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://tres/theme_dark.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/core/Canvas.tscn" type="PackedScene" id=2]
@@ -13,11 +13,10 @@
 [ext_resource path="res://assets/graphics/icon_move.png" type="Texture" id=11]
 [ext_resource path="res://assets/graphics/icon_bucket.png" type="Texture" id=12]
 [ext_resource path="res://scenes/core/ViewportContainer.gd" type="Script" id=13]
-[ext_resource path="res://scenes/ui/CustomColorPicker.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/core/Grid.gd" type="Script" id=14]
 [ext_resource path="res://assets/graphics/icon_copy.png" type="Texture" id=15]
 [ext_resource path="res://scenes/ui/TouchPad.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/graphics/icon_undo.png" type="Texture" id=17]
-[ext_resource path="res://scenes/ui/CustomPopup.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/graphics/icon_redo.png" type="Texture" id=19]
 [ext_resource path="res://assets/graphics/icon_grid.png" type="Texture" id=20]
 [ext_resource path="res://scenes/ui/CanvasOverlay.tscn" type="PackedScene" id=21]
@@ -29,30 +28,10 @@
 [ext_resource path="res://assets/graphics/icon_paste.png" type="Texture" id=27]
 [ext_resource path="res://assets/graphics/icon_cut.png" type="Texture" id=28]
 
-[sub_resource type="StyleBoxEmpty" id=4]
-
-[sub_resource type="StyleBoxFlat" id=8]
-bg_color = Color( 0, 0, 0, 1 )
-border_width_bottom = 2
-border_color = Color( 0.4, 0.8, 1, 1 )
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-
-[sub_resource type="StyleBoxEmpty" id=7]
-
-[sub_resource type="StyleBoxFlat" id=9]
-bg_color = Color( 0, 0, 0, 1 )
-border_width_bottom = 2
-border_color = Color( 0.811765, 0.811765, 0.811765, 1 )
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
+[sub_resource type="StyleBoxEmpty" id=11]
 
 [sub_resource type="StyleBoxFlat" id=10]
-bg_color = Color( 0.145098, 0.137255, 0.188235, 1 )
+bg_color = Color( 0.133333, 0.164706, 0.188235, 1 )
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
@@ -60,11 +39,11 @@ corner_radius_bottom_left = 2
 
 [sub_resource type="ButtonGroup" id=5]
 
-[node name="Editor" type="PanelContainer"]
+[node name="Editor" type="PanelContainer" groups=["editor"]]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 11 )
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -84,50 +63,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 8
 
-[node name="Palette" type="VBoxContainer" parent="VBoxC/OpArea"]
-margin_right = 104.0
-margin_bottom = 720.0
-size_flags_vertical = 3
-custom_constants/separation = 16
-
-[node name="Palette" parent="VBoxC/OpArea/Palette" instance=ExtResource( 5 )]
-margin_right = 104.0
-margin_bottom = 592.0
-
-[node name="Color" type="Button" parent="VBoxC/OpArea/Palette"]
-margin_top = 608.0
-margin_right = 104.0
-margin_bottom = 656.0
-rect_min_size = Vector2( 48, 48 )
-size_flags_horizontal = 3
-size_flags_vertical = 4
-custom_styles/hover = SubResource( 8 )
-custom_styles/pressed = SubResource( 8 )
-custom_styles/focus = SubResource( 7 )
-custom_styles/normal = SubResource( 9 )
-
-[node name="HBoxC" type="HBoxContainer" parent="VBoxC/OpArea/Palette"]
-margin_top = 672.0
-margin_right = 104.0
-margin_bottom = 720.0
-rect_min_size = Vector2( 0, 48 )
-custom_constants/separation = 8
-alignment = 1
-
-[node name="Add" type="Button" parent="VBoxC/OpArea/Palette/HBoxC"]
-margin_right = 48.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 48, 48 )
-icon = ExtResource( 25 )
-expand_icon = true
-
-[node name="Delete" type="Button" parent="VBoxC/OpArea/Palette/HBoxC"]
-margin_left = 56.0
-margin_right = 104.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 48, 48 )
-icon = ExtResource( 24 )
-expand_icon = true
+[node name="Palette" parent="VBoxC/OpArea" instance=ExtResource( 5 )]
 
 [node name="VBoxC" type="VBoxContainer" parent="VBoxC/OpArea"]
 margin_left = 112.0
@@ -184,13 +120,14 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC"]
-margin_right = 1112.0
-margin_bottom = 608.0
+margin_right = 2000.0
+margin_bottom = 2000.0
+rect_min_size = Vector2( 2000, 2000 )
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Bg" type="TextureRect" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel"]
+[node name="CanvasBacklay" type="TextureRect" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel"]
 margin_left = 494.0
 margin_top = 278.0
 margin_right = 526.0
@@ -204,7 +141,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ViewportC" type="ViewportContainer" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/Bg"]
+[node name="ViewportC" type="ViewportContainer" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBacklay"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 32, 32 )
@@ -215,7 +152,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Viewport" type="Viewport" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/Bg/ViewportC"]
+[node name="Viewport" type="Viewport" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBacklay/ViewportC"]
 size = Vector2( 32, 32 )
 transparent_bg = true
 handle_input_locally = false
@@ -223,19 +160,30 @@ render_target_clear_mode = 1
 render_target_update_mode = 3
 gui_disable_input = true
 
-[node name="Canvas" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/Bg/ViewportC/Viewport" instance=ExtResource( 2 )]
+[node name="Canvas" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBacklay/ViewportC/Viewport" instance=ExtResource( 2 )]
 
-[node name="CanvasOverlay" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel" instance=ExtResource( 21 )]
-mouse_filter = 2
-
-[node name="ReferenceRect" type="ReferenceRect" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel"]
+[node name="Grid" type="TextureRect" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBacklay"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-editor_only = false
+script = ExtResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="EditorOverlay" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel" instance=ExtResource( 21 )]
+mouse_filter = 2
+
+[node name="DebugMousePosition" type="Position2D" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel"]
+position = Vector2( 523, 316 )
+
+[node name="Line2D" type="Line2D" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/DebugMousePosition"]
+points = PoolVector2Array( 16, 0, -16, 0 )
+width = 1.0
+
+[node name="Line2D2" type="Line2D" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/DebugMousePosition"]
+points = PoolVector2Array( 0, 16, 0, -16 )
+width = 1.0
 
 [node name="InfoBar" type="HBoxContainer" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC"]
 margin_top = 616.0
@@ -253,7 +201,7 @@ text = "0,0"
 align = 1
 valign = 1
 
-[node name="ImgSizeLabel" type="Label" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/InfoBar"]
+[node name="SelectSizeLabel" type="Label" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/InfoBar"]
 margin_left = 88.0
 margin_right = 168.0
 margin_bottom = 48.0
@@ -270,12 +218,17 @@ margin_right = 224.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 0 )
 
+[node name="Seperator" type="Control" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/InfoBar"]
+margin_left = 232.0
+margin_right = 776.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+
 [node name="UndoButton" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/InfoBar"]
 margin_left = 784.0
 margin_right = 832.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 0 )
-size_flags_horizontal = 10
 icon = ExtResource( 17 )
 expand_icon = true
 
@@ -482,41 +435,6 @@ mouse_filter = 2
 [node name="TouchPad" parent="FreeZone" instance=ExtResource( 16 )]
 visible = false
 
-[node name="ColorPickerPopup" parent="." instance=ExtResource( 18 )]
-visible = false
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 1280.0
-margin_bottom = 720.0
-
-[node name="CenterC" type="CenterContainer" parent="ColorPickerPopup"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PanelC" type="PanelContainer" parent="ColorPickerPopup/CenterC"]
-margin_left = 640.0
-margin_top = 360.0
-margin_right = 640.0
-margin_bottom = 360.0
-
-[node name="MarginC" type="MarginContainer" parent="ColorPickerPopup/CenterC/PanelC"]
-margin_right = 310.0
-margin_bottom = 528.0
-custom_constants/margin_right = 8
-custom_constants/margin_top = 8
-custom_constants/margin_left = 8
-custom_constants/margin_bottom = 8
-
-[node name="ColorPicker" parent="ColorPickerPopup/CenterC/PanelC/MarginC" instance=ExtResource( 14 )]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 302.0
-margin_bottom = 520.0
-
 [node name="CenterC" type="CenterContainer" parent="."]
 margin_right = 1280.0
 margin_bottom = 720.0
@@ -528,25 +446,27 @@ margin_top = 344.0
 margin_right = 648.0
 margin_bottom = 376.0
 
-[connection signal="color_selected" from="VBoxC/OpArea/Palette/Palette" to="." method="_on_Palette_color_selected"]
-[connection signal="pressed" from="VBoxC/OpArea/Palette/Color" to="." method="_on_Color_pressed"]
-[connection signal="pressed" from="VBoxC/OpArea/Palette/HBoxC/Add" to="." method="_on_Add_pressed"]
+[connection signal="color_selected" from="VBoxC/OpArea/Palette" to="." method="_on_Palette_color_selected"]
+[connection signal="current_color_button_pressed" from="VBoxC/OpArea/Palette" to="." method="_on_Palette_current_color_button_pressed"]
+[connection signal="gui_input" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC" to="." method="_on_ScrollC_gui_input"]
 [connection signal="gui_input" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel" to="." method="_on_Panel_gui_input"]
-[connection signal="gui_input" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/Bg/ViewportC" to="." method="_on_ViewportContainer_gui_input"]
-[connection signal="bursh_moved_by_mouse" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/Bg/ViewportC/Viewport/Canvas" to="." method="_on_Canvas_bursh_moved_by_mouse"]
-[connection signal="draw" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/Bg/ViewportC/Viewport/Canvas" to="." method="_on_Canvas_draw"]
-[connection signal="stroke_finished" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/Bg/ViewportC/Viewport/Canvas" to="." method="_on_Canvas_stroke_finished"]
+[connection signal="gui_input" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBacklay/ViewportC" to="." method="_on_ViewportContainer_gui_input"]
+[connection signal="bursh_moved_by_mouse" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBacklay/ViewportC/Viewport/Canvas" to="." method="_on_Canvas_bursh_moved_by_mouse"]
+[connection signal="draw" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBacklay/ViewportC/Viewport/Canvas" to="." method="_on_Canvas_draw"]
+[connection signal="stroke_finished" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBacklay/ViewportC/Viewport/Canvas" to="." method="_on_Canvas_stroke_finished"]
 [connection signal="pressed" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/InfoBar/UndoButton" to="." method="_on_UndoButton_pressed"]
 [connection signal="pressed" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/InfoBar/RedoButton" to="." method="_on_RedoButton_pressed"]
 [connection signal="pressed" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/MarginContainer/HBoxContainer/ZoomOut" to="." method="_on_ZoomOut_pressed"]
 [connection signal="text_entered" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/MarginContainer/HBoxContainer/ZoomEdit" to="." method="_on_ZoomEdit_text_entered"]
 [connection signal="pressed" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/MarginContainer/HBoxContainer/ZoomIn" to="." method="_on_ZoomIn_pressed"]
+[connection signal="toggled" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/MarginContainer/HBoxContainer/ShowAxes" to="." method="_on_ShowAxes_toggled"]
+[connection signal="toggled" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/MarginContainer/HBoxContainer/ShowGrid" to="." method="_on_ShowGrid_toggled"]
+[connection signal="toggled" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/MarginContainer/HBoxContainer/ShowChecked" to="." method="_on_ShowChecked_toggled"]
 [connection signal="pressed" from="VBoxC/OpArea/VBoxC/HBoxC/BrushTools/VBoxC/Select" to="." method="_on_Select_pressed"]
-[connection signal="toggled" from="VBoxC/OpArea/VBoxC/HBoxC/BrushTools/VBoxC/Pencil" to="." method="_on_Pencil_toggled"]
-[connection signal="toggled" from="VBoxC/OpArea/VBoxC/HBoxC/BrushTools/VBoxC/Eraser" to="." method="_on_Eraser_toggled"]
+[connection signal="pressed" from="VBoxC/OpArea/VBoxC/HBoxC/BrushTools/VBoxC/Pencil" to="." method="_on_Pencil_pressed"]
+[connection signal="pressed" from="VBoxC/OpArea/VBoxC/HBoxC/BrushTools/VBoxC/Eraser" to="." method="_on_Eraser_pressed"]
 [connection signal="pressed" from="VBoxC/OpArea/VBoxC/HBoxC/BrushTools/VBoxC/Eyedropper" to="." method="_on_Eyedropper_pressed"]
 [connection signal="pressed" from="VBoxC/OpArea/VBoxC/HBoxC/BrushTools/VBoxC/Move" to="." method="_on_Move_pressed"]
 [connection signal="pressed" from="VBoxC/OpArea/VBoxC/HBoxC/BrushTools/VBoxC/Bucket" to="." method="_on_Bucket_pressed"]
 [connection signal="pressed" from="VBoxC/OpArea/VBoxC/HBoxC/BrushTools/VBoxC/Line" to="." method="_on_Line_pressed"]
 [connection signal="touch_pad_operated" from="FreeZone/TouchPad" to="." method="_on_TouchPad_touch_pad_operated"]
-[connection signal="color_changed" from="ColorPickerPopup/CenterC/PanelC/MarginC/ColorPicker" to="." method="_on_ColorPicker_color_changed"]

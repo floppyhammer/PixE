@@ -1,4 +1,5 @@
 extends Control
+class_name DrawingCanvas
 
 var IMAGE_SIZE = Vector2(32, 32)
 

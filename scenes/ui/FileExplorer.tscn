@@ -42,7 +42,7 @@ __meta__ = {
 margin_right = 413.0
 margin_bottom = 48.0
 
-[node name="Back" type="Button" parent="MarginC/VBoxC/HBoxC"]
+[node name="Backward" type="Button" parent="MarginC/VBoxC/HBoxC"]
 margin_right = 48.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
@@ -57,7 +57,7 @@ rect_min_size = Vector2( 48, 48 )
 icon = ExtResource( 6 )
 expand_icon = true
 
-[node name="Up" type="Button" parent="MarginC/VBoxC/HBoxC"]
+[node name="Upward" type="Button" parent="MarginC/VBoxC/HBoxC"]
 margin_left = 104.0
 margin_right = 152.0
 margin_bottom = 48.0
@@ -73,32 +73,51 @@ rect_min_size = Vector2( 48, 48 )
 icon = ExtResource( 3 )
 expand_icon = true
 
-[node name="TreeOptionButton" type="OptionButton" parent="MarginC/VBoxC/HBoxC"]
-margin_left = 208.0
+[node name="HBoxC4" type="HBoxContainer" parent="MarginC/VBoxC"]
+margin_top = 52.0
 margin_right = 413.0
+margin_bottom = 100.0
+
+[node name="DiskOption" type="OptionButton" parent="MarginC/VBoxC/HBoxC4"]
+margin_right = 48.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
+text = "C:/"
+
+[node name="AddressEdit" type="LineEdit" parent="MarginC/VBoxC/HBoxC4"]
+margin_left = 52.0
+margin_right = 361.0
 margin_bottom = 48.0
 size_flags_horizontal = 3
+
+[node name="Go" type="Button" parent="MarginC/VBoxC/HBoxC4"]
+margin_left = 365.0
+margin_right = 413.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 48, 48 )
+text = ">"
 
 [node name="FileTree" parent="MarginC/VBoxC" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 52.0
+margin_top = 104.0
 margin_right = 413.0
-margin_bottom = 293.0
+margin_bottom = 321.0
 size_flags_vertical = 3
 
-[node name="HBoxC2" type="HBoxContainer" parent="MarginC/VBoxC"]
+[node name="FileNameBox" type="HBoxContainer" parent="MarginC/VBoxC"]
+visible = false
 margin_top = 297.0
 margin_right = 413.0
 margin_bottom = 321.0
 
-[node name="Label" type="Label" parent="MarginC/VBoxC/HBoxC2"]
+[node name="Label" type="Label" parent="MarginC/VBoxC/FileNameBox"]
 margin_top = 5.0
 margin_right = 67.0
 margin_bottom = 19.0
 text = "File name:"
 
-[node name="LineEdit" type="LineEdit" parent="MarginC/VBoxC/HBoxC2"]
+[node name="LineEdit" type="LineEdit" parent="MarginC/VBoxC/FileNameBox"]
 margin_left = 71.0
 margin_right = 413.0
 margin_bottom = 24.0
@@ -125,4 +144,7 @@ margin_bottom = 48.0
 rect_min_size = Vector2( 80, 0 )
 text = "Cancel"
 
+[connection signal="pressed" from="MarginC/VBoxC/HBoxC/Upward" to="." method="_on_Upward_pressed"]
+[connection signal="pressed" from="MarginC/VBoxC/HBoxC/NewFolder" to="." method="_on_NewFolder_pressed"]
+[connection signal="current_dir_changed" from="MarginC/VBoxC/FileTree" to="." method="_on_FileTree_current_dir_changed"]
 [connection signal="pressed" from="MarginC/VBoxC/HBoxC3/Cancel" to="." method="_on_Cancel_pressed"]
