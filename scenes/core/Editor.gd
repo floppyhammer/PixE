@@ -3,11 +3,14 @@ extends Control
 onready var pen_pos_label = $VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/InfoBar/PenPosLabel
 onready var scroll_c = $VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC
 onready var scroll_panel = scroll_c.get_node("Panel")
-onready var canvas_bg = scroll_panel.get_node("CanvasBacklay")
+onready var canvas_bg = scroll_panel.get_node("CanvasBg")
 onready var canvas_vp_container = canvas_bg.get_node("ViewportC")
 onready var canvas_viewport = canvas_vp_container.get_node("Viewport")
 onready var canvas = canvas_viewport.get_node("Canvas")
-onready var canvas_overlay = scroll_panel.get_node("EditorOverlay")
+
+onready var axes = scroll_panel.get_node("Axes")
+onready var grid = canvas_bg.get_node("Grid")
+onready var checked = canvas_bg.get_node("Checked")
 
 onready var zoom_edit = $VBoxC/OpArea/VBoxC/HBoxC/Control2/MarginContainer/HBoxContainer/ZoomEdit
 onready var palette = $VBoxC/OpArea/Palette
@@ -36,6 +39,8 @@ var editor_state = {
 
 
 func setup(p_image_size : Vector2, p_initial_image : Image = null):
+	Logger.info("Editor setup with size " + str(p_image_size), "Editor")
+	
 	canvas.IMAGE_SIZE = p_image_size
 	
 	if p_initial_image:
@@ -51,10 +56,11 @@ func setup(p_image_size : Vector2, p_initial_image : Image = null):
 	
 	# Load editor state.
 	change_zoom(editor_state.zoom)
+	
 	canvas.change_brush_mode(editor_state.brush)
 	
-	# Update Canvas overlay.
-	canvas_overlay.update_overlay(editor_state)
+	# Update axes.
+	axes.xupdate(editor_state)
 	
 	_on_Pencil_pressed()
 
@@ -89,13 +95,11 @@ func _on_Canvas_draw():
 
 
 func undo_canvas():
-	if canvas.undo():
-		canvas_viewport.render_target_clear_mode = canvas_viewport.CLEAR_MODE_ONLY_NEXT_FRAME
+	canvas.undo()
 
 
 func redo_canvas():
-	if canvas.redo():
-		canvas_viewport.render_target_clear_mode = canvas_viewport.CLEAR_MODE_ONLY_NEXT_FRAME
+	canvas.redo()
 
 
 func _on_ColorPicker_color_changed(new_color : Color):
@@ -225,9 +229,9 @@ func change_zoom(direction : int, exact_zoom : float = 0, mouse_pos : Vector2 = 
 	
 	# Keep the current pixel unmoved.
 	if mouse_pos.x > -1 and mouse_pos.y > -1:
-
 		var pos_mark = $VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/DebugMousePosition
 		
+		# Mouse postion relative to the center of the canvas.
 		var mouse_pos_offset = (mouse_pos_ratio_on_canvas - Vector2.ONE * 0.5) * real_canvas_bg_size
 		
 		# We just need to keep this point fixed on the scroll container coordinates.
@@ -247,6 +251,18 @@ func change_zoom(direction : int, exact_zoom : float = 0, mouse_pos : Vector2 = 
 		scroll_c.scroll_horizontal -= diff.x
 		scroll_c.scroll_vertical -= diff.y
 	# -------------------------------------------
+
+
+func _center_canvas():
+	var scroll_c_size = scroll_c.rect_size
+	var scroll_panel_size = scroll_panel.rect_size
+	
+	var h = (scroll_panel_size.x - scroll_c_size.x) * 0.5
+	var v = (scroll_panel_size.y - scroll_c_size.y) * 0.5
+	
+	# Add offset.
+	scroll_c.set_deferred("scroll_horizontal", h)
+	scroll_c.set_deferred("scroll_vertical", v)
 
 
 func _info_bar_hide_brush_specific_nodes():
@@ -319,23 +335,19 @@ func _on_ShowAxes_toggled(button_pressed):
 	editor_state.axes.show = button_pressed
 	
 	# Update Canvas overlay.
-	canvas_overlay.update_overlay(editor_state)
+	axes.xupdate(editor_state)
 
 
 func _on_ShowGrid_toggled(button_pressed):
 	editor_state.grid.show = button_pressed
 	
-	$VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBacklay/Grid.visible = button_pressed
-	
-	# Update Canvas overlay.
-	canvas_overlay.update_overlay(editor_state)
+	grid.visible = button_pressed
 
 
 func _on_ShowChecked_toggled(button_pressed):
 	editor_state.checked.show = button_pressed
 	
-	# Update Canvas overlay.
-	canvas_overlay.update_overlay(editor_state)
+	checked.visible = button_pressed
 
 
 func change_palette_current_color(new_color : Color):
@@ -370,3 +382,12 @@ func _scroll_panel_pos_to_scroll_c(pos : Vector2) -> Vector2:
 	new_pos.y = pos.y - scroll_c.scroll_vertical
 	
 	return new_pos
+
+
+func _on_ScrollC_item_rect_changed():
+	_center_canvas()
+
+
+func _on_Canvas_need_to_redraw():
+	canvas_viewport.render_target_clear_mode = canvas_viewport.CLEAR_MODE_ONLY_NEXT_FRAME
+

@@ -47,6 +47,8 @@ func _reload_menu_bar():
 	popup_menu.add_item("Close")
 	popup_menu.add_item("Close All")
 	popup_menu.add_separator("")
+	popup_menu.add_item("Settings...")
+	popup_menu.add_separator("")
 	popup_menu.add_item("Quit")
 	popup_menu.connect("index_pressed", self, "_file_mb_pressed")
 
@@ -72,12 +74,10 @@ func _reload_menu_bar():
 	
 	popup_menu = view_mb.get_popup()
 	popup_menu.clear()
-	popup_menu.add_check_item("Axes")
-	popup_menu.add_check_item("Grid")
-	popup_menu.add_check_item("Checked")
+#	popup_menu.add_check_item("Axes")
+#	popup_menu.add_check_item("Grid")
+#	popup_menu.add_check_item("Checked")
 	popup_menu.add_item("Center Image")
-	popup_menu.add_separator("")
-	popup_menu.add_item("Settings...")
 	
 	popup_menu = help_mb.get_popup()
 	popup_menu.clear()
@@ -124,6 +124,8 @@ func _file_mb_pressed(index):
 				_on_Tabs_tab_close(0)
 			current_editor = null
 		9:
+			pass
+		11:
 			get_tree().quit()
 
 
@@ -173,9 +175,8 @@ func _add_editor(img_size : Vector2, file_name : String, loaded_image):
 	if img_size.x == 0 or img_size.y == 0: return
 	
 	var new_editor = editor_scene.instance()
-	new_editor.call_deferred("setup", img_size, loaded_image)
-	
 	tab_c.add_child(new_editor)
+	new_editor.call_deferred("setup", img_size, loaded_image)
 	tabs.add_tab(file_name)
 	tab_c.current_tab = tab_c.get_tab_count() - 1
 	tabs.current_tab = tabs.get_tab_count() - 1

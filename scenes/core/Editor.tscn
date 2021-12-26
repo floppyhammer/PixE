@@ -19,7 +19,7 @@
 [ext_resource path="res://assets/graphics/icon_undo.png" type="Texture" id=17]
 [ext_resource path="res://assets/graphics/icon_redo.png" type="Texture" id=19]
 [ext_resource path="res://assets/graphics/icon_grid.png" type="Texture" id=20]
-[ext_resource path="res://scenes/ui/CanvasOverlay.tscn" type="PackedScene" id=21]
+[ext_resource path="res://scenes/ui/Axes.tscn" type="PackedScene" id=21]
 [ext_resource path="res://assets/graphics/icon_checked.png" type="Texture" id=22]
 [ext_resource path="res://assets/graphics/icon_axes.png" type="Texture" id=23]
 [ext_resource path="res://assets/graphics/icon_minus.png" type="Texture" id=24]
@@ -127,12 +127,21 @@ mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="CanvasBacklay" type="TextureRect" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel"]
-margin_left = 494.0
-margin_top = 278.0
-margin_right = 526.0
-margin_bottom = 310.0
+[node name="CanvasBg" type="ColorRect" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel"]
+margin_left = 441.0
+margin_top = 238.0
+margin_right = 473.0
+margin_bottom = 270.0
 rect_scale = Vector2( 5, 5 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Checked" type="TextureRect" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBg"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 3 )
@@ -141,7 +150,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ViewportC" type="ViewportContainer" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBacklay"]
+[node name="ViewportC" type="ViewportContainer" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBg"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 32, 32 )
@@ -152,7 +161,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Viewport" type="Viewport" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBacklay/ViewportC"]
+[node name="Viewport" type="Viewport" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBg/ViewportC"]
 size = Vector2( 32, 32 )
 transparent_bg = true
 handle_input_locally = false
@@ -160,18 +169,16 @@ render_target_clear_mode = 1
 render_target_update_mode = 3
 gui_disable_input = true
 
-[node name="Canvas" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBacklay/ViewportC/Viewport" instance=ExtResource( 2 )]
+[node name="Canvas" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBg/ViewportC/Viewport" instance=ExtResource( 2 )]
 
-[node name="Grid" type="TextureRect" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBacklay"]
+[node name="Grid" type="Control" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBg"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 14 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="EditorOverlay" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel" instance=ExtResource( 21 )]
+[node name="Axes" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel" instance=ExtResource( 21 )]
 mouse_filter = 2
 
 [node name="DebugMousePosition" type="Position2D" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel"]
@@ -342,6 +349,7 @@ margin_right = 1088.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
 toggle_mode = true
+pressed = true
 icon = ExtResource( 22 )
 expand_icon = true
 
@@ -449,11 +457,13 @@ margin_bottom = 376.0
 [connection signal="color_selected" from="VBoxC/OpArea/Palette" to="." method="_on_Palette_color_selected"]
 [connection signal="current_color_button_pressed" from="VBoxC/OpArea/Palette" to="." method="_on_Palette_current_color_button_pressed"]
 [connection signal="gui_input" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC" to="." method="_on_ScrollC_gui_input"]
+[connection signal="item_rect_changed" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC" to="." method="_on_ScrollC_item_rect_changed"]
 [connection signal="gui_input" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel" to="." method="_on_Panel_gui_input"]
-[connection signal="gui_input" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBacklay/ViewportC" to="." method="_on_ViewportContainer_gui_input"]
-[connection signal="bursh_moved_by_mouse" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBacklay/ViewportC/Viewport/Canvas" to="." method="_on_Canvas_bursh_moved_by_mouse"]
-[connection signal="draw" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBacklay/ViewportC/Viewport/Canvas" to="." method="_on_Canvas_draw"]
-[connection signal="stroke_finished" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBacklay/ViewportC/Viewport/Canvas" to="." method="_on_Canvas_stroke_finished"]
+[connection signal="gui_input" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBg/ViewportC" to="." method="_on_ViewportContainer_gui_input"]
+[connection signal="bursh_moved_by_mouse" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBg/ViewportC/Viewport/Canvas" to="." method="_on_Canvas_bursh_moved_by_mouse"]
+[connection signal="draw" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBg/ViewportC/Viewport/Canvas" to="." method="_on_Canvas_draw"]
+[connection signal="need_to_redraw" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBg/ViewportC/Viewport/Canvas" to="." method="_on_Canvas_need_to_redraw"]
+[connection signal="stroke_finished" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/CanvasBg/ViewportC/Viewport/Canvas" to="." method="_on_Canvas_stroke_finished"]
 [connection signal="pressed" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/InfoBar/UndoButton" to="." method="_on_UndoButton_pressed"]
 [connection signal="pressed" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/InfoBar/RedoButton" to="." method="_on_RedoButton_pressed"]
 [connection signal="pressed" from="VBoxC/OpArea/VBoxC/HBoxC/Control2/MarginContainer/HBoxContainer/ZoomOut" to="." method="_on_ZoomOut_pressed"]

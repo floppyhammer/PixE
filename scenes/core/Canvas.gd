@@ -28,6 +28,10 @@ var brush_pos = Vector2.ZERO
 # Integer brush position.
 var snapped_brush_pos = Vector2.ZERO
 
+# Where the brush touches and leaves the canvas.
+var brush_start_pos = Vector2.ZERO
+var brush_end_pos = Vector2.ZERO
+
 # Only draw new dot when mouse moved.
 # Also, fix incontinuous pixels when moving the brush fast.
 var last_pixel : Vector2 # Snapped.
@@ -48,7 +52,12 @@ var need_to_redraw_cache = true
 # dropped before the actual rendering takes place.
 var tex = ImageTexture.new()
 
+# Once OP is finished, update image cache.
 signal stroke_finished
+
+# Clear viewport, redraw cache head, redraw pixel batch.
+signal need_to_redraw
+
 signal bursh_moved_by_mouse
 
 var custom_touch_input_info = {
@@ -73,6 +82,8 @@ func undo() -> bool:
 		
 		update()
 		
+		emit_signal("need_to_redraw")
+		
 		return true
 	else:
 		cache_head = 0
@@ -89,6 +100,8 @@ func redo() -> bool:
 		need_to_redraw_cache = true
 		
 		update()
+		
+		emit_signal("need_to_redraw")
 		
 		return true
 	else:
@@ -150,6 +163,8 @@ func receive_gui_input(event):
 			_handle_pencil(event)
 		BrushModes.EYEDROPPER:
 			_handle_eyedropper(event)
+		BrushModes.LINE:
+			_handle_line(event)
 
 
 func _handle_pencil(event):
@@ -222,7 +237,94 @@ func _handle_eyedropper(event):
 
 
 func _handle_line(event):
-	pass
+	if event is InputEventMouse:
+		if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
+			var snapped = Math.snap_to_pixel(event.position)
+			
+			# Start drawing line.
+			if event.pressed:
+				brush_start_pos = event.position
+				snapped_brush_pos = snapped
+
+			else: # Line is decided upon mouse release.
+				# If we did undo before, remove outdated images.
+				# Don't remove the first empty image.
+				if cache_head < img_cache.size() - 1:
+					img_cache.resize(cache_head + 1)
+				
+				brush_end_pos = event.position
+				
+				var start_pos_pixel_center = Math.snap_to_pixel(brush_start_pos) + Vector2(0.5, 0.5)
+				var end_pos_pixel_center = snapped + Vector2(0.5, 0.5)
+				
+				var pixels = Math.interpolate_pixels_along_line(start_pos_pixel_center, end_pos_pixel_center)
+				
+				# Remove pixels that contact two or more pixels.
+				var pixels_to_exclude = []
+#				for p0 in pixels:
+#					var vertical_contact_count = 0
+#					var horizontal_contact_count = 0
+#					for p1 in pixels:
+#						if p0 != p1 and p0.distance_to(p1) < 1.1:
+#							if p0.x != p1.x:
+#								horizontal_contact_count += 1
+#							if p0.y != p1.y:
+#								vertical_contact_count += 1
+#					if vertical_contact_count >= 1 and horizontal_contact_count >= 1:
+#						pixels_to_exclude.append(p0)
+				
+				pixel_batch.clear()
+				for p in pixels:
+					var point_center = p + Vector2.ONE * 0.5
+					var dis_to_line = Math.distance_from_point_to_line(start_pos_pixel_center, end_pos_pixel_center, point_center)
+					var m = (start_pos_pixel_center.y - end_pos_pixel_center.y) / (start_pos_pixel_center.x - end_pos_pixel_center.x)
+					print(dis_to_line)
+					var vertical_dis = (m * (point_center.x - start_pos_pixel_center.x) + start_pos_pixel_center.y)
+#					var above_line = point_center.y < vertical_dis
+#					if above_line:
+#						if vertical_dis < 0.5:
+#							_add_pixel_to_batch(p)
+#					else:
+#						if dis_to_line < 0.5:
+#							_add_pixel_to_batch(p)
+					if dis_to_line <= 0.5:
+						_add_pixel_to_batch(p)
+				
+				emit_signal("stroke_finished")
+				
+				# 1. Clean frame.
+				# 2. Draw things that exist before LINE operation.
+				# 3. Draw dragged line.
+				# 4. Update image cache.
+				update()
+		
+		# Drag.
+		if event is InputEventMouseMotion:
+			var snapped = Math.snap_to_pixel(event.position)
+			snapped_brush_pos = snapped
+			
+			var start_pos = Math.snap_to_pixel(last_pos) + Vector2(0.5, 0.5)
+			var end_pos = snapped + Vector2(0.5, 0.5)
+			
+			emit_signal("bursh_moved_by_mouse", event.position)
+			
+			if Input.is_mouse_button_pressed(BUTTON_LEFT):
+				# To avoid adding the same pixel when moving the brush
+				# inside the pixel.
+				if snapped != last_pixel:
+					var pixels = Math.interpolate_pixels_along_line(start_pos, end_pos)
+					
+					for p in pixels:
+						_add_pixel_to_batch(p)
+					
+					last_pixel = snapped
+					last_pos = event.position
+					
+					# 1. Clean frame.
+					# 2. Draw things that exist before LINE operation.
+					# 3. Draw dragged line.
+					# 4. Don't update image cache.
+					#update()
 
 
 func receive_touch_input(brush_pos, pushed, just_pushed, just_released):

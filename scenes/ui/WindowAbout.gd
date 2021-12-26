@@ -18,3 +18,7 @@ func _ready():
 
 func _on_WindowNewImage_pressed():
 	hide()
+
+
+func _on_WebsiteLink_pressed():
+	OS.shell_open("https://github.com/floppyhammer/PixE")

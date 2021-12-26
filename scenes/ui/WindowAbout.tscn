@@ -31,9 +31,9 @@ __meta__ = {
 }
 
 [node name="PanelC" type="PanelContainer" parent="CenterC"]
-margin_left = 336.0
+margin_left = 384.0
 margin_top = 104.0
-margin_right = 944.0
+margin_right = 896.0
 margin_bottom = 616.0
 rect_min_size = Vector2( 512, 512 )
 __meta__ = {
@@ -41,7 +41,7 @@ __meta__ = {
 }
 
 [node name="MarginC" type="MarginContainer" parent="CenterC/PanelC"]
-margin_right = 608.0
+margin_right = 512.0
 margin_bottom = 512.0
 custom_constants/margin_right = 16
 custom_constants/margin_top = 16
@@ -54,7 +54,7 @@ __meta__ = {
 [node name="VBoxC" type="VBoxContainer" parent="CenterC/PanelC/MarginC"]
 margin_left = 16.0
 margin_top = 16.0
-margin_right = 592.0
+margin_right = 496.0
 margin_bottom = 496.0
 custom_constants/separation = 16
 __meta__ = {
@@ -62,23 +62,23 @@ __meta__ = {
 }
 
 [node name="Logo" type="TextureRect" parent="CenterC/PanelC/MarginC/VBoxC"]
-margin_left = 224.0
-margin_right = 352.0
+margin_left = 176.0
+margin_right = 304.0
 margin_bottom = 128.0
 size_flags_horizontal = 6
 texture = ExtResource( 3 )
 
 [node name="VersionLabel" type="Label" parent="CenterC/PanelC/MarginC/VBoxC"]
 margin_top = 144.0
-margin_right = 576.0
+margin_right = 480.0
 margin_bottom = 168.0
-text = "PixE v1.0.0.alpha"
+text = "PixE 1.0.0.alpha"
 align = 1
 valign = 1
 
 [node name="Label" type="Label" parent="CenterC/PanelC/MarginC/VBoxC"]
 margin_top = 184.0
-margin_right = 576.0
+margin_right = 480.0
 margin_bottom = 400.0
 size_flags_vertical = 7
 text = "Thanks for using PixE!"
@@ -86,18 +86,21 @@ align = 1
 valign = 1
 
 [node name="WebsiteLink" type="LinkButton" parent="CenterC/PanelC/MarginC/VBoxC"]
+margin_left = 192.0
 margin_top = 416.0
-margin_right = 576.0
+margin_right = 288.0
 margin_bottom = 440.0
-text = "https://github.com/floppyhammer/PixE"
+size_flags_horizontal = 4
+text = "Github"
 
 [node name="CopyrightLabel" type="Label" parent="CenterC/PanelC/MarginC/VBoxC"]
 margin_top = 456.0
-margin_right = 576.0
+margin_right = 480.0
 margin_bottom = 480.0
 size_flags_vertical = 8
-text = "Copyright (C) 2021"
+text = "Copyleft (C) 2021"
 align = 1
 valign = 1
 
 [connection signal="pressed" from="." to="." method="_on_WindowNewImage_pressed"]
+[connection signal="pressed" from="CenterC/PanelC/MarginC/VBoxC/WebsiteLink" to="." method="_on_WebsiteLink_pressed"]

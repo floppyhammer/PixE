@@ -1,19 +1,20 @@
-extends TextureRect
+extends Control
+
+var image_size : Vector2 = Vector2(32, 32)
+var interval : int = 1
+var color = Color(1, 1, 1, 0.3)
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func xupdate(p_image_size : Vector2, p_interval : int):
+	image_size = p_image_size
+	interval = p_interval
+	
+	update()
 
 
 func _draw():
 	# Draw grid.
-	for i in range(32):
-		draw_line(Vector2(0, i), Vector2(32, i), Color(1, 1, 1, 0.3))
-	for j in range(32):
-		draw_line(Vector2(j, 0), Vector2(j, 32), Color(1, 1, 1, 0.3))
+	for i in range(0, image_size.x, interval):
+		draw_line(Vector2(0, i), Vector2(image_size.y, i), color)
+	for j in range(0, image_size.y, interval):
+		draw_line(Vector2(j, 0), Vector2(j, image_size.x), color)

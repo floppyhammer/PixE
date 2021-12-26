@@ -22,6 +22,32 @@ func get_rect_center(rect : Rect2) -> Vector2:
 	return center
 
 
+func distance_from_point_to_line(line_start : Vector2, line_end : Vector2, point : Vector2) -> float:
+	# ax + by + c = 0
+	var a = 0
+	var b = 0
+	var c = 0
+	
+	if line_start.x != line_end.x:
+		# Slope = m = (y1 - y0) / (x1 - x0)
+		var slope = (line_start.y - line_end.y) / (line_start.x - line_end.x)
+		# y = mx + n
+		var n = line_start.y - slope * line_start.x
+		a = slope
+		b = -1
+		c = n
+	else:
+		a = 1
+		c = -line_start.x
+	
+	var x0 = point.x
+	var y0 = point.y
+	
+	var d = abs(a * x0 + b * y0 + c) / sqrt(a * a + b * b)
+	
+	return d
+
+
 static func angle_to_angle(from, to):
 	return fposmod(to - from + PI, PI * 2) - PI
 

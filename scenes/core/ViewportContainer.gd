@@ -64,4 +64,4 @@ func _process(delta):
 
 
 func _draw():
-	draw_rect(Rect2(cursor_pos.x, cursor_pos.y, 1, 1), color, false)
+	draw_rect(Rect2(cursor_pos.x, cursor_pos.y, 1, 1), Color.black, false, 1)

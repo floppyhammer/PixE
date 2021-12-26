@@ -172,7 +172,7 @@ margin_right = 628.0
 margin_bottom = 648.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-items = [ "PixE v1.0.0 released!", null, false ]
+items = [ "PixE 1.0.0 released!", null, false ]
 
 [node name="TabC" type="TabContainer" parent="VBoxC"]
 visible = false

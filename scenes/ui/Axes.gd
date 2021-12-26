@@ -5,7 +5,7 @@ var axes_color = Color(1.0, 1.0, 1.0, 0.5)
 var editor_state_copy : Dictionary
 
 
-func update_overlay(editor_state : Dictionary):
+func xupdate(editor_state : Dictionary):
 	editor_state_copy = editor_state
 	update()
 
