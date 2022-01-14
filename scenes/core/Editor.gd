@@ -77,8 +77,13 @@ func _process(delta):
 	canvas_vp_container.cursor_pos = snapped_cursor_pos
 
 
+"""
+When a stroke is finished in Canvas, capture the viewport as an image,
+and push it to the cache list.
+"""
 func _on_Canvas_stroke_finished():
-	print("Stroke finished")
+	Logger.info("Canvas stroke finished", "Editor")
+	
 	var img = canvas_viewport.get_texture().get_data()
 	img.flip_y()
 	
@@ -390,4 +395,3 @@ func _on_ScrollC_item_rect_changed():
 
 func _on_Canvas_need_to_redraw():
 	canvas_viewport.render_target_clear_mode = canvas_viewport.CLEAR_MODE_ONLY_NEXT_FRAME
-

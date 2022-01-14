@@ -72,7 +72,7 @@ var current_pixel_info = {
 
 
 func undo() -> bool:
-	Logger.info("Undo", "Canvas")
+	Logger.info("Undo, go to cache head %d/%d" % [cache_head - 1, img_cache.size()], "Canvas")
 	
 	if cache_head > 0:
 		cache_head -= 1
@@ -92,7 +92,7 @@ func undo() -> bool:
 
 
 func redo() -> bool:
-	Logger.info("Redo", "Canvas")
+	Logger.info("Redo, go to cache head %d/%d" % [cache_head + 1, img_cache.size()], "Canvas")
 	
 	if cache_head < img_cache.size() - 1:
 		cache_head += 1
@@ -111,10 +111,12 @@ func redo() -> bool:
 
 
 func _draw():
-	Logger.info("Redraw canvas", "Canvas")
+	Logger.info("Redraw", "Canvas")
 	
 	# NB: create_from_image() doesn't like empty images.
 	if need_to_redraw_cache and cache_head > 0:
+		Logger.info("Redraw cache %d" % cache_head, "Canvas")
+		
 		# Draw the last texture in the cache.
 		tex.create_from_image(img_cache[cache_head])
 		
@@ -130,6 +132,10 @@ func _draw():
 		BrushModes.ERASER:
 			material.blend_mode = material.BLEND_MODE_MUL
 			color = Color.transparent
+		BrushModes.LINE:
+			material.blend_mode = material.BLEND_MODE_MIX
+	
+	Logger.info("Redraw %d pixels" % pixel_batch.size(), "Canvas")
 	
 	for p in pixel_batch:
 		draw_primitive([p + Vector2.DOWN], [color], [])
@@ -193,9 +199,8 @@ func _handle_pencil(event):
 				if cache_head < img_cache.size() - 1:
 					img_cache.resize(cache_head + 1)
 				
-				emit_signal("stroke_finished")
-				
 				update()
+				emit_signal("stroke_finished")
 		
 		# Drag.
 		if event is InputEventMouseMotion:
@@ -222,7 +227,9 @@ func _handle_pencil(event):
 					last_pixel = snapped
 					last_pos = event.position
 				
+				need_to_redraw_cache = true
 				update()
+				emit_signal("need_to_redraw")
 
 
 func _handle_eyedropper(event):
@@ -238,93 +245,62 @@ func _handle_eyedropper(event):
 
 func _handle_line(event):
 	if event is InputEventMouse:
+		# Cursor precise position.
+		var brush_pos = event.position
+		
 		if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
-			var snapped = Math.snap_to_pixel(event.position)
-			
 			# Start drawing line.
 			if event.pressed:
-				brush_start_pos = event.position
-				snapped_brush_pos = snapped
-
+				# Store press position.
+				brush_start_pos = brush_pos
 			else: # Line is decided upon mouse release.
 				# If we did undo before, remove outdated images.
 				# Don't remove the first empty image.
 				if cache_head < img_cache.size() - 1:
 					img_cache.resize(cache_head + 1)
 				
-				brush_end_pos = event.position
-				
-				var start_pos_pixel_center = Math.snap_to_pixel(brush_start_pos) + Vector2(0.5, 0.5)
-				var end_pos_pixel_center = snapped + Vector2(0.5, 0.5)
-				
-				var pixels = Math.interpolate_pixels_along_line(start_pos_pixel_center, end_pos_pixel_center)
-				
-				# Remove pixels that contact two or more pixels.
-				var pixels_to_exclude = []
-#				for p0 in pixels:
-#					var vertical_contact_count = 0
-#					var horizontal_contact_count = 0
-#					for p1 in pixels:
-#						if p0 != p1 and p0.distance_to(p1) < 1.1:
-#							if p0.x != p1.x:
-#								horizontal_contact_count += 1
-#							if p0.y != p1.y:
-#								vertical_contact_count += 1
-#					if vertical_contact_count >= 1 and horizontal_contact_count >= 1:
-#						pixels_to_exclude.append(p0)
-				
-				pixel_batch.clear()
-				for p in pixels:
-					var point_center = p + Vector2.ONE * 0.5
-					var dis_to_line = Math.distance_from_point_to_line(start_pos_pixel_center, end_pos_pixel_center, point_center)
-					var m = (start_pos_pixel_center.y - end_pos_pixel_center.y) / (start_pos_pixel_center.x - end_pos_pixel_center.x)
-					print(dis_to_line)
-					var vertical_dis = (m * (point_center.x - start_pos_pixel_center.x) + start_pos_pixel_center.y)
-#					var above_line = point_center.y < vertical_dis
-#					if above_line:
-#						if vertical_dis < 0.5:
-#							_add_pixel_to_batch(p)
-#					else:
-#						if dis_to_line < 0.5:
-#							_add_pixel_to_batch(p)
-					if dis_to_line <= 0.5:
-						_add_pixel_to_batch(p)
-				
-				emit_signal("stroke_finished")
-				
-				# 1. Clean frame.
-				# 2. Draw things that exist before LINE operation.
-				# 3. Draw dragged line.
-				# 4. Update image cache.
+				need_to_redraw_cache = true
 				update()
+				emit_signal("stroke_finished")
+				emit_signal("need_to_redraw")
+				
+				# Already used the batch in update(), can clear it now.
+				pixel_batch.clear()
 		
 		# Drag.
 		if event is InputEventMouseMotion:
-			var snapped = Math.snap_to_pixel(event.position)
-			snapped_brush_pos = snapped
-			
-			var start_pos = Math.snap_to_pixel(last_pos) + Vector2(0.5, 0.5)
-			var end_pos = snapped + Vector2(0.5, 0.5)
-			
-			emit_signal("bursh_moved_by_mouse", event.position)
+			emit_signal("bursh_moved_by_mouse", brush_pos)
 			
 			if Input.is_mouse_button_pressed(BUTTON_LEFT):
+				var brush_pixel = Math.snap_to_pixel(brush_pos)
+				
 				# To avoid adding the same pixel when moving the brush
 				# inside the pixel.
-				if snapped != last_pixel:
-					var pixels = Math.interpolate_pixels_along_line(start_pos, end_pos)
+				if brush_pixel != last_pixel:
+					last_pixel = brush_pixel
+					last_pos = brush_pos
 					
+					brush_end_pos = brush_pos
+					
+					var start_pixel_center = Math.snap_to_pixel(brush_start_pos) + Vector2(0.5, 0.5)
+					var end_pixel_center = Math.snap_to_pixel(brush_end_pos) + Vector2(0.5, 0.5)
+					
+					var pixels = Math.interpolate_pixels_along_line(start_pixel_center, end_pixel_center)
+					
+					# Prepare the pixel batch to draw.
+					pixel_batch.clear()
 					for p in pixels:
 						_add_pixel_to_batch(p)
 					
-					last_pixel = snapped
-					last_pos = event.position
+					need_to_redraw_cache = true
 					
 					# 1. Clean frame.
 					# 2. Draw things that exist before LINE operation.
 					# 3. Draw dragged line.
 					# 4. Don't update image cache.
-					#update()
+					update()
+					
+					emit_signal("need_to_redraw")
 
 
 func receive_touch_input(brush_pos, pushed, just_pushed, just_released):
@@ -346,9 +322,8 @@ func receive_touch_input(brush_pos, pushed, just_pushed, just_released):
 		if cache_head < img_cache.size() - 1:
 			img_cache.resize(cache_head + 1)
 		
-		emit_signal("stroke_finished")
-		
 		update()
+		emit_signal("stroke_finished")
 	
 	var snapped = Math.snap_to_pixel(brush_pos)
 	snapped_brush_pos = snapped
