@@ -11,4 +11,8 @@ func _on_FileExplorer_cancel_pressed():
 
 func _on_WindowOpenImage_visibility_changed():
 	if visible:
-		$CenterC/FileExplorer.setup()
+		pass
+
+
+func _on_FileExplorer_file_selected():
+	pass # Replace with function body.

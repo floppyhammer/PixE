@@ -40,3 +40,4 @@ rect_min_size = Vector2( 512, 512 )
 [connection signal="pressed" from="." to="." method="_on_WindowOpenSprite_pressed"]
 [connection signal="visibility_changed" from="." to="." method="_on_WindowOpenImage_visibility_changed"]
 [connection signal="cancel_pressed" from="CenterC/FileExplorer" to="." method="_on_FileExplorer_cancel_pressed"]
+[connection signal="file_selected" from="CenterC/FileExplorer" to="." method="_on_FileExplorer_file_selected"]

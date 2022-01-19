@@ -1,40 +1,49 @@
 extends Tree
 
-var dir = Directory.new()
+var dir : Directory = Directory.new()
 
-# Default dir for different platforms.
-var start_urls = {
+# Default dir on different platforms.
+var default_dirs = {
 	"Android": '/storage/emulated/0',
 	"X11": "/usr",
 	"Windows": "C:/users",
 }
 
-var current_drive
+# Drives are only valid on Windows.
+var current_drive: int
 var drive_count : int
 
+# Mouse press position.
+var press_pos : Vector2 = Vector2.ZERO
+
+signal current_dir_changed
 signal file_selected
 signal quit_pressed
-signal current_dir_changed
 
-var touch_points = [null, null]
+# 注意：选择项目信号发出时不要更新树，会导致阻塞，激活项目信号发出时没关系
 
-# 选择项目信号发出时不要更新树，会导致阻塞，激活项目信号发出时没关系
+func _ready():
+	Logger.add_module("FileTree")
+
 
 func setup():
-	drive_count = dir.get_drive_count()
-	current_drive = dir.get_current_drive()
-	
-	# 要求权限的过程是并发的，路径更新会发生在取得权限之前
-	var perm = OS.get_granted_permissions()
-	if perm.empty():
-		OS.request_permissions()
-	Logger.info('Granted Permissions: %s' % str(perm), "FileExplorer")
+	# "Android", "iOS", "HTML5", "OSX", "Server", "Windows", "UWP", "X11"
+	match OS.get_name():
+		"Windows":
+			drive_count = dir.get_drive_count()
+			current_drive = dir.get_current_drive()
+		"Android":
+			# 要求权限的过程是并发的，路径更新会发生在取得权限之前
+			var perm = OS.get_granted_permissions()
+			if perm.empty():
+				OS.request_permissions()
+			Logger.info('Granted Permissions: %s' % str(perm), "FileExplorer")
 	
 	# Open the default dir.
-	if dir.open(start_urls[OS.get_name()]) == OK:
+	if dir.open(default_dirs[OS.get_name()]) == OK:
 		relist_dir()
 	else:
-		Logger.error("Error occurred when trying to access path: %s" % start_urls[OS.get_name()], "FileExplorer")
+		Logger.error("Error occurred when trying to access path: %s" % default_dirs[OS.get_name()], "FileExplorer")
 	
 	hide_root = true
 	allow_reselect = true
@@ -50,30 +59,22 @@ func _notification(what):
 
 
 func _input(event):
-	if event is InputEventScreenTouch:
-		# Ignore multitouch
-		if event is InputEventScreenTouch:
-			if event.index != 0: return
-
+	if event is InputEventMouseButton:
 		if event.pressed:
-			touch_points[0] = event.position
+			press_pos = event.position
 		else:
-			touch_points[1] = event.position
-
 			# If no drag
-			if touch_points[0].distance_to(touch_points[1]) < 8:
+			if event.position.distance_to(press_pos) < 8:
 				_on_item_selected()
 
 			# Deselect item on release
 			if get_selected():
 				get_selected().deselect(0)
 
-			# Reset touch points on release
-			touch_points = [null, null]
-	return
-
 
 func go_to(new_dir):
+	Logger.info('Try to go to: "%s"' % new_dir, "FileTree")
+	
 	var error = dir.change_dir(new_dir)
 	
 	# If is a valid dir, return.
@@ -197,4 +198,7 @@ func _on_item_selected():
 	
 		if full_file_path != null:
 			emit_signal("file_selected", full_file_path)
-	return
+
+
+func get_current_drive_name() -> String:
+	return dir.get_drive(dir.get_current_drive())

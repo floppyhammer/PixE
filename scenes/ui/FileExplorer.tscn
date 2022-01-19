@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/ui/FileTree.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/ui/FileExplorer.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://assets/graphics/theme_file_dialog_parent_folder.png" type="Texture" id=4]
 [ext_resource path="res://assets/graphics/icon_undo.png" type="Texture" id=5]
 [ext_resource path="res://assets/graphics/icon_redo.png" type="Texture" id=6]
+[ext_resource path="res://assets/graphics/icon_go_to.png" type="Texture" id=7]
+[ext_resource path="res://tres/theme_dark.tres" type="Theme" id=8]
 
 [node name="FileExplorer" type="PanelContainer"]
 anchor_right = 1.0
@@ -14,16 +16,15 @@ margin_left = 355.0
 margin_top = 145.0
 margin_right = -482.0
 margin_bottom = -172.0
+theme = ExtResource( 8 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MarginC" type="MarginContainer" parent="."]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 436.0
-margin_bottom = 396.0
+margin_right = 443.0
+margin_bottom = 403.0
 custom_constants/margin_right = 8
 custom_constants/margin_top = 8
 custom_constants/margin_left = 8
@@ -32,15 +33,16 @@ custom_constants/margin_bottom = 8
 [node name="VBoxC" type="VBoxContainer" parent="MarginC"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 421.0
-margin_bottom = 381.0
+margin_right = 435.0
+margin_bottom = 395.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HBoxC" type="HBoxContainer" parent="MarginC/VBoxC"]
-margin_right = 413.0
+margin_right = 427.0
 margin_bottom = 48.0
+custom_constants/separation = 4
 
 [node name="Backward" type="Button" parent="MarginC/VBoxC/HBoxC"]
 margin_right = 48.0
@@ -73,43 +75,53 @@ rect_min_size = Vector2( 48, 48 )
 icon = ExtResource( 3 )
 expand_icon = true
 
+[node name="RecentDirs" type="MenuButton" parent="MarginC/VBoxC/HBoxC"]
+margin_left = 208.0
+margin_right = 427.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+text = "Recent..."
+flat = false
+items = [ "Placeholder 0", null, 0, false, false, 0, 0, null, "", false, "Placeholder 1", null, 0, false, false, 1, 0, null, "", false, "Placeholder 2", null, 0, false, false, 2, 0, null, "", false ]
+
 [node name="HBoxC4" type="HBoxContainer" parent="MarginC/VBoxC"]
-margin_top = 52.0
-margin_right = 413.0
-margin_bottom = 100.0
+margin_top = 56.0
+margin_right = 427.0
+margin_bottom = 104.0
 
 [node name="DiskOption" type="OptionButton" parent="MarginC/VBoxC/HBoxC4"]
-margin_right = 48.0
+margin_right = 80.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
 text = "C:/"
 
 [node name="AddressEdit" type="LineEdit" parent="MarginC/VBoxC/HBoxC4"]
-margin_left = 52.0
-margin_right = 361.0
+margin_left = 88.0
+margin_right = 371.0
 margin_bottom = 48.0
 size_flags_horizontal = 3
 
 [node name="Go" type="Button" parent="MarginC/VBoxC/HBoxC4"]
-margin_left = 365.0
-margin_right = 413.0
+margin_left = 379.0
+margin_right = 427.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 48 )
-text = ">"
+icon = ExtResource( 7 )
+expand_icon = true
 
 [node name="FileTree" parent="MarginC/VBoxC" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 104.0
-margin_right = 413.0
-margin_bottom = 321.0
+margin_top = 112.0
+margin_right = 427.0
+margin_bottom = 331.0
 size_flags_vertical = 3
 
 [node name="FileNameBox" type="HBoxContainer" parent="MarginC/VBoxC"]
 visible = false
-margin_top = 297.0
-margin_right = 413.0
-margin_bottom = 321.0
+margin_top = 305.0
+margin_right = 421.0
+margin_bottom = 329.0
 
 [node name="Label" type="Label" parent="MarginC/VBoxC/FileNameBox"]
 margin_top = 5.0
@@ -119,32 +131,37 @@ text = "File name:"
 
 [node name="LineEdit" type="LineEdit" parent="MarginC/VBoxC/FileNameBox"]
 margin_left = 71.0
-margin_right = 413.0
+margin_right = 421.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 
 [node name="HBoxC3" type="HBoxContainer" parent="MarginC/VBoxC"]
-margin_top = 325.0
-margin_right = 413.0
-margin_bottom = 373.0
+margin_top = 339.0
+margin_right = 427.0
+margin_bottom = 387.0
 rect_min_size = Vector2( 0, 48 )
 alignment = 2
 
 [node name="OK" type="Button" parent="MarginC/VBoxC/HBoxC3"]
-margin_left = 249.0
-margin_right = 329.0
+margin_left = 243.0
+margin_right = 323.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 80, 0 )
 text = "OK"
 
 [node name="Cancel" type="Button" parent="MarginC/VBoxC/HBoxC3"]
-margin_left = 333.0
-margin_right = 413.0
+margin_left = 331.0
+margin_right = 427.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 80, 0 )
 text = "Cancel"
 
+[connection signal="pressed" from="MarginC/VBoxC/HBoxC/Backward" to="." method="_on_Backward_pressed"]
+[connection signal="pressed" from="MarginC/VBoxC/HBoxC/Forward" to="." method="_on_Forward_pressed"]
 [connection signal="pressed" from="MarginC/VBoxC/HBoxC/Upward" to="." method="_on_Upward_pressed"]
 [connection signal="pressed" from="MarginC/VBoxC/HBoxC/NewFolder" to="." method="_on_NewFolder_pressed"]
+[connection signal="item_selected" from="MarginC/VBoxC/HBoxC4/DiskOption" to="." method="_on_DiskOption_item_selected"]
+[connection signal="pressed" from="MarginC/VBoxC/HBoxC4/Go" to="." method="_on_Go_pressed"]
 [connection signal="current_dir_changed" from="MarginC/VBoxC/FileTree" to="." method="_on_FileTree_current_dir_changed"]
+[connection signal="file_selected" from="MarginC/VBoxC/FileTree" to="." method="_on_FileTree_file_selected"]
 [connection signal="pressed" from="MarginC/VBoxC/HBoxC3/Cancel" to="." method="_on_Cancel_pressed"]
