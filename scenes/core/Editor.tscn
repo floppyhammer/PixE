@@ -311,14 +311,16 @@ expand_icon = true
 
 [node name="ZoomEdit" type="LineEdit" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/MarginContainer/HBoxContainer"]
 margin_left = 56.0
-margin_right = 136.0
+margin_right = 152.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 80, 0 )
 text = "100%"
+align = 1
+expand_to_text_length = true
 
 [node name="ZoomIn" type="Button" parent="VBoxC/OpArea/VBoxC/HBoxC/Control2/MarginContainer/HBoxContainer"]
-margin_left = 144.0
-margin_right = 192.0
+margin_left = 160.0
+margin_right = 208.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 48, 0 )
 icon = ExtResource( 25 )
