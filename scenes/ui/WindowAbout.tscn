@@ -72,7 +72,7 @@ texture = ExtResource( 3 )
 margin_top = 144.0
 margin_right = 480.0
 margin_bottom = 168.0
-text = "PixE 1.0.0.alpha"
+text = "PixE"
 align = 1
 valign = 1
 
@@ -98,7 +98,7 @@ margin_top = 456.0
 margin_right = 480.0
 margin_bottom = 480.0
 size_flags_vertical = 8
-text = "Copyleft (C) 2021"
+text = "Copyleft (C) 2022"
 align = 1
 valign = 1
 

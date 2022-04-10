@@ -3,8 +3,6 @@ extends Control
 """
 Android Export Settings
 ----------------------------------------
-所有资源的文件名不能包含英语之外的文字，否则会导致APK无法安装（显示无证书）
-
 Adb (from Android Studio)
 C:/Users/[user]/AppData/Local/Android/Sdk/platform-tools/adb.exe
 
@@ -15,7 +13,7 @@ or
 
 Debug keystore
 keytool -keyalg RSA -genkeypair -alias androiddebugkey -keypass android -keystore debug.keystore -storepass android -dname "CN=Android Debug,O=Android,C=US" -validity 9999
-Windows: C:/Users/zzz/.android/ or Windows: C:/Users/zzz
+Windows: C:/Users/[user]/.android/ or Windows: C:/Users/[user]
 Linux: ~/.android/debug.keystore
 ----------------------------------------
 """

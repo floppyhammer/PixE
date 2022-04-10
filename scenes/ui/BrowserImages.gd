@@ -1,6 +1,6 @@
 extends Control
 
-var img_url = "https://i.pximg.net/img-original/img/2021/01/11/22/24/37/86989689_p0.png"
+var img_url = "https://"
 onready var http_request = $HTTPRequest
 onready var tex_rect = $ScrollC/VBoxC/Item/VBoxC/TextureRect
 signal image_pressed

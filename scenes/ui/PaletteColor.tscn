@@ -36,6 +36,3 @@ custom_styles/focus = SubResource( 4 )
 custom_styles/normal = SubResource( 2 )
 toggle_mode = true
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
