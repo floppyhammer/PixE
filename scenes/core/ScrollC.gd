@@ -1,5 +1,4 @@
-extends ViewportContainer
-
+extends ScrollContainer
 
 var cursor_pos : Vector2 = Vector2.ZERO
 
@@ -49,10 +48,6 @@ func assign_color(percent):
 	return c
 
 
-func _ready():
-	$Viewport.gui_disable_input = true
-
-
 func _process(delta):
 	offset += delta * speed
 	if offset >= 2 * PI:
@@ -64,4 +59,11 @@ func _process(delta):
 
 
 func _draw():
+	draw_rect(Rect2(cursor_pos.x, cursor_pos.y, 1, 1), Color.white, false, 1)
 	draw_rect(Rect2(cursor_pos.x, cursor_pos.y, 1, 1), Color.black, false, 1)
+
+
+func _on_ScrollC_gui_input(event):
+	if event is InputEventMouseMotion:
+		cursor_pos = event.position
+		

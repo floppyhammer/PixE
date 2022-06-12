@@ -12,6 +12,3 @@ theme = ExtResource( 2 )
 presets_enabled = false
 presets_visible = false
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}

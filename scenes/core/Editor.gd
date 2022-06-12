@@ -1,7 +1,7 @@
 extends Control
 
-onready var pen_pos_label = $VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/InfoBar/PenPosLabel
-onready var scroll_c = $VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC
+onready var pen_pos_label = $HBoxC/VBoxC/HBoxC/Control2/VBoxC/InfoBar/PenPosLabel
+onready var scroll_c = $HBoxC/VBoxC/HBoxC/Control2/VBoxC/ScrollC
 onready var scroll_panel = scroll_c.get_node("Panel")
 onready var canvas_bg = scroll_panel.get_node("CanvasBg")
 onready var canvas_vp_container = canvas_bg.get_node("ViewportC")
@@ -12,10 +12,10 @@ onready var axes = scroll_panel.get_node("Axes")
 onready var grid = canvas_bg.get_node("Grid")
 onready var checked = canvas_bg.get_node("Checked")
 
-onready var zoom_edit = $VBoxC/OpArea/VBoxC/HBoxC/Control2/MarginContainer/HBoxContainer/ZoomEdit
-onready var palette = $VBoxC/OpArea/Palette
+onready var zoom_edit = $HBoxC/VBoxC/HBoxC/Control2/MarginContainer/HBoxContainer/ZoomEdit
+onready var palette = $HBoxC/Palette
 
-onready var info_bar = $VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/InfoBar
+onready var info_bar = $HBoxC/VBoxC/HBoxC/Control2/VBoxC/InfoBar
 
 var cursor_pos : Vector2 = Vector2.ZERO
 
@@ -74,7 +74,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("redo"):
 		redo_canvas()
 	
-	canvas_vp_container.cursor_pos = snapped_cursor_pos
+	scroll_c.cursor_pos = snapped_cursor_pos
 
 
 """
@@ -234,7 +234,7 @@ func change_zoom(direction : int, exact_zoom : float = 0, mouse_pos : Vector2 = 
 	
 	# Keep the current pixel unmoved.
 	if mouse_pos.x > -1 and mouse_pos.y > -1:
-		var pos_mark = $VBoxC/OpArea/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/DebugMousePosition
+		var pos_mark = $HBoxC/VBoxC/HBoxC/Control2/VBoxC/ScrollC/Panel/DebugMousePosition
 		
 		# Mouse postion relative to the center of the canvas.
 		var mouse_pos_offset = (mouse_pos_ratio_on_canvas - Vector2.ONE * 0.5) * real_canvas_bg_size
@@ -363,10 +363,6 @@ func change_palette_current_color(new_color : Color):
 
 func _on_Palette_current_color_button_pressed():
 	emit_signal("color_picker_called")
-
-
-func _on_ScrollC_gui_input(event):
-	pass # Replace with function body.
 
 
 func _scroll_c_pos_to_scroll_panel(pos : Vector2) -> Vector2:

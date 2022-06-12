@@ -3,7 +3,6 @@ extends Panel
 onready var home_panel = $VBoxC/Home
 
 onready var file_mb = $VBoxC/MenuBar/HBoxC/File
-onready var edit_mb = $VBoxC/MenuBar/HBoxC/Edit
 onready var image_mb = $VBoxC/MenuBar/HBoxC/Image
 onready var view_mb = $VBoxC/MenuBar/HBoxC/View
 onready var help_mb = $VBoxC/MenuBar/HBoxC/Help
@@ -52,20 +51,6 @@ func _reload_menu_bar():
 	popup_menu.add_item("Quit")
 	popup_menu.connect("index_pressed", self, "_file_mb_pressed")
 
-	popup_menu = edit_mb.get_popup()
-	popup_menu.clear()
-	
-	popup_menu.add_item("Undo")
-	popup_menu.add_item("Redo")
-	popup_menu.add_separator("")
-	popup_menu.add_item("Cut")
-	popup_menu.add_item("Copy")
-	popup_menu.add_item("Paste")
-	popup_menu.add_item("Delete")
-	popup_menu.add_separator("")
-	popup_menu.add_item("Clear")
-	popup_menu.connect("index_pressed", self, "_edit_mb_pressed")
-	
 	popup_menu = image_mb.get_popup()
 	popup_menu.clear()
 	popup_menu.add_item("Canvas Size...")
@@ -98,11 +83,9 @@ func _disable_editor_options_in_menu_bar(disabled : bool):
 		popup_menu.set_item_disabled(7, true)
 	
 	if disabled:
-		edit_mb.disabled = true
 		image_mb.disabled = true
 		view_mb.disabled = true
 	else:
-		edit_mb.disabled = false
 		image_mb.disabled = false
 		view_mb.disabled = false
 
@@ -127,16 +110,6 @@ func _file_mb_pressed(index):
 			pass
 		11:
 			get_tree().quit()
-
-
-func _edit_mb_pressed(index):
-	if not current_editor: return
-	
-	match index:
-		0:
-			current_editor.undo_canvas()
-		1:
-			current_editor.redo_canvas()
 
 
 func _image_mb_pressed(index):
